@@ -12,13 +12,12 @@ use yii\web\Response;
 /**
  * Site controller
  */
-class SiteController extends Controller
-{
+class SiteController extends Controller {
+
     /**
      * {@inheritdoc}
      */
-    public function behaviors()
-    {
+    public function behaviors() {
         return [
             'access' => [
                 'class' => AccessControl::class,
@@ -46,8 +45,7 @@ class SiteController extends Controller
     /**
      * {@inheritdoc}
      */
-    public function actions()
-    {
+    public function actions() {
         return [
             'error' => [
                 'class' => \yii\web\ErrorAction::class,
@@ -60,8 +58,7 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function actionIndex()
-    {
+    public function actionIndex() {
         return $this->render('index');
     }
 
@@ -70,8 +67,7 @@ class SiteController extends Controller
      *
      * @return string|Response
      */
-    public function actionLogin()
-    {
+    public function actionLogin() {
         if (!Yii::$app->user->isGuest)
             return $this->goHome();
 
@@ -79,7 +75,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login())
-            if (\Yii::$app->user->can('backendPermission'))
+            if (Yii::$app->user->can('backendPermission'))
                 return $this->goBack();
         else {
             Yii::$app->user->logout();
@@ -98,10 +94,8 @@ class SiteController extends Controller
      *
      * @return Response
      */
-    public function actionLogout()
-    {
+    public function actionLogout() {
         Yii::$app->user->logout();
-
         return $this->goHome();
     }
 }

@@ -9,8 +9,7 @@ use common\models\User;
 /**
  * Signup form
  */
-class SignupForm extends Model
-{
+class SignupForm extends Model {
     public $username;
     public $email;
     public $password;
@@ -19,8 +18,7 @@ class SignupForm extends Model
     /**
      * {@inheritdoc}
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             ['username', 'trim'],
             ['username', 'required'],
@@ -43,8 +41,7 @@ class SignupForm extends Model
      *
      * @return bool whether the creating new account was successful and email was sent
      */
-    public function signup()
-    {
+    public function signup() {
         if ($this->validate()) {
             $user = new User();
             $user->username = $this->username;
@@ -53,8 +50,8 @@ class SignupForm extends Model
             $user->generateAuthKey();
             $user->save(false);
 
-            $auth = \Yii::$app->authManager;
-            $userRole = $auth->getRole('user');
+            $auth = Yii::$app->authManager;
+            $userRole = $auth->getRole('User');
             $auth->assign($userRole, $user->getId());
 
             return $user;
@@ -63,31 +60,12 @@ class SignupForm extends Model
         return null;
     }
 
-    /*
-    public function signup()
-    {
-        if (!$this->validate()) {
-            return null;
-        }
-
-        $user = new User();
-        $user->username = $this->username;
-        $user->email = $this->email;
-        $user->setPassword($this->password);
-        $user->generateAuthKey();
-        $user->generateEmailVerificationToken();
-
-        return $user->save() && $this->sendEmail($user);
-    }
-    */
-
     /**
      * Sends confirmation email to user
      * @param User $user user model to with email should be send
      * @return bool whether the email was sent
      */
-    protected function sendEmail($user)
-    {
+    protected function sendEmail($user) {
         return Yii::$app
             ->mailer
             ->compose(

@@ -18,7 +18,7 @@ use hail812\adminlte\widgets\Menu;
                 <img src="<?=$assetDir?>/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block"><?php //Yii::$app->user->identity->username ?></a>
+                <a href="#" class="d-block"><?= Yii::$app->user->identity->username ?></a>
             </div>
         </div>
 
@@ -29,13 +29,6 @@ use hail812\adminlte\widgets\Menu;
                 'items' => [
                     ['label' => 'GESTÃO', 'header' => true],
                     ['label' => 'Utilizadores', 'url' => ['/users']],
-                    ['label' => 'Ocorrências', 'url' => ['/occorencias']],
-                    ['label' => 'Solicitações', 'url' => ['/solicitacoes']],
-                    ['label' => 'Notícias', 'url' => ['/noticias']],
-                    ['label' => 'Eventos', 'url' => ['/eventos']],
-                    ['label' => 'Avisos', 'url' => ['/avisos']],
-
-
                 ],
             ]);
             ?>
