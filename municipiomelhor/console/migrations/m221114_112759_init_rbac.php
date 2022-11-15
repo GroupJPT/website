@@ -14,19 +14,35 @@ class m221114_112759_init_rbac extends Migration
     {
         $auth = Yii::$app->authManager;
 
-        $admin = $auth->createRole('admin');
-        $auth->add($admin);
+        // ==============================
+        // PERMISSIONS
+        // ==============================
+        $backendPermission = $auth->createPermission('backendPermission');
+        $backendPermission->description = 'Consegue realizar autenticação no backend.';
+        $auth->add($backendPermission);
 
-        $user = $auth->createRole('user');
+        // ==============================
+        // ROLES
+        // ==============================
+        $admin = $auth->createRole('Admin');
+        $auth->add($admin);
+        $auth->addChild($admin, $backendPermission);
+
+        $employee = $auth->createRole('Employee');
+        $auth->add($employee);
+
+        $user = $auth->createRole('User');
         $auth->add($user);
 
-        $auth->assign($admin, 'admin');
-        $auth->assign($user, 'user');
+        // ==============================
+        // ASSIGNS
+        // ==============================
+        $auth->assign($admin, '1');
+
     }
 
     /**
-     * {@inheritdoc}
-     */
+     * {@inheritdoc}     */
     public function safeDown()
     {
         $auth = Yii::$app->authManager;
