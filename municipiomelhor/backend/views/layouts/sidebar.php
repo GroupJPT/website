@@ -29,6 +29,13 @@ use hail812\adminlte\widgets\Menu;
                 'items' => [
                     ['label' => 'GESTÃO', 'header' => true],
                     ['label' => 'Utilizadores', 'url' => ['/users']],
+                    ['label' => 'Ocorrências', 'url' => ['/occorencias']],
+                    ['label' => 'Solicitações', 'url' => ['/solicitacoes']],
+                    ['label' => 'Notícias', 'url' => ['/noticias']],
+                    ['label' => 'Eventos', 'url' => ['/eventos']],
+                    ['label' => 'Avisos', 'url' => ['/avisos']],
+
+
                 ],
             ]);
             ?>
