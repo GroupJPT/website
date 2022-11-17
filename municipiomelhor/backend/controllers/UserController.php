@@ -26,7 +26,7 @@ class UserController extends Controller
                     'class' => AccessControl::class,
                     'rules' => [
                         [
-                            'actions' => ['index', 'create', 'update', 'view'],
+                            'actions' => ['index', 'create', 'update', 'view',],
                             'allow' => true,
                             'roles' => ['Admin'],
                         ],
@@ -88,9 +88,7 @@ class UserController extends Controller
             $model->loadDefaultValues();
         }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        return $this->render('create', ['model' => $model,]);
     }
 
     /**

@@ -28,7 +28,12 @@ use hail812\adminlte\widgets\Menu;
             echo Menu::widget([
                 'items' => [
                     ['label' => 'GESTÃO', 'header' => true],
-                    ['label' => 'Utilizadores', 'url' => ['/users']],
+                    ['label' => 'Utilizadores', 'url' => ['/user']],
+                    ['label' => 'Occorrências', 'url' => ['/ocorrencias']],
+                    ['label' => 'Eventos', 'url' => ['/eventos']],
+                    ['label' => 'Solicitações', 'url' => ['/solicitacoes']],
+                    ['label' => 'Notícias', 'url' => ['/noticias']],
+                    ['label' => 'Avisos', 'url' => ['/avisos']],
                 ],
             ]);
             ?>
