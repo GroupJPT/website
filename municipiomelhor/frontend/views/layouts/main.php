@@ -41,9 +41,7 @@ AppAsset::register($this);
     $menuItemsOption = [
         ['label' => 'Home', 'url' => ['#']],
         ['label' => 'Ocorrencias', 'url' => ['#']],
-        ['label' => 'Noticias', 'url' => ['#']],
         ['label' => 'Avisos', 'url' => ['#']],
-        ['label' => 'Eventos', 'url' => ['#']],
         ['label' => 'Solicitações', 'url' => ['#']],
     ];
 
