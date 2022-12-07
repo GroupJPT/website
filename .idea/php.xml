@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PhpIncludePathManager">
+    <include_path>
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/phar-io/manifest" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/phar-io/version" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/phpunit/php-timer" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/phpunit/php-file-iterator" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/phpunit/php-invoker" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/phpunit/php-text-template" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/phpunit/phpunit" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/phpunit/php-code-coverage" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/bower-asset/bootstrap" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/bower-asset/inputmask" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/bower-asset/punycode" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/bower-asset/yii2-pjax" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/bower-asset/jquery" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/psy/psysh" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/sebastian/object-reflector" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/sebastian/code-unit-reverse-lookup" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/sebastian/environment" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/sebastian/global-state" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/phpspec/php-diff" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/sebastian/resource-operations" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/symfony/polyfill-intl-idn" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/sebastian/recursion-context" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/symfony/event-dispatcher-contracts" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/sebastian/complexity" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/symfony/polyfill-php72" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/sebastian/version" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/cebe/markdown" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/symfony/yaml" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/sebastian/cli-parser" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/sebastian/exporter" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/myclabs/deep-copy" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/symfony/mime" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/sebastian/code-unit" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/symfony/mailer" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/sebastian/comparator" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/symfony/service-contracts" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/sebastian/object-enumerator" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/symfony/dom-crawler" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/sebastian/lines-of-code" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/symfony/browser-kit" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/symfony/string" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/sebastian/type" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/symfony/polyfill-intl-normalizer" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/symfony/css-selector" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/codeception/module-asserts" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/codeception/module-yii2" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/symfony/polyfill-intl-grapheme" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/codeception/verify" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/codeception/lib-innerbrowser" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/codeception/stub" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/codeception/lib-web" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/codeception/module-filesystem" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/codeception/codeception" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/codeception/lib-asserts" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/fakerphp/faker" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/paragonie/random_compat" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/egulias/email-validator" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/almasaeed2010/adminlte" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/composer" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/behat/gherkin" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/doctrine/instantiator" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/hail812/yii2-adminlte-widgets" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/hail812/yii2-adminlte3" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/psr/event-dispatcher" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/npm-asset/bootstrap" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/ezyang/htmlpurifier" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/yiisoft/yii2-bootstrap4" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/yiisoft/yii2-composer" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/yiisoft/yii2-bootstrap5" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/masterminds/html5" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/yiisoft/yii2" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/yiisoft/yii2-debug" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/yiisoft/yii2-faker" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/yiisoft/yii2-gii" />
+      <path value="$PROJECT_DIR$/municipiomelhor/vendor/yiisoft/yii2-symfonymailer" />
+    </include_path>
+  </component>
+  <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />
+  <component name="PhpUnit">
+    <phpunit_settings>
+      <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/municipiomelhor/vendor/autoload.php" />
+    </phpunit_settings>
+  </component>
+</project>
