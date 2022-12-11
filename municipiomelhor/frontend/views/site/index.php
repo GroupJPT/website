@@ -1,40 +1,58 @@
 <?php
 
 /** @var yii\web\View $this */
+use yii\bootstrap5\Html;
+
 
 $this->title = 'Município Melhor';
 ?>
 <div class="site-index">
     <div class="p-5 mb-4 bg-transparent rounded-3">
-        <div class="container-fluid py-5 text-center">
+        <div class="main-slider slick-initialized slick-slider" aria-hidden="true">
+            <div aria-live="polite" class="slick-list draggable"><div class="slick-track" role="listbox" style="opacity: 1; width: 1100px; transform: translate3d(0px, 0px, 0px);"><div class="main-slider__item slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false" tabindex="-1" role="option" aria-describedby="slick-slide00" style="width: 1100px;">
 
-            <h1 class="display-4">Municipio Melhor!</h1>
-
-
-            <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Criar Ocorrência</a></p>
+                        <a class="main-slider__item__background" tabindex="0">
+                            <?php
+                            Html::img('@web/images/testeapp.jpg');
+                            ?>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="body-content">
 
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Avisos</h2>
-
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/doc/">avisos &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Ocorrências</h2>
-
-
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/forum/">ocorrências &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Solicitações</h2>
-
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/extensions/">Solicitações &raquo;</a></p>
+        <div class="container-fluid">
+            <div class="card-group">
+                <div class="card" style="margin:5px 5px 5px 5px;">
+                    <img src="..." class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">Occorência Nº1</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+                <div class="card" style="margin:5px 5px 5px 5px;">
+                    <img src="..." class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">Occorência Nº2</h5>
+                        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+                <div class="card" style="margin:5px 5px 5px 5px;">
+                    <img src="..." class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">Occorência Nº3</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
             </div>
         </div>
+
 
     </div>
 </div>

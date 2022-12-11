@@ -30,12 +30,13 @@ AppAsset::register($this);
     <?php
     // Configurações da NavBar
     NavBar::begin([
-        'brandLabel' => Yii::$app->name,
+        'brandLabel' => Html::img('@web/images/icon.jpeg',['alt'=>Yii::$app->name]),
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar navbar-expand-md fixed-top',
         ],
     ]);
+
 
     // Items da NavBar
     $menuItemsOption = [
@@ -78,7 +79,7 @@ AppAsset::register($this);
 
 <footer class="footer mt-auto py-3 text-muted">
     <div class="container">
-        <p class="float-start">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
+        <p class="float-start">&copy; MunicipioMelhor <?= date('Y') ?></p>
         <p class="float-end"><?= Yii::powered() ?></p>
     </div>
 </footer>
