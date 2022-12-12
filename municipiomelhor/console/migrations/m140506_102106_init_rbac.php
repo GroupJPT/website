@@ -1,62 +1,34 @@
 <?php
-/**
- * @link https://www.yiiframework.com/
- * @copyright Copyright (c) 2008 Yii Software LLC
- * @license https://www.yiiframework.com/license/
- */
 
 use yii\base\InvalidConfigException;
+use yii\db\Migration;
 use yii\rbac\DbManager;
 
-/**
- * Initializes RBAC tables.
- *
- * @author Alexander Kochetov <creocoder@gmail.com>
- * @since 2.0
- */
-class m140506_102106_rbac_init extends \yii\db\Migration
-{
-    /**
-     * @throws yii\base\InvalidConfigException
-     * @return DbManager
-     */
-    protected function getAuthManager()
-    {
-        $authManager = Yii::$app->getAuthManager();
-        if (!$authManager instanceof DbManager) {
-            throw new InvalidConfigException('You should configure "authManager" component to use database before executing this migration.');
-        }
+class m140506_102106_rbac_init extends Migration {
 
+    protected function getAuthManager() {
+        $authManager = Yii::$app->getAuthManager();
+        if (!$authManager instanceof DbManager)
+            throw new InvalidConfigException('You should configure "authManager" component to use database before executing this migration.');
         return $authManager;
     }
 
-    /**
-     * @return bool
-     */
-    protected function isMSSQL()
-    {
+    protected function isMSSQL() {
         return $this->db->driverName === 'mssql' || $this->db->driverName === 'sqlsrv' || $this->db->driverName === 'dblib';
     }
 
-    protected function isOracle()
-    {
+    protected function isOracle() {
         return $this->db->driverName === 'oci' || $this->db->driverName === 'oci8';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function up()
-    {
+    public function up() {
         $authManager = $this->getAuthManager();
         $this->db = $authManager->db;
         $schema = $this->db->getSchema()->defaultSchema;
 
         $tableOptions = null;
-        if ($this->db->driverName === 'mysql') {
-            // https://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
+        if ($this->db->driverName === 'mysql')
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
-        }
 
         $this->createTable($authManager->ruleTable, [
             'name' => $this->string(64)->notNull(),
@@ -140,15 +112,13 @@ class m140506_102106_rbac_init extends \yii\db\Migration
     /**
      * {@inheritdoc}
      */
-    public function down()
-    {
+    public function safeDown() {
         $authManager = $this->getAuthManager();
         $this->db = $authManager->db;
         $schema = $this->db->getSchema()->defaultSchema;
 
-        if ($this->isMSSQL()) {
+        if ($this->isMSSQL())
             $this->execute("DROP TRIGGER {$schema}.trigger_auth_item_child;");
-        }
 
         $this->dropTable($authManager->assignmentTable);
         $this->dropTable($authManager->itemChildTable);
@@ -156,15 +126,12 @@ class m140506_102106_rbac_init extends \yii\db\Migration
         $this->dropTable($authManager->ruleTable);
     }
 
-    protected function buildFkClause($delete = '', $update = '')
-    {
-        if ($this->isMSSQL()) {
+    protected function buildFkClause($delete = '', $update = '') {
+        if ($this->isMSSQL())
             return '';
-        }
 
-        if ($this->isOracle()) {
+        if ($this->isOracle())
             return ' ' . $delete;
-        }
 
         return implode(' ', ['', $delete, $update]);
     }
