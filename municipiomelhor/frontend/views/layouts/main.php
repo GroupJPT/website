@@ -30,7 +30,7 @@ AppAsset::register($this);
     <?php
     // Configurações da NavBar
     NavBar::begin([
-        'brandLabel' => Html::img('@web/images/icon.jpeg',['alt'=>Yii::$app->name]),
+        'brandLabel' => Html::img('@web/images/icon.png',['alt'=>Yii::$app->name,'class'=>'imgIcon']),
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar navbar-expand-md fixed-top',
