@@ -18,7 +18,7 @@ use hail812\adminlte\widgets\Menu;
                 <img src="<?=$assetDir?>/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block"><?= Yii::$app->user->identity->username ?></a>
+                <a href="#" class="d-block"><?= Yii::$app->user->identity->name ?> <?= Yii::$app->user->identity->surname ?></a>
             </div>
         </div>
 

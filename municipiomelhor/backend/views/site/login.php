@@ -7,39 +7,6 @@ use yii\helpers\Html;
 
         <?php $form = \yii\bootstrap4\ActiveForm::begin(['id' => 'login-form']) ?>
 
-       <!-- <?/*= $form->field($model,'username', [
-            'options' => ['class' => 'form-group has-feedback'],
-            'inputTemplate' => '{input}',
-            'template' => '{beginWrapper}{input}{error}{endWrapper}',
-            'wrapperOptions' => ['class' => 'input-group mb-3']
-        ])
-            ->label(false)
-            ->textInput(['placeholder' => $model->getAttributeLabel('username')]) */?>
-
-        <?/*= $form->field($model, 'password', [
-            'options' => ['class' => 'form-group has-feedback'],
-            'inputTemplate' => '{input}',
-            'template' => '{beginWrapper}{input}{error}{endWrapper}',
-            'wrapperOptions' => ['class' => 'input-group mb-3']
-        ])
-            ->label(false)
-            ->passwordInput(['placeholder' => $model->getAttributeLabel('password')]) */?>
-
-        <div class="row">
-            <div class="col-8">
-                <?/*= $form->field($model, 'rememberMe')->checkbox([
-                    'template' => '<div class="icheck-primary">{input}{label}</div>',
-                    'labelOptions' => [
-                        'class' => ''
-                    ],
-                    'uncheck' => null
-                ]) */?>
-            </div>
-            <div class="col-4">
-                <?/*= Html::submitButton('Sign In', ['class' => 'btn btn-primary btn-block']) */?>
-            </div>
-        </div>-->
-
         <!-- Section: Design Block -->
         <div class="card-body login-card-body">
 
@@ -57,14 +24,14 @@ use yii\helpers\Html;
 
                             <form>
 
-                                <?= $form->field($model,'username', [
+                                <?= $form->field($model,'email', [
                                     'options' => ['class' => 'form-group has-feedback'],
                                     'inputTemplate' => '{input}',
                                     'template' => '{beginWrapper}{input}{error}{endWrapper}',
                                     'wrapperOptions' => ['class' => 'input-group mb-3']
                                 ])
                                     ->label(false)
-                                    ->textInput(['placeholder' => $model->getAttributeLabel('username')]) ?>
+                                    ->textInput(['placeholder' => $model->getAttributeLabel('email')]) ?>
 
                                 <?= $form->field($model, 'password', [
                                     'options' => ['class' => 'form-group has-feedback'],

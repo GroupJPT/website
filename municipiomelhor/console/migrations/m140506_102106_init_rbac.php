@@ -4,7 +4,7 @@ use yii\base\InvalidConfigException;
 use yii\db\Migration;
 use yii\rbac\DbManager;
 
-class m140506_102106_rbac_init extends Migration {
+class m140506_102106_init_rbac extends Migration {
 
     protected function getAuthManager() {
         $authManager = Yii::$app->getAuthManager();
@@ -21,7 +21,7 @@ class m140506_102106_rbac_init extends Migration {
         return $this->db->driverName === 'oci' || $this->db->driverName === 'oci8';
     }
 
-    public function up() {
+    public function safeUp() {
         $authManager = $this->getAuthManager();
         $this->db = $authManager->db;
         $schema = $this->db->getSchema()->defaultSchema;
@@ -109,9 +109,6 @@ class m140506_102106_rbac_init extends Migration {
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function safeDown() {
         $authManager = $this->getAuthManager();
         $this->db = $authManager->db;

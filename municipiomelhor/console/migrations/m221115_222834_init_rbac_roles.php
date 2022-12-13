@@ -2,7 +2,7 @@
 
 use yii\db\Migration;
 
-class m221115_222834_init_rbac extends Migration {
+class m221115_222834_init_rbac_roles extends Migration {
 
     public function safeUp() {
         $auth = Yii::$app->authManager;

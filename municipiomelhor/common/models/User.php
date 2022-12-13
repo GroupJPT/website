@@ -4,210 +4,173 @@ namespace common\models;
 
 use Yii;
 use yii\base\NotSupportedException;
-use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
 /**
- * User model
+ * This is the model class for table "user".
  *
- * @property integer $id
- * @property string $username
- * @property string $password_hash
- * @property string $password_reset_token
- * @property string $verification_token
+ * @property int $id
+ * @property string $name
+ * @property string $surname
  * @property string $email
  * @property string $auth_key
- * @property integer $status
- * @property integer $created_at
- * @property integer $updated_at
- * @property string $password write-only password
+ * @property string $password_hash
+ * @property string|null $password_reset_token
+ * @property string|null $created_at
+ * @property int|null $parish_id
+ *
+ * @property OccurrenceFollow[] $occurrenceFollows
+ * @property Occurrence[] $occurrences
+ * @property Parish $parish
+ * @property Suggestion[] $suggestions
  */
-class User extends ActiveRecord implements IdentityInterface
-{
-    const STATUS_DELETED = 0;
-    const STATUS_INACTIVE = 9;
-    const STATUS_ACTIVE = 10;
+class User extends ActiveRecord implements IdentityInterface {
 
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
-    {
-        return '{{%user}}';
+    public static function tableName() {
+        return 'user';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
+    public function rules() {
         return [
-            TimestampBehavior::class,
+            [['name', 'surname', 'email', 'auth_key', 'password_hash'], 'required'],
+            [['created_at'], 'safe'],
+            [['parish_id'], 'integer'],
+            [['name', 'surname', 'email', 'password_hash', 'password_reset_token'], 'string', 'max' => 255],
+            [['auth_key'], 'string', 'max' => 32],
+            [['email'], 'unique'],
+            [['password_reset_token'], 'unique'],
+            [['parish_id'], 'exist', 'skipOnError' => true, 'targetClass' => Parish::class, 'targetAttribute' => ['parish_id' => 'id']],
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function rules()
-    {
+    public function attributeLabels() {
         return [
-            ['status', 'default', 'value' => self::STATUS_INACTIVE],
-            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
+            'id' => Yii::t('app', 'ID'),
+            'name' => Yii::t('app', 'Name'),
+            'surname' => Yii::t('app', 'Surname'),
+            'email' => Yii::t('app', 'Email'),
+            'auth_key' => Yii::t('app', 'Auth Key'),
+            'password_hash' => Yii::t('app', 'Password Hash'),
+            'password_reset_token' => Yii::t('app', 'Password Reset Token'),
+            'created_at' => Yii::t('app', 'Created At'),
+            'parish_id' => Yii::t('app', 'Parish ID'),
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function findIdentity($id)
-    {
-        return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
+    public static function findIdentity($id) {
+        return static::findOne(['id' => $id]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function findIdentityByAccessToken($token, $type = null)
-    {
+    public static function findIdentityByAccessToken($token, $type = null) {
         throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
     }
 
-    /**
-     * Finds user by username
-     *
-     * @param string $username
-     * @return static|null
-     */
-    public static function findByUsername($username)
-    {
-        return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
+    public static function findByEmail($email) {
+        return static::findOne(['email' => $email]);
     }
 
-    /**
-     * Finds user by password reset token
-     *
-     * @param string $token password reset token
-     * @return static|null
-     */
-    public static function findByPasswordResetToken($token)
-    {
-        if (!static::isPasswordResetTokenValid($token)) {
+    public static function findByPasswordResetToken($token) {
+        if (!static::isPasswordResetTokenValid($token))
             return null;
-        }
 
-        return static::findOne([
-            'password_reset_token' => $token,
-            'status' => self::STATUS_ACTIVE,
-        ]);
+        return static::findOne(['password_reset_token' => $token]);
     }
 
-    /**
-     * Finds user by verification email token
-     *
-     * @param string $token verify email token
-     * @return static|null
-     */
     public static function findByVerificationToken($token) {
-        return static::findOne([
-            'verification_token' => $token,
-            'status' => self::STATUS_INACTIVE
-        ]);
+        return static::findOne(['verification_token' => $token]);
     }
 
-    /**
-     * Finds out if password reset token is valid
-     *
-     * @param string $token password reset token
-     * @return bool
-     */
-    public static function isPasswordResetTokenValid($token)
-    {
-        if (empty($token)) {
+    public static function isPasswordResetTokenValid($token) {
+        if (empty($token))
             return false;
-        }
 
         $timestamp = (int) substr($token, strrpos($token, '_') + 1);
         $expire = Yii::$app->params['user.passwordResetTokenExpire'];
         return $timestamp + $expire >= time();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getId()
-    {
+    public function getId(){
         return $this->getPrimaryKey();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getAuthKey()
-    {
+    public function getAuthKey() {
         return $this->auth_key;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function validateAuthKey($authKey)
-    {
+    public function validateAuthKey($authKey) {
         return $this->getAuthKey() === $authKey;
     }
 
-    /**
-     * Validates password
-     *
-     * @param string $password password to validate
-     * @return bool if password provided is valid for current user
-     */
-    public function validatePassword($password)
-    {
+    public function validatePassword($password) {
         return Yii::$app->security->validatePassword($password, $this->password_hash);
     }
 
-    /**
-     * Generates password hash from password and sets it to the model
-     *
-     * @param string $password
-     */
-    public function setPassword($password)
-    {
+    public function setPassword($password) {
         $this->password_hash = Yii::$app->security->generatePasswordHash($password);
     }
 
-    /**
-     * Generates "remember me" authentication key
-     */
-    public function generateAuthKey()
-    {
+    public function generateAuthKey() {
         $this->auth_key = Yii::$app->security->generateRandomString();
     }
 
-    /**
-     * Generates new password reset token
-     */
-    public function generatePasswordResetToken()
-    {
+    public function generatePasswordResetToken(){
         $this->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
     }
 
-    /**
-     * Generates new token for email verification
-     */
-    public function generateEmailVerificationToken()
-    {
-        $this->verification_token = Yii::$app->security->generateRandomString() . '_' . time();
+    public function removePasswordResetToken() {
+        $this->password_reset_token = null;
     }
 
-    /**
-     * Removes password reset token
-     */
-    public function removePasswordResetToken()
-    {
-        $this->password_reset_token = null;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // QUERYS
+
+    /*
+    public function getOccurrenceFollows() {
+        return $this->hasMany(OccurrenceFollow::class, ['user_id' => 'id']);
+    }
+
+    public function getOccurrences() {
+        return $this->hasMany(Occurrence::class, ['user_id' => 'id']);
+    }
+
+    public function getParish() {
+        return $this->hasOne(Parish::class, ['id' => 'parish_id']);
+    }
+
+    public function getSuggestions() {
+        return $this->hasMany(Suggestion::class, ['user_id' => 'id']);
+    }*/
+
+    public function createUser() {
+        $user = new User();
+
+        $user->name = $this->name;
+        $user->surname = $this->surname;
+        $user->email = $this->email;
+        $user->generateAuthKey();
+        $user->setPassword($this->password_hash);
+        $user->parish_id = $this->parish_id;
+        $user->save(false);
+
+        $auth = Yii::$app->authManager;
+        $userRole = $auth->getRole('User');
+        $auth->assign($userRole, $user->getId());
+
+        return $user;
     }
 }
