@@ -6,7 +6,10 @@ use yii\bootstrap5\Html;
 
 $this->title = 'Município Melhor';
 ?>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
 <div class="site-index">
     <div class="p-5 mb-4 bg-transparent rounded-3">
         <div class="main-slider slick-initialized slick-slider" aria-hidden="true">
@@ -32,27 +35,26 @@ $this->title = 'Município Melhor';
                     <div class="card-body">
                         <h5 class="card-title">Occorência Nº1</h5>
                         <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        <button class="fa fa-eye" id="detalheOcorrencia"></button>
+                        <p class="card-text"><small class="text-muted">Data de publicação:</small></p>
+                        <a href="#" class="fa fa-eye" style="color:black;text-decoration: none;" id="detalheOcorrencia"></a>
                     </div>
                 </div>
-                <div class="card" style="margin:5px 5px 5px 5px;">
-                    <img src="..." class="card-img-top">
+                <div class="card">
+                    <?php Html::img('@web/images/testeapp.jpg');?>
                     <div class="card-body">
-                        <h5 class="card-title">Occorência Nº2</h5>
-                        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        <button class="fa fa-eye" id="detalheOcorrencia"></button>
+                        <h5 class="card-title">Occorência Nº1</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <p class="card-text"><small class="text-muted">Data de publicação:</small></p>
+                        <a href="#" class="fa fa-eye" style="color:black;text-decoration: none;" id="detalheOcorrencia"></a>
                     </div>
                 </div>
-                <div class="card" style="margin:5px 5px 5px 5px;">
-                    <img src="..." class="card-img-top">
+                <div class="card">
+                    <?php Html::img('@web/images/testeapp.jpg');?>
                     <div class="card-body">
-                        <h5 class="card-title">Occorência Nº3</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        <button class="fa fa-eye" id="detalheOcorrencia"></button>
-
+                        <h5 class="card-title">Occorência Nº1</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <p class="card-text"><small class="text-muted">Data de publicação:</small></p>
+                        <a href="#" class="fa fa-eye" style="color:black;text-decoration: none;" id="detalheOcorrencia"></a>
                     </div>
                 </div>
             </div>
