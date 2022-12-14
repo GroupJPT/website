@@ -50,11 +50,11 @@ class Warning extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
-            'description' => Yii::t('app', 'Description'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'categorie_id' => Yii::t('app', 'Categorie ID'),
-            'parish_id' => Yii::t('app', 'Parish ID'),
+            'name' => Yii::t('app', 'Nome'),
+            'description' => Yii::t('app', 'Descrição'),
+            'created_at' => Yii::t('app', 'Data da Publicação'),
+            'categorie_id' => Yii::t('app', 'ID Categoria'),
+            'parish_id' => Yii::t('app', 'ID Freguesia'),
         ];
     }
 

@@ -29,11 +29,12 @@ use hail812\adminlte\widgets\Menu;
                 'items' => [
                     ['label' => 'GESTÃO', 'header' => true],
                     ['label' => 'Utilizadores', 'url' => ['/user']],
-                    ['label' => 'Occorrências', 'url' => ['/ocorrencias']],
-                    ['label' => 'Eventos', 'url' => ['/eventos']],
-                    ['label' => 'Solicitações', 'url' => ['/solicitacoes']],
-                    ['label' => 'Notícias', 'url' => ['/noticias']],
-                    ['label' => 'Avisos', 'url' => ['/avisos']],
+                    ['label' => 'Occorrências', 'url' => ['/occurrence']],
+                    ['label' => 'Sugestões', 'url' => ['/suggestion']],
+                    ['label' => 'Avisos', 'url' => ['/warning']],
+                    ['label' => 'Freguesias', 'url' => ['/parish']],
+                    ['label' => 'Categorias', 'url' => ['/categorie']],
+
                 ],
             ]);
             ?>

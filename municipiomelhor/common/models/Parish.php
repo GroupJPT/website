@@ -33,7 +33,7 @@ class Parish extends ActiveRecord {
     public function attributeLabels() {
         return [
             'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
+            'name' => Yii::t('app', 'Nome'),
         ];
     }
 

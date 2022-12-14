@@ -47,8 +47,8 @@ class User extends ActiveRecord implements IdentityInterface {
     public function attributeLabels() {
         return [
             'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
-            'surname' => Yii::t('app', 'Surname'),
+            'name' => Yii::t('app', 'Nome'),
+            'surname' => Yii::t('app', 'Sobrenome'),
             'email' => Yii::t('app', 'Email'),
             'auth_key' => Yii::t('app', 'Auth Key'),
             'password_hash' => Yii::t('app', 'Password Hash'),

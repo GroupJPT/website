@@ -55,11 +55,11 @@ class Occurrence extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'description' => Yii::t('app', 'Description'),
-            'user_id' => Yii::t('app', 'User ID'),
-            'categorie_id' => Yii::t('app', 'Categorie ID'),
-            'subcategorie_id' => Yii::t('app', 'Subcategorie ID'),
-            'parish_id' => Yii::t('app', 'Parish ID'),
+            'description' => Yii::t('app', 'Descrição'),
+            'user_id' => Yii::t('app', 'ID Utilizador'),
+            'categorie_id' => Yii::t('app', 'ID categoria'),
+            'subcategorie_id' => Yii::t('app', 'ID Subcategoria'),
+            'parish_id' => Yii::t('app', 'ID Freguesia'),
         ];
     }
 

@@ -1,24 +1,26 @@
 <?php
 
-use common\models\User;
+use common\models\Parish;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
 /** @var yii\web\View $this */
+/** @var common\models\ParishSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
 
 ?>
-<div class="user-index">
+<div class="parish-index">
 
-    <h1>Utilizadores</h1>
+    <h1>Freguesias</h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Criar Utilizador'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Criar Freguesia', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -27,18 +29,11 @@ use yii\grid\GridView;
 
             'id',
             'name',
-            'surname',
-            'email:email',
-            //'auth_key',
-            //'password_hash',
-            //'password_reset_token',
-            //'created_at',
-            //'parish_id',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, User $model, $key, $index, $column) {
+                'urlCreator' => function ($action, Parish $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
-                }
+                 }
             ],
         ],
     ]); ?>

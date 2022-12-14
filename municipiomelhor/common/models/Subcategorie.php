@@ -45,8 +45,8 @@ class Subcategorie extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
-            'categorie_id' => Yii::t('app', 'Categorie ID'),
+            'name' => Yii::t('app', 'Nome'),
+            'categorie_id' => Yii::t('app', 'ID Categoria'),
         ];
     }
 
