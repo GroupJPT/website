@@ -103,7 +103,7 @@ a.desc:after {
 }
 
 .fixed-top{
-    background-color: #6c757d !important;
+    background-color: #d9d9d9 !important;
     font-size:22px;
 }
 
@@ -128,4 +128,13 @@ a.desc:after {
 .imgIcon{
     width:80px;
     height:80px;
+}
+
+.imagem-fundo-pag-inicial{
+    /*width:1000px;
+    height:550px;*/
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
 }
