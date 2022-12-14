@@ -15,10 +15,8 @@ $this->title = 'Município Melhor';
         <div class="main-slider slick-initialized slick-slider" aria-hidden="true">
             <div aria-live="polite" class="slick-list draggable"><div class="slick-track" role="listbox" style="opacity: 1; width: 1100px; transform: translate3d(0px, 0px, 0px);"><div class="main-slider__item slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false" tabindex="-1" role="option" aria-describedby="slick-slide00" style="width: 1100px;">
 
-                        <a class="main-slider__item__background" tabindex="0">
-                            <?php
-                            Html::img('@web/images/testeapp.jpg');
-                            ?>
+                        <a>
+                            <img src="/images/divulgarapp.png" class="imagem-fundo-pag-inicial"/>
                         </a>
                     </div>
                 </div>
@@ -30,28 +28,33 @@ $this->title = 'Município Melhor';
 
         <div class="container-fluid">
             <div class="card-group">
+
                 <div class="card">
-                    <?php Html::img('@web/images/testeapp.jpg');?>
+                    <img src="/images/divulgarapp.png"/>
+
                     <div class="card-body">
-                        <h5 class="card-title">Occorência Nº1</h5>
+                        <h5 class="card-title">Ocorência Nº1</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <p class="card-text"><small class="text-muted">Data de publicação:</small></p>
+                        <a href="#" class="fa fa-eye" style="color:black;text-decoration: none;" id="detalheOcorrencia"></a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="/images/divulgarapp.png"/>
+
+                    <div class="card-body">
+                        <h5 class="card-title">Ocorência Nº2</h5>
                         <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                         <p class="card-text"><small class="text-muted">Data de publicação:</small></p>
                         <a href="#" class="fa fa-eye" style="color:black;text-decoration: none;" id="detalheOcorrencia"></a>
                     </div>
                 </div>
                 <div class="card">
-                    <?php Html::img('@web/images/testeapp.jpg');?>
+                    <img src="/images/divulgarapp.png"/>
+
                     <div class="card-body">
-                        <h5 class="card-title">Occorência Nº1</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <p class="card-text"><small class="text-muted">Data de publicação:</small></p>
-                        <a href="#" class="fa fa-eye" style="color:black;text-decoration: none;" id="detalheOcorrencia"></a>
-                    </div>
-                </div>
-                <div class="card">
-                    <?php Html::img('@web/images/testeapp.jpg');?>
-                    <div class="card-body">
-                        <h5 class="card-title">Occorência Nº1</h5>
+                        <h5 class="card-title">Ocorência Nº3</h5>
                         <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                         <p class="card-text"><small class="text-muted">Data de publicação:</small></p>
                         <a href="#" class="fa fa-eye" style="color:black;text-decoration: none;" id="detalheOcorrencia"></a>
