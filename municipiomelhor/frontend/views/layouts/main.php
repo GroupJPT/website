@@ -1,15 +1,11 @@
 <?php
 
-/** @var \yii\web\View $this */
-/** @var string $content */
-
 use common\widgets\Alert;
 use frontend\assets\AppAsset;
 use yii\bootstrap5\Breadcrumbs;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\Nav;
 use yii\bootstrap5\NavBar;
-use yii\helpers\ArrayHelper;
 
 AppAsset::register($this);
 ?>
@@ -22,45 +18,48 @@ AppAsset::register($this);
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 </head>
 <body class="d-flex flex-column h-100">
 <?php $this->beginBody() ?>
 
 <header>
     <?php
-    // Configurações da NavBar
+    /** ==============================
+    // NAVBAR CONFIG
+    ============================== **/
     NavBar::begin([
-        'brandLabel' => Html::img('@web/images/icon.png',['alt'=>Yii::$app->name,'class'=>'imgIcon']),
+        'brandLabel' => Html::img('@web/images/icon.png', ['class'=>'navbar-img', 'alt'=>Yii::$app->name]),
         'brandUrl' => Yii::$app->homeUrl,
+        'brandOptions' => ['class' => 'myclass'],
         'options' => [
             'class' => 'navbar navbar-expand-md fixed-top',
         ],
     ]);
 
-
-    // Items da NavBar
-    $menuItemsOption = [
-        ['label' => 'Home', 'url' => ['#']],
-        ['label' => 'Ocorrencias', 'url' => ['/occurrence/index']],
-        ['label' => 'Avisos', 'url' => ['#']],
-        ['label' => 'Solicitações', 'url' => ['#']],
-    ];
-
+    // Test to see if user are authenticated
     if (Yii::$app->user->isGuest)
-        $menuItemsAuth = [['label' => 'Entrar', 'url' => ['/site/login']]];
+        $menuItemsAuth = [['label' => 'Entrar', 'url' => ['/site/login'], 'options' => ['class' => 'justify-content-end']]];
     else
-        $menuItemsAuth = [['label' => 'Olá '.Yii::$app->user->identity->username, 'items' => [
+        $menuItemsAuth = [['label' => 'Olá '.Yii::$app->user->identity->name." ".Yii::$app->user->identity->surname, 'items' => [
             ['label' => 'Perfil', 'url' => ['#']],
             ['label' => 'Minhas Occorencias', 'url' => ['#']],
             ['label' => 'Sair', 'linkOptions' => ['data-method' => 'post'], 'url' => ['/site/logout']],
         ]]];
 
-    $menuItems = ArrayHelper::merge($menuItemsOption, $menuItemsAuth);
-
-    // Criar Items na NavBar
+    // Create NavBar Items
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav'],
-        'items' => $menuItems,
+        'options' => ['class' => 'navbar-nav navbar-right d-flex align-items-left justify-content-start nav w-100'],
+        'items' => [
+            ['label' => 'Home', 'url' => ['#']],
+            ['label' => 'Ocorrencias', 'url' => ['/occurrence']],
+            ['label' => 'Avisos', 'url' => ['#']],
+            ['label' => 'Solicitações', 'url' => ['#']],
+        ]
+    ]);
+    echo Nav::widget([
+        'options' => ['class' => 'navbar-nav navbar-right d-flex align-items-left justify-content-end nav w-100'],
+        'items' => $menuItemsAuth,
     ]);
 
     NavBar::end();

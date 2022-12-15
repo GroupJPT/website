@@ -25,6 +25,7 @@ use yii\web\IdentityInterface;
  * @property Parish $parish
  * @property Suggestion[] $suggestions
  */
+
 class User extends ActiveRecord implements IdentityInterface {
 
     public static function tableName() {
@@ -139,7 +140,6 @@ class User extends ActiveRecord implements IdentityInterface {
 
     // QUERYS
 
-    /*
     public function getOccurrenceFollows() {
         return $this->hasMany(OccurrenceFollow::class, ['user_id' => 'id']);
     }
@@ -154,8 +154,13 @@ class User extends ActiveRecord implements IdentityInterface {
 
     public function getSuggestions() {
         return $this->hasMany(Suggestion::class, ['user_id' => 'id']);
-    }*/
+    }
 
+
+
+
+
+    // BackEnd
     public function createUser() {
         $user = new User();
 

@@ -1,6 +1,13 @@
-main > .container, main > .container-fluid
-{
+/** ==============================
+// GLOBAL CONFIGURATION
+============================== **/
+main > .container, main > .container-fluid {
     padding: 70px 15px 20px;
+}
+
+body {
+    font-family: 'Poppins';
+    background-color: #F6F8FC;
 }
 
 .footer {
@@ -65,7 +72,16 @@ a.desc:after {
     margin: 0 0 15px 0;
 }
 
-/* align the logout "link" (button in form) of the navbar */
+/** ==============================
+// CSS NAVBAR
+============================== **/
+.navbar {
+    padding: 0px;
+    height: 52px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+    background-color: #FFFFFF;
+}
+
 .navbar form > button.logout {
     padding-top: 7px;
     color: rgba(255, 255, 255, 0.5);
@@ -90,6 +106,17 @@ a.desc:after {
     outline: none;
 }
 
+.navbar-brand {
+    padding: 3px
+}
+.navbar-img {
+    height: 45px;
+}
+
+
+
+
+
 /* style breadcrumb widget as in previous bootstrap versions */
 .breadcrumb {
     background-color: var(--bs-gray-200);
@@ -100,11 +127,6 @@ a.desc:after {
 .breadcrumb-item > a
 {
     text-decoration: none;
-}
-
-.fixed-top{
-    background-color: #d9d9d9 !important;
-    font-size:22px;
 }
 
 .nav-link{
@@ -123,11 +145,6 @@ a.desc:after {
 #detalheOcorrencia{
     border:0;
     background-color: white;
-}
-
-.imgIcon{
-    width:80px;
-    height:80px;
 }
 
 .imagem-fundo-pag-inicial{
