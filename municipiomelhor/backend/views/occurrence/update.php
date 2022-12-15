@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var common\models\Occurrence $model */
 
-$this->title = 'Update Occurrence: ' . $model->id;
+$this->title = 'Update occurrence: ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Occurrences', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';

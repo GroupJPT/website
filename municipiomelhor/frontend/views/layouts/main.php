@@ -41,7 +41,7 @@ AppAsset::register($this);
     // Items da NavBar
     $menuItemsOption = [
         ['label' => 'Home', 'url' => ['#']],
-        ['label' => 'Ocorrencias', 'url' => ['#']],
+        ['label' => 'Ocorrencias', 'url' => ['/occurrence/index']],
         ['label' => 'Avisos', 'url' => ['#']],
         ['label' => 'Solicitações', 'url' => ['#']],
     ];

@@ -46,12 +46,12 @@ class OccurrenceHistory extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'status' => Yii::t('app', 'Status'),
             'created_at' => Yii::t('app', 'Created At'),
-            'occurrence_id' => Yii::t('app', 'Occurrence ID'),
+            'occurrence_id' => Yii::t('app', 'occurrence ID'),
         ];
     }
 
     /**
-     * Gets query for [[Occurrence]].
+     * Gets query for [[occurrence]].
      *
      * @return \yii\db\ActiveQuery
      */

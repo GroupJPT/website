@@ -44,12 +44,12 @@ class OccurrencePhoto extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'photo_path' => Yii::t('app', 'Photo Path'),
-            'occurrence_id' => Yii::t('app', 'Occurrence ID'),
+            'occurrence_id' => Yii::t('app', 'occurrence ID'),
         ];
     }
 
     /**
-     * Gets query for [[Occurrence]].
+     * Gets query for [[occurrence]].
      *
      * @return \yii\db\ActiveQuery
      */

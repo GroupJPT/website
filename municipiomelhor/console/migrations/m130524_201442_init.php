@@ -69,7 +69,7 @@ class m130524_201442_init extends Migration {
             'categorie_id' => $this->integer()->notNull(),
         ], $tableOptions);
 
-        // Table Occurrence
+        // Table occurrence
         $this->createTable('occurrence', [
             'id' => $this->primaryKey(),
             'description' => $this->text()->notNull(),
@@ -79,14 +79,14 @@ class m130524_201442_init extends Migration {
             'parish_id' => $this->integer()->notNull(),
         ], $tableOptions);
 
-        // Table Occurrence Photo
+        // Table occurrence Photo
         $this->createTable('occurrence_photo', [
             'id' => $this->primaryKey(),
             'photo_path' => $this->string()->notNull(),
             'occurrence_id' => $this->integer()->notNull(),
         ], $tableOptions);
 
-        // Table Occurrence History
+        // Table occurrence History
         $this->createTable('occurrence_history', [
             'id' => $this->primaryKey(),
             'status' => $this->integer()->notNull(),
@@ -94,7 +94,7 @@ class m130524_201442_init extends Migration {
             'occurrence_id' => $this->integer()->notNull(),
         ], $tableOptions);
 
-        // Table Occurrence Follow
+        // Table occurrence Follow
         $this->createTable('occurrence_follow', [
             'id' => $this->primaryKey(),
             'created_at' => $this->dateTime()->notNull(),
@@ -137,19 +137,19 @@ class m130524_201442_init extends Migration {
         // Table Subcategories
         $this->addForeignKey('fk-subcategorie-categorie_id', 'subcategorie', 'categorie_id', 'categorie', 'id',);
 
-        // Table Occurrence
+        // Table occurrence
         $this->addForeignKey('fk-occurrence-user_id', 'occurrence', 'user_id', 'user', 'id',);
         $this->addForeignKey('fk-occurrence-categorie_id', 'occurrence', 'categorie_id', 'categorie', 'id',);
         $this->addForeignKey('fk-occurrence-subcategorie_id', 'occurrence', 'subcategorie_id', 'subcategorie', 'id',);
         $this->addForeignKey('fk-occurrence-parish_id', 'occurrence', 'parish_id', 'parish', 'id',);
 
-        // Table Occurrence Photo
+        // Table occurrence Photo
         $this->addForeignKey('fk-occurrence_photo-occurrence_id', 'occurrence_photo', 'occurrence_id', 'occurrence', 'id',);
 
-        // Table Occurrence History
+        // Table occurrence History
         $this->addForeignKey('fk-occurrence_history-occurrence_id', 'occurrence_history', 'occurrence_id', 'occurrence', 'id',);
 
-        // Table Occurrence Follow
+        // Table occurrence Follow
         $this->addForeignKey('fk-occurrence_follow-user_id', 'occurrence_follow', 'user_id', 'user', 'id',);
         $this->addForeignKey('fk-occurrence_follow-occurrence_id', 'occurrence_follow', 'occurrence_id', 'occurrence', 'id',);
 

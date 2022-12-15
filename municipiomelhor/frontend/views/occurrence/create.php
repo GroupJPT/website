@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var common\models\Occurrence $model */
 
-$this->title = 'Create occurrence';
-$this->params['breadcrumbs'][] = ['label' => 'Occurrences', 'url' => ['index']];
+$this->title = 'Criar Ocurrência';
+$this->params['breadcrumbs'][] = ['label' => 'Ocorrência', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="occurrence-create">

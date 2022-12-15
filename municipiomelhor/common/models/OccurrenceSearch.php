@@ -7,7 +7,7 @@ use yii\data\ActiveDataProvider;
 use common\models\Occurrence;
 
 /**
- * OccurrenceSearch represents the model behind the search form of `common\models\Occurrence`.
+ * OccurrenceSearch represents the model behind the search form of `common\models\occurrence`.
  */
 class OccurrenceSearch extends Occurrence
 {

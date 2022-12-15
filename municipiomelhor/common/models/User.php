@@ -145,7 +145,7 @@ class User extends ActiveRecord implements IdentityInterface {
     }
 
     public function getOccurrences() {
-        return $this->hasMany(Occurrence::class, ['user_id' => 'id']);
+        return $this->hasMany(occurrence::class, ['user_id' => 'id']);
     }
 
     public function getParish() {
