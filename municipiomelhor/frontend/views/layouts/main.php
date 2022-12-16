@@ -3,6 +3,7 @@
 use common\widgets\Alert;
 use frontend\assets\AppAsset;
 use yii\bootstrap5\Breadcrumbs;
+use yii\bootstrap5\Dropdown;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\Nav;
 use yii\bootstrap5\NavBar;
@@ -51,12 +52,13 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right d-flex align-items-left justify-content-start nav w-100'],
         'items' => [
-            ['label' => 'Home', 'url' => ['#']],
-            ['label' => 'Ocorrencias', 'url' => ['/occurrence']],
-            ['label' => 'Avisos', 'url' => ['#']],
-            ['label' => 'Solicitações', 'url' => ['#']],
-        ]
-    ]);
+            ['label' => 'Home', 'url' => ['/site']],
+            ['label' => 'Ocorrencias','url' => ['/occurrence']],
+            ['label' => 'Avisos', 'url' => ['/warning']],
+            ['label' => 'Sugestões', 'url' => ['/suggestion']],
+            ]]);
+
+
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right d-flex align-items-left justify-content-end nav w-100'],
         'items' => $menuItemsAuth,
