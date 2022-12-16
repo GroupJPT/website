@@ -47,8 +47,8 @@ class Suggestion extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'address' => Yii::t('app', 'Address'),
-            'description' => Yii::t('app', 'Description'),
-            'user_id' => Yii::t('app', 'User ID'),
+            'description' => Yii::t('app', 'Descrição'),
+            'user_id' => Yii::t('app', 'ID de Utilizador'),
         ];
     }
 
