@@ -19,7 +19,9 @@ AppAsset::register($this);
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
-    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
 </head>
 <body class="d-flex flex-column h-100">
 <?php $this->beginBody() ?>
@@ -69,19 +71,54 @@ AppAsset::register($this);
 </header>
 
 <main role="main" class="flex-shrink-0">
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
-    </div>
+
+    <?php
+        if ($this->title == 'Ocorrências')
+            echo $content;
+        else
+    ?>
+            <div class="container">
+                <?= $content ?>
+            </div>
+    <?php
+    ?>
 </main>
 
 <footer class="footer mt-auto py-3 text-muted">
     <div class="container">
-        <p class="float-start">&copy; MunicipioMelhor <?= date('Y') ?></p>
-        <p class="float-end"><?= Yii::powered() ?></p>
+        <div class="row">
+            <div class="col">
+                <p>dsadas</p>
+
+            </div>
+            <div class="col">
+                <p>dsadas</p>
+
+            </div>
+            <div class="col">
+                <p>dsadas</p>
+
+            </div>
+            <div class="col">
+                <p>dsadas</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p class="float-start"><?= date('Y') ?> &copy; MunicípioMelhor!, Todos os direitos reservados.</p>
+            </div>
+            <div class="col">
+                <?php
+                    echo Nav::widget([
+                    'options' => ['class' => 'float-end'],
+                    'items' => [
+                        ['label' => 'Privacidade', 'url' => ['/site']],
+                        ['label' => 'Avisos Legal','url' => ['/occurrence']],
+                        ['label' => 'Termos', 'url' => ['/warning']],
+                    ]]);
+                ?>
+            </div>
+        </div>
     </div>
 </footer>
 

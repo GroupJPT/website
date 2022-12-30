@@ -26,6 +26,11 @@ $this->title = 'Município Melhor';
 
     <div class="body-content">
 
+        <div id="map"></div>
+
+        <input type="text" class="form-control" placeholder="lat" name="lat" id="lat">
+        <input type="text" class="form-control" placeholder="lng" name="lng" id="lng">
+
         <div class="container-fluid">
             <div class="card-group">
 
