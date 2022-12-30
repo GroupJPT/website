@@ -19,6 +19,7 @@ AppAsset::register($this);
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    <?php $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/png', 'href' => '@web/images/icon.png']); ?>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
@@ -32,7 +33,7 @@ AppAsset::register($this);
     // NAVBAR CONFIG
     ============================== **/
     NavBar::begin([
-        'brandLabel' => Html::img('@web/images/icon.png', ['class'=>'navbar-img', 'alt'=>Yii::$app->name]),
+        'brandLabel' => Html::img('@web/images/icon-navbar.svg', ['class'=>'icon', 'alt'=>Yii::$app->name]),
         'brandUrl' => Yii::$app->homeUrl,
         'brandOptions' => ['class' => 'myclass'],
         'options' => [
@@ -71,17 +72,7 @@ AppAsset::register($this);
 </header>
 
 <main role="main" class="flex-shrink-0">
-
-    <?php
-        if ($this->title == 'Ocorrências')
-            echo $content;
-        else
-    ?>
-            <div class="container">
-                <?= $content ?>
-            </div>
-    <?php
-    ?>
+    <?= $content; ?>
 </main>
 
 <footer class="footer mt-auto py-3 text-muted">

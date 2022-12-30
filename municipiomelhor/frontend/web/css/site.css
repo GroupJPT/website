@@ -1,13 +1,45 @@
 /** ==============================
+// VARIABLES FOR LIGHT & DARK MODE
+============================== **/
+/*
+Vermelho #CB5757
+Preto #282828
+Cinzento #7F8080
+Branco #FAF6F6
+*/
+
+:root {
+    /* Navbar */
+    --icon-color: invert(23%) sepia(62%) saturate(3908%) hue-rotate(348deg) brightness(116%) contrast(81%);
+    --bg-navbar: #FAF6F6;
+    --font-navbar: #282828;
+
+    /* Body */
+    --bg-body: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* Navbar */
+        --icon-color: invert(100%) sepia(14%) saturate(2324%) hue-rotate(310deg) brightness(113%) contrast(98%);
+        --bg-navbar: #2B2B2B;
+        --font-navbar: #FAF6F6;
+
+        /* Body */
+        --bg-body: #282828;
+    }
+}
+
+/** ==============================
 // GLOBAL CONFIGURATION
 ============================== **/
-main > .container, main > .container-fluid {
-    padding: 52px 15px 20px;
+main {
+    padding-top: 52px;
 }
 
 body {
     font-family: 'Source Sans Pro';
-    background-color: #F6F8FC;
+    background-color: var(--bg-body);
 }
 
 .footer {
@@ -21,6 +53,80 @@ body {
     padding-right: 15px;
     padding-left: 15px;
 }
+
+/** ==============================
+// ICON CUSTOMIZATION
+============================== **/
+.icon{
+    height: 45px;
+    filter: var(--icon-color);
+}
+
+/** ==============================
+// NAVBAR
+============================== **/
+.navbar {
+    padding: 0px;
+    height: 52px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+    background-color: var(--bg-navbar);
+}
+
+.nav-link { color: var(--font-navbar) !important; }
+
+.navbar-toggler, .navbar-toggler-icon > span {
+    color: var(--font-navbar) !important;
+    border-color: var(--font-navbar) !important;
+}
+.navbar-collapse {
+    background: var(--bg-navbar);
+}
+
+
+
+
+
+.navbar form > button.logout {
+    padding-top: 7px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+@media(max-width:767px) {
+    .navbar form > button.logout {
+        display:block;
+        text-align: left;
+        width: 100%;
+        padding: 10px 0;
+    }
+}
+
+.navbar form > button.logout:focus,
+.navbar form > button.logout:hover {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.navbar form > button.logout:focus {
+    outline: none;
+}
+
+.navbar-brand {
+    padding: 3px
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .not-set {
     color: #c55;
@@ -73,46 +179,15 @@ a.desc:after {
     margin: 0 0 15px 0;
 }
 
+
 /** ==============================
-// CSS NAVBAR
+// HOME PAGE
 ============================== **/
-.navbar {
-    padding: 0px;
-    height: 52px;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
-    background-color: #FFFFFF;
+.home-header {
+    background-color: #CB5757;
+    height: 400px;
 }
 
-.navbar form > button.logout {
-    padding-top: 7px;
-    color: rgba(255, 255, 255, 0.5);
-}
-
-@media(max-width:767px) {
-    .navbar form > button.logout {
-        display:block;
-        text-align: left;
-        width: 100%;
-        padding: 10px 0;
-    }
-}
-
-.navbar form > button.logout:focus,
-.navbar form > button.logout:hover {
-    text-decoration: none;
-    color: rgba(255, 255, 255, 0.75);
-}
-
-.navbar form > button.logout:focus {
-    outline: none;
-}
-
-.navbar-brand {
-    padding: 3px
-}
-.navbar-img {
-    height: 45px;
-}
 
 /** ==============================
 // OCCURRENCE PAGE

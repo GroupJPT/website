@@ -1,36 +1,29 @@
 <?php
 
-/** @var yii\web\View $this */
 use yii\bootstrap5\Html;
 
-
-$this->title = 'Município Melhor';
+$this->title = 'Município Melhor!';
 ?>
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
-<div class="site-index">
-    <div class="p-5 mb-4 bg-transparent rounded-3">
-        <div class="main-slider slick-initialized slick-slider" aria-hidden="true">
-            <div aria-live="polite" class="slick-list draggable"><div class="slick-track" role="listbox" style="opacity: 1; width: 1100px; transform: translate3d(0px, 0px, 0px);"><div class="main-slider__item slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false" tabindex="-1" role="option" aria-describedby="slick-slide00" style="width: 1100px;">
 
-                        <a>
-                            <img src="/images/divulgarapp.png" class="imagem-fundo-pag-inicial"/>
-                        </a>
-                    </div>
-                </div>
+<div class="home-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <p>sdas</p>
+            </div>
+            <div class="col-6">
+                <p>sdas</p>
             </div>
         </div>
     </div>
+</div>
 
+<div class="container">
     <div class="body-content">
-
-        <div id="map"></div>
-
-        <input type="text" class="form-control" placeholder="lat" name="lat" id="lat">
-        <input type="text" class="form-control" placeholder="lng" name="lng" id="lng">
-
         <div class="container-fluid">
             <div class="card-group">
 
