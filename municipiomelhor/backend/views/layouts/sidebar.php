@@ -34,6 +34,7 @@ use hail812\adminlte\widgets\Menu;
                     ['label' => 'Avisos', 'url' => ['/warning']],
                     ['label' => 'Freguesias', 'url' => ['/parish']],
                     ['label' => 'Categorias', 'url' => ['/categorie']],
+                    ['label' => 'Subcategorias', 'url' => ['/subcategorie']],
 
                 ],
             ]);
