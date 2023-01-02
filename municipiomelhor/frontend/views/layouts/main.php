@@ -73,8 +73,22 @@ AppAsset::register($this);
 
 <main role="main" class="flex-shrink-0">
     <?= $content; ?>
-</main>
 
+    <div class="loader-wrapper">
+        <span class="loader"><span class="loader-inner"></span></span>
+    </div>
+
+    <script>
+        addEventListener("load", (event) => {
+            $(".loader-wrapper").fadeOut("slow");
+        })
+
+        function createOccurrence() {
+            $(".loader-wrapper").fadeIn("slow");
+        }
+    </script>
+</main>
+<!--
 <footer class="footer mt-auto py-3 text-muted">
     <div class="container">
         <div class="row">
@@ -99,19 +113,20 @@ AppAsset::register($this);
                 <p class="float-start"><?= date('Y') ?> &copy; MunicípioMelhor!, Todos os direitos reservados.</p>
             </div>
             <div class="col">
-                <?php
+                <?php /*
                     echo Nav::widget([
                     'options' => ['class' => 'float-end'],
                     'items' => [
                         ['label' => 'Privacidade', 'url' => ['/site']],
                         ['label' => 'Avisos Legal','url' => ['/occurrence']],
                         ['label' => 'Termos', 'url' => ['/warning']],
-                    ]]);
+                    ]]);*/
                 ?>
             </div>
         </div>
     </div>
 </footer>
+-->
 
 <?php $this->endBody() ?>
 </body>

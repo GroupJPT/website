@@ -13,54 +13,60 @@ $this->title = 'Município Melhor!';
     <div class="container">
         <div class="row">
             <div class="col-6">
-                <p>sdas</p>
+                <h1>Porque esperar?! Melhora já o teu Município!</h1>
+                <p>O Lorem Ipsum é um texto modelo da indústria tipográfica e de impressão. O Lo, que continham passagens com Lorem Ipsum, e mais recentemente com os programas de publicação como o Aldus PageMaker que incluem versões do Lorem Ipsum.</p>
+                <button>Criar Ocorrencia</button>
             </div>
             <div class="col-6">
-                <p>sdas</p>
+                <?= Html::img('@web/images/home-header.svg', ['class'=>'']) ?>
             </div>
         </div>
     </div>
 </div>
 
 <div class="container">
-    <div class="body-content">
-        <div class="container-fluid">
-            <div class="card-group">
-
-                <div class="card">
-                    <img src="/images/divulgarapp.png"/>
-
-                    <div class="card-body">
-                        <h5 class="card-title">Ocorência Nº1</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <p class="card-text"><small class="text-muted">Data de publicação:</small></p>
-                        <a href="#" class="fa fa-eye" style="color:black;text-decoration: none;" id="detalheOcorrencia"></a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="/images/divulgarapp.png"/>
-
-                    <div class="card-body">
-                        <h5 class="card-title">Ocorência Nº2</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <p class="card-text"><small class="text-muted">Data de publicação:</small></p>
-                        <a href="#" class="fa fa-eye" style="color:black;text-decoration: none;" id="detalheOcorrencia"></a>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="/images/divulgarapp.png"/>
-
-                    <div class="card-body">
-                        <h5 class="card-title">Ocorência Nº3</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <p class="card-text"><small class="text-muted">Data de publicação:</small></p>
-                        <a href="#" class="fa fa-eye" style="color:black;text-decoration: none;" id="detalheOcorrencia"></a>
-                    </div>
+    <div class="row abb">
+        <div class="col-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Ocorência Nº1</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <p class="card-text"><small class="text-muted">Data de publicação:</small></p>
+                    <a href="#" class="fa fa-eye" style="color:black;text-decoration: none;" id="detalheOcorrencia"></a>
                 </div>
             </div>
         </div>
-
-
+        <div class="col-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Facilidade</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <p class="card-text"><small class="text-muted">Data de publicação:</small></p>
+                    <a href="#" class="fa fa-eye" style="color:black;text-decoration: none;" id="detalheOcorrencia"></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Eficaz</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <p class="card-text"><small class="text-muted">Data de publicação:</small></p>
+                    <a href="#" class="fa fa-eye" style="color:black;text-decoration: none;" id="detalheOcorrencia"></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Eficiencia</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <p class="card-text"><small class="text-muted">Data de publicação:</small></p>
+                    <a href="#" class="fa fa-eye" style="color:black;text-decoration: none;" id="detalheOcorrencia"></a>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <div class="row" style="height: 3000px"></div>
 </div>

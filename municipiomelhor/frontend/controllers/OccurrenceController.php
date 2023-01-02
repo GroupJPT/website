@@ -3,49 +3,78 @@
 namespace frontend\controllers;
 
 use common\models\Occurrence;
-use common\models\OccurrenceSearch;
+use Yii;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-/**
- * OccurrenceController implements the CRUD actions for occurrence model.
- */
-class OccurrenceController extends Controller
-{
-    /**
-     * @inheritDoc
-     */
-    public function behaviors()
-    {
+class OccurrenceController extends Controller {
+
+    public function behaviors() {
         return array_merge(
             parent::behaviors(),
             [
+                'access' => [
+                    'class' => AccessControl::class,
+                    'rules' => [
+                        [
+                            'actions' => ['index', 'search'],
+                            'allow' => true,
+                        ],
+                        [
+                            'actions' => ['create', 'myoccurrences'],
+                            'allow' => true,
+                            'roles' => ['Admin', 'Employee', 'User'],
+                        ],
+                    ],
+                ],
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
                         'delete' => ['POST'],
                     ],
+
                 ],
             ]
         );
     }
 
-    /**
-     * Lists all occurrence models.
-     *
-     * @return string
-     */
-    public function actionIndex()
-    {
-        $searchModel = new OccurrenceSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+     /** ==============================
+     * Action to Index page.
+     ============================== **/
+    public function actionIndex() {
+        return $this->render('index');
     }
+
+    /** ==============================
+     * Action to create occurrence.
+    ============================== **/
+    public function actionCreate() {
+        return $this->render('create');
+    }
+
+    /** ==============================
+     * Action to List occurrences of
+     * authenticated user.
+    ============================== **/
+    public function actionMyoccurrences() {
+        return $this->render('myoccurrences');
+    }
+
+    /** ==============================
+     * Action to search occurrences.
+    ============================== **/
+    public function actionSearch() {
+        return $this->render('myoccurrences');
+    }
+
+
+
+
+
+
+
 
     /**
      * Displays a single occurrence model.
@@ -53,8 +82,7 @@ class OccurrenceController extends Controller
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
-    {
+    public function actionView($id) {
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -64,7 +92,7 @@ class OccurrenceController extends Controller
      * Creates a new occurrence model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
-     */
+     *
     public function actionCreate()
     {
         $model = new Occurrence();
@@ -80,7 +108,7 @@ class OccurrenceController extends Controller
         return $this->render('create', [
             'model' => $model,
         ]);
-    }
+    }*/
 
     /**
      * Updates an existing occurrence model.

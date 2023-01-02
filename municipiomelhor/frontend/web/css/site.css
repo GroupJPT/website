@@ -10,12 +10,14 @@ Branco #FAF6F6
 
 :root {
     /* Navbar */
-    --icon-color: invert(23%) sepia(62%) saturate(3908%) hue-rotate(348deg) brightness(116%) contrast(81%);
+    --icon-color: invert(8%) sepia(0%) saturate(488%) hue-rotate(148deg) brightness(94%) contrast(81%);
     --bg-navbar: #FAF6F6;
     --font-navbar: #282828;
 
     /* Body */
     --bg-body: #ffffff;
+
+    /* Home Page*/
 }
 
 @media (prefers-color-scheme: dark) {
@@ -35,11 +37,13 @@ Branco #FAF6F6
 ============================== **/
 main {
     padding-top: 52px;
+    height: 100%;
 }
 
-body {
+html, body {
     font-family: 'Source Sans Pro';
     background-color: var(--bg-body);
+    height: 100%;
 }
 
 .footer {
@@ -65,6 +69,9 @@ body {
 /** ==============================
 // NAVBAR
 ============================== **/
+header{
+    height: 100%;
+}
 .navbar {
     padding: 0px;
     height: 52px;
@@ -81,6 +88,128 @@ body {
 .navbar-collapse {
     background: var(--bg-navbar);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.loader-wrapper{
+    width: 100%;
+    height: calc(100% - 52px);
+    position: absolute;
+    top: 52px;
+    background-color: #282828;
+}
+.loader {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    position: relative;
+    border: 4px solid #Fff;
+    top: 50%;
+    left: 50%;
+    animation: loader 2s infinite ease;
+}
+
+.loader-inner {
+    vertical-align: top;
+    display: inline-block;
+    width: 100%;
+    background-color: #fff;
+    animation: loader-inner 2s infinite ease-in;
+}
+
+@keyframes loader {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(180deg);
+    }
+
+    50% {
+        transform: rotate(180deg);
+    }
+
+    75% {
+        transform: rotate(360deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes loader-inner {
+    0% {
+        height: 0%;
+    }
+
+    25% {
+        height: 0%;
+    }
+
+    50% {
+        height: 100%;
+    }
+
+    75% {
+        height: 100%;
+    }
+
+    100% {
+        height: 0%;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -185,20 +314,143 @@ a.desc:after {
 ============================== **/
 .home-header {
     background-color: #CB5757;
-    height: 400px;
+    height: 600px;
+}
+.abb {
+    position: relative;
+    bottom: 50px;
 }
 
 
 /** ==============================
 // OCCURRENCE PAGE
 ============================== **/
-#map{
-    padding-top: 52px;
-    overflow:hidden;
-    padding-bottom:50%;
-    position:relative;
-    height:100%;
+
+/* Menu */
+.occ-menu {
+    height: calc(100% - 52px);
+    width: 100%;
+    margin: 0px;
 }
+.occ-menu-icons {
+    height: 30%;
+    filter: invert(100%) sepia(0%) saturate(3740%) hue-rotate(356deg) brightness(123%) contrast(93%);
+    transition: height 0.5s;
+}
+.occ-menu > a {
+    cursor: pointer;
+    text-decoration: none;
+    color: #FFFFFF;
+}
+.occ-menu > a:not(:last-child){
+    border-right: 1px solid #FFFFFF;
+}
+.occ-menu > a > p {
+    margin-top: 30%;
+    font-size: 40px;
+    transition: font-size 0.5s;
+}
+.occ-menu > a:hover > p  {
+    font-size: 50px;
+    transition: font-size 0.5s;
+}
+.occ-menu > a:hover > .occ-menu-icons {
+    height: 35%;
+    transition: height 0.5s;
+}
+
+
+/* Create */
+.occ-create {
+    height: 100%;
+}
+.occ-create > div {
+    height: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+#map{
+    height:100%;
+    width: 100%;
+}
+#occ-form {
+    height: 95%;
+}
+#occ-footer {
+    height: 5%;
+}
+.occ-tab {
+    height: 90%;
+}
+
+/* Occurrences Footer */
+.occ-col-footer {
+    height: 5%;
+    color: #ffffff;
+}
+.occ-col-footer > p {
+    bottom: 0;
+    left: 50%;
+    position: absolute;
+    margin-left: 10px;
+    margin-bottom: 5px;
+    font-size: 80%;
+}
+
+
+/* Occurrences Menu */
+.occ-form-page {
+    height: 95%;
+    display: none;
+}
+.occ-form-page-active {
+    display: inline; !important;
+}
+.occ-form-page > div > div {
+    height: 50%;
+}
+.occ-menu-btn {
+    height: 60px;
+    width: 80%;
+    margin: 30px;
+    background-color: #282828;
+    border-color: #CB5757;
+    color: #FFFFFF;
+    font-size: 30px;
+    border-width: 5px;
+    border-radius: 30px;
+    animation: fadeIn 0.5s linear forwards;
+}
+@keyframes fadeIn {
+    0% { opacity:0; }
+    100% { opacity:1; }
+}
+
+/* Occurrences Create */
+.occ-create-page {
+    display: none;
+    color: #FFFFFF;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* style breadcrumb widget as in previous bootstrap versions */
