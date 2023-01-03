@@ -46,14 +46,16 @@ $this->title = 'Criar ocorrência';
 
             <!-- Step 2 -->
             <div class="col occ-form-page">
-                <h2>2. Qual é a rua.</h2>
+                <h2>2. Qual é a rua?</h2>
                 <p>Rua</p>
+                <textarea id="ocurrenceStreet" rows="5" cols="50"></textarea>
             </div>
 
             <!-- Step 3 -->
             <div class="col occ-form-page">
                 <h2>3. Descrição.</h2>
                 <p>Descrição</p>
+                <textarea id="ocurrenceDesc" rows="10" cols="100"></textarea>
             </div>
 
             <!-- Step 4 -->

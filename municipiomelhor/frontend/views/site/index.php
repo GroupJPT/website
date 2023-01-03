@@ -1,6 +1,7 @@
 <?php
 
 use yii\bootstrap5\Html;
+use yii\helpers\Url;
 
 $this->title = 'Município Melhor!';
 ?>
@@ -15,7 +16,7 @@ $this->title = 'Município Melhor!';
             <div class="col-6">
                 <h1>Porque esperar?! Melhora já o teu Município!</h1>
                 <p>O Lorem Ipsum é um texto modelo da indústria tipográfica e de impressão. O Lo, que continham passagens com Lorem Ipsum, e mais recentemente com os programas de publicação como o Aldus PageMaker que incluem versões do Lorem Ipsum.</p>
-                <button>Criar Ocorrencia</button>
+                <a class="col-4 h-100" style="color:black;" href="<?= Url::to(['/occurrence/create']) ?>">Criar ocorrência</a>
             </div>
             <div class="col-6">
                 <?= Html::img('@web/images/home-header.svg', ['class'=>'']) ?>
