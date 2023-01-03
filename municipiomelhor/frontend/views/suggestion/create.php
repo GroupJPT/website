@@ -6,8 +6,6 @@ use yii\helpers\Html;
 /** @var common\models\Suggestion $model */
 
 $this->title = 'Criar Sugestão';
-$this->params['breadcrumbs'][] = ['label' => 'Sugestões', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="suggestion-create">
 

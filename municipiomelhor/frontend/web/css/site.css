@@ -363,9 +363,24 @@ a.desc:after {
 /* Create */
 .occ-create {
     height: 100%;
+    width: 100%;
+    color: #FFFFFF;
 }
-.occ-create > div {
+.occ-create > div, .occ-create > form {
     height: 100%;
+}
+.occ-create > form > div {
+    height: 100%;
+}
+.occ-form-page {
+    display: none;
+    height: 85%;
+    padding-top: 10%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+.occ-create-active {
+    display: inline; !important;
 }
 
 
@@ -406,17 +421,9 @@ a.desc:after {
 }
 
 
-/* Occurrences Menu */
-.occ-form-page {
-    height: 95%;
-    display: none;
-}
-.occ-form-page-active {
-    display: inline; !important;
-}
-.occ-form-page > div > div {
-    height: 50%;
-}
+
+
+
 .occ-menu-btn {
     height: 60px;
     width: 80%;

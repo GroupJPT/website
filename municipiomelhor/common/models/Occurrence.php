@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "occurrence".
@@ -22,21 +23,11 @@ use Yii;
  * @property Subcategorie $subcategorie
  * @property User $user
  */
-class Occurrence extends \yii\db\ActiveRecord
-{
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
-    {
-        return 'occurrence';
-    }
+class Occurrence extends ActiveRecord {
 
-    /**
-     * {@inheritdoc}
-     */
-    public function rules()
-    {
+    public static function tableName() { return 'occurrence'; }
+
+    public function rules() {
         return [
             [['description', 'user_id', 'categorie_id', 'subcategorie_id', 'parish_id'], 'required'],
             [['description'], 'string'],
@@ -48,11 +39,7 @@ class Occurrence extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => Yii::t('app', 'ID'),
             'description' => Yii::t('app', 'Descrição'),

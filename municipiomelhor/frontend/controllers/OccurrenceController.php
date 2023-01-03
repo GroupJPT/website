@@ -3,7 +3,7 @@
 namespace frontend\controllers;
 
 use common\models\Occurrence;
-use Yii;
+
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -51,8 +51,11 @@ class OccurrenceController extends Controller {
      * Action to create occurrence.
     ============================== **/
     public function actionCreate() {
-        return $this->render('create');
-    }
+        $model = new Occurrence();
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);    }
 
     /** ==============================
      * Action to List occurrences of

@@ -1,8 +1,14 @@
 <?php
 
+use common\models\Categorie;
 use yii\bootstrap5\Html;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
+use yii\widgets\ActiveForm;
 
 $this->title = 'Criar ocorrência';
+
+/** @var common\models\Occurrence $model */
 
 ?>
 
@@ -10,68 +16,88 @@ $this->title = 'Criar ocorrência';
     <div class="col-7">
         <div id="map"></div>
     </div>
-    <div class="col-5">
-        <form id="row-cols-1" action="" class="occ-form-page occ-form-page-active">
-            <div class="row-cols-1 h-100">
 
-                <div class="col occ-create-page">
-                    <h2>Primeiros Passos...</h2>
-                    <p>Em que categoria se encaixa o seu problema?</p>
+    <?php $form = ActiveForm::begin([
+        'action' => '/occurrences/create',
+        'options' => [
+            'class' => 'col-5'
+        ]
+    ]); ?>
+        <div class="row-cols-1">
 
-                    <select class="form-select" id="inlineFormSelectPref">
-                        <option selected>Selecione a Categoria</option>
-                    </select>
+            <!-- Step 1 -->
+            <div class="col occ-form-page occ-create-active">
+                <h2>1. Selecione a categoria.</h2>
+                <p>Em que categoria encaixa se o seu problema?</p>
 
-                </div>
-                <div class="col occ-create-page">
-                    <p>2</p>
-                </div>
-                <div class="col occ-create-page">
-                    <p>3</p>
-                </div>
-                <div class="col occ-create-page">
-                    <p>4</p>
-                </div>
+                <?php
+
+                $categories = Categorie::find()->all();
+                $listData=ArrayHelper::map($categories,'id','name');
+
+                echo $form->field($model, 'categorie_id')->dropDownList(
+                    $listData,
+                    ['prompt'=>'Selecione a Categoria']
+                );
+
+                ?>
+
+            </div>
+
+            <!-- Step 2 -->
+            <div class="col occ-form-page">
+                <h2>2. Qual é a rua.</h2>
+                <p>Rua</p>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="col occ-form-page">
+                <h2>3. Descrição.</h2>
+                <p>Descrição</p>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="col occ-form-page">
+                <h2>4. Fotografias.</h2>
+                <p>Fotografias</p>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="col occ-form-page">
+                <h2>Confirmação dos dados.</h2>
+                <p>Dados</p>
+            </div>
 
 
 
-                <div class="col occ-btns">
-                    <div class="row">
-                        <div class="col-4 d-flex flex-column align-items-center">
-                            <button type="button" id="occ-create-prev" class="" onclick="nextPrev(-1)">Anterior</button>
-                        </div>
+            <div class="col occ-btns">
+                <div class="row">
+                    <div class="col-4 d-flex flex-column align-items-center">
+                        <button type="button" id="occ-create-prev" class="" onclick="nextPrev(-1)">Anterior</button>
+                    </div>
 
-                        <div class="col-4 d-flex flex-column align-items-center">
-                            <span class="step"></span>
-                            <span class="step"></span>
-                            <span class="step"></span>
-                            <span class="step"></span>
-                        </div>
+                    <div class="col-4 d-flex flex-column align-items-center">
+                        <span class="step"></span>
+                        <span class="step"></span>
+                        <span class="step"></span>
+                        <span class="step"></span>
+                    </div>
 
-                        <div class="col-4 d-flex flex-column align-items-center">
-                            <button type="button" id="occ-create-next" class="" onclick="nextPrev(1)">Proximo</button>
-                        </div>
+                    <div class="col-4 d-flex flex-column align-items-center">
+                        <button type="button" id="occ-create-next" class="" onclick="nextPrev(1)">Proximo</button>
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
 
-        <!-- Search -->
-        <form id="occ-form-search" class="occ-form-page">
-        </form>
-    </div>
+    <?php ActiveForm::end(); ?>
 
     <script>
         var page = 0;
         showCreatePage(page);
 
-        function occCreate() {
-            document.getElementById("occ-form-menu").classList.remove("occ-form-page-active");
-            document.getElementById("occ-form-create").classList.add("occ-form-page-active");
-        }
-
         function showCreatePage(n) {
-            var x = document.getElementsByClassName("occ-create-page");
+            var x = document.getElementsByClassName("occ-form-page");
             x[n].style.display = "block";
 
             if (n == 0)
@@ -81,22 +107,15 @@ $this->title = 'Criar ocorrência';
         }
 
         function nextPrev(n) {
-            var x = document.getElementsByClassName("occ-create-page");
+            var x = document.getElementsByClassName("occ-form-page");
             x[page].style.display = "none";
             page = page + n;
             if (page >= x.length) {
+                document.getElementById("occ-create-next").textContent = "Submeter"
                 document.getElementById("occ-form-create").submit();
                 return false;
             }
             showCreatePage(page);
-        }
-
-
-
-
-        function occSearch() {
-            document.getElementById("occ-form-menu").classList.remove("occ-form-page-active");
-            document.getElementById("occ-form-search").classList.add("occ-form-page-active");
         }
 
     </script>
