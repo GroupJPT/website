@@ -14,8 +14,8 @@ $this->title = 'Município Melhor!';
     <div class="container">
         <div class="row">
             <div class="col-6">
-                <h1>Porque esperar?! Melhora já o teu Município!</h1>
-                <p>O Lorem Ipsum é um texto modelo da indústria tipográfica e de impressão. O Lo, que continham passagens com Lorem Ipsum, e mais recentemente com os programas de publicação como o Aldus PageMaker que incluem versões do Lorem Ipsum.</p>
+                <h1>Porquê esperar? Melhora já o teu Município!</h1>
+                <p>A aplicação MunicipioMelhor foi desenvolvida para ajudar e poupar tempo aos cidadãos do Município. Através da mesma será possivel registar ocorrências observadas na via pública, como defeitos na iluminação de uma rua, entre muitos outros problemas com que nos deparamos no dia a dia.</p>
                 <a class="col-4 h-100" style="color:black;" href="<?= Url::to(['/occurrence/create']) ?>">Criar ocorrência</a>
             </div>
             <div class="col-6">
