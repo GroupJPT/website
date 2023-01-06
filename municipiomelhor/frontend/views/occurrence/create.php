@@ -1,6 +1,7 @@
 <?php
 
 use common\models\Categorie;
+use common\models\Subcategorie;
 use yii\bootstrap5\Html;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
@@ -28,17 +29,28 @@ $this->title = 'Criar ocorrência';
             <!-- Step 1 -->
             <div class="col occ-form-page occ-create-active">
                 <h2>1. Selecione a categoria.</h2>
-                <p>Em que categoria encaixa se o seu problema?</p>
+                <p>Em que categoria se encaixa o seu problema?</p>
 
                 <?php
 
-                $categories = Categorie::find()->all();
-                $listData=ArrayHelper::map($categories,'id','name');
+                $dataCategory = ArrayHelper::map(Categorie::find()->all(), 'id', 'name');
 
                 echo $form->field($model, 'categorie_id')->dropDownList(
-                    $listData,
-                    ['prompt'=>'Selecione a Categoria']
-                );
+                    $dataCategory,
+                    [
+                        'prompt'=>'Selecione a categoria',
+
+                        'onchange'=>'
+                        $.get(
+                            "'.Url::toRoute('occurrence/subcategories').'",
+                            { id: $(this).val() },
+                            function(res){
+                                $("#occurrence-subcategorie_id").html(res);
+                            },
+                        ); visibleSubcategory();
+                    '])->label("Categoria");
+
+                echo $form->field($model, 'subcategorie_id')->dropDownList(['prompt'=>'Selecione uma Categoria'])->label("");
 
                 ?>
 
@@ -48,7 +60,7 @@ $this->title = 'Criar ocorrência';
             <div class="col occ-form-page">
                 <h2>2. Qual é a rua?</h2>
                 <p>Rua</p>
-                <textarea id="ocurrenceStreet" rows="5" cols="50"></textarea>
+                <?= $form->field($model, 'description')->textInput() ?>
             </div>
 
             <!-- Step 3 -->
@@ -109,6 +121,14 @@ $this->title = 'Criar ocorrência';
         }
 
         function nextPrev(n) {
+            switch (page) {
+                case 0:
+                    if(document.getElementById("occurrence-categorie_id").value == "" || document.getElementById("occurrence-subcategorie_id").value == "") return false;
+                    break;
+                case 1:
+                    if(document.getElementById("occurrence-categorie_id").value == "") return false;
+                    break;
+            }
             var x = document.getElementsByClassName("occ-form-page");
             x[page].style.display = "none";
             page = page + n;
@@ -118,6 +138,15 @@ $this->title = 'Criar ocorrência';
                 return false;
             }
             showCreatePage(page);
+        }
+
+        function visibleSubcategory() {
+            if(document.getElementById("occurrence-categorie_id").value != "") {
+                document.getElementById("occurrence-subcategorie_id").style.display = "inline";
+            }
+            else {
+                document.getElementById("occurrence-subcategorie_id").style.display = "none";
+            }
         }
 
     </script>
@@ -141,7 +170,7 @@ $this->title = 'Criar ocorrência';
                     strictBounds: false,
                 },
                 streetViewControl: false,
-                zoom: 13,
+                zoom: 1,
                 scrollwheel:true,
                 styles: [
                     {
@@ -440,38 +469,42 @@ $this->title = 'Criar ocorrência';
                 fillOpacity: 0.5
             });
 
+            marker = new google.maps.Marker({
+                map: map,
+                draggable: false
+            });
 
             var geocoder = new google.maps.Geocoder();
 
             google.maps.event.addListener(map, 'click', function(event) {
-                var myLatLng = event.latLng;
-                $('#lat').val(myLatLng.lat());
-                $('#lng').val(myLatLng.lng());
-                map.setCenter(myLatLng);
-                placeMarker(myLatLng);
+                if(page == 1) {
+                    map.setZoom(14);
+                    map.setCenter(event.latLng);
+
+                    marker.setPosition(event.latLng)
+
+
+                    //Teste
+                    $('#lat').val(myLatLng.lat());
+                    $('#lng').val(myLatLng.lng());
 
 
 
-                geocoder.geocode({
-                    'latLng': event.latLng
-                }, function(results, status) {
-                    if (status == google.maps.GeocoderStatus.OK) {
-                        if (results[0]) {
-                            $('#lng').val(results[0].formatted_address);
+                    geocoder.geocode({
+                        'latLng': event.latLng
+                    }, function(results, status) {
+                        if (status == google.maps.GeocoderStatus.OK) {
+                            if (results[0]) {
+                                $('#lng').val(results[0].formatted_address);
+                            }
                         }
-                    }
-                });
+                    });
+                }
             })
 
             warrenParishBorder.setMap(map);
         }
 
-        function placeMarker(location) {
-            var marker = new google.maps.Marker({
-                position: location,
-                map: map
-            })
-        }
     </script>
 
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEjyX3XVWLoxPaC44hX9Owt9SFeduZ_XU&callback=initMap"></script>

@@ -379,8 +379,14 @@ a.desc:after {
     padding-left: 5%;
     padding-right: 5%;
 }
+.occ-form-page > div > .help-block {
+    display: none; !important;
+}
 .occ-create-active {
     display: inline; !important;
+}
+.field-occurrence-subcategorie_id{
+
 }
 
 

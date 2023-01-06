@@ -2,8 +2,10 @@
 
 namespace frontend\controllers;
 
+use common\models\Categorie;
 use common\models\Occurrence;
 
+use common\models\Subcategorie;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -23,7 +25,7 @@ class OccurrenceController extends Controller {
                             'allow' => true,
                         ],
                         [
-                            'actions' => ['create', 'myoccurrences'],
+                            'actions' => ['create', 'myoccurrences', 'subcategories'],
                             'allow' => true,
                             'roles' => ['Admin', 'Employee', 'User'],
                         ],
@@ -55,7 +57,31 @@ class OccurrenceController extends Controller {
 
         return $this->render('create', [
             'model' => $model,
-        ]);    }
+        ]);
+    }
+
+    public function actionSubcategories($id)
+    {
+        $countSubcategories = Subcategorie::find()
+            ->where(['categorie_id' => $id])
+            ->count();
+
+        $subcategories = Subcategorie::find()
+            ->where(['categorie_id' => $id])
+            ->all();
+
+        if($countSubcategories > 0){
+            echo "<option value=''>Selecione uma subcategoria.</option>";
+            foreach ($subcategories as $subcategory){
+                echo "<option value='".$subcategory->id."'>".$subcategory->name."</option>";
+            }
+        }
+        else{
+            echo "<option>Não existe subcategorias.</option>";
+        }
+
+
+    }
 
     /** ==============================
      * Action to List occurrences of
