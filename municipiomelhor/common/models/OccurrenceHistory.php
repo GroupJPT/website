@@ -2,7 +2,7 @@
 
 namespace common\models;
 
-use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "occurrence_history".
@@ -14,21 +14,12 @@ use Yii;
  *
  * @property Occurrence $occurrence
  */
-class OccurrenceHistory extends \yii\db\ActiveRecord
-{
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
-    {
-        return 'occurrence_history';
-    }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function rules()
-    {
+class OccurrenceHistory extends ActiveRecord {
+
+    public static function tableName() { return 'occurrence_history'; }
+
+    public function rules() {
         return [
             [['status', 'created_at', 'occurrence_id'], 'required'],
             [['status', 'occurrence_id'], 'integer'],
@@ -37,26 +28,16 @@ class OccurrenceHistory extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'status' => Yii::t('app', 'Status'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'occurrence_id' => Yii::t('app', 'occurrence ID'),
+            'id' => 'ID',
+            'status' => 'Status',
+            'created_at' => 'Created At',
+            'occurrence_id' => 'Occurrence ID',
         ];
     }
 
-    /**
-     * Gets query for [[occurrence]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getOccurrence()
-    {
+    public function getOccurrence() {
         return $this->hasOne(Occurrence::class, ['id' => 'occurrence_id']);
     }
 }

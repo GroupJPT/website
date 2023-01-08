@@ -2,14 +2,14 @@
 
 namespace backend\controllers;
 
-use common\models\Subcategorie;
-use common\models\SubcategorieSearch;
+use common\models\Subcategory;
+use common\models\SubcategorySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * SubcategorieController implements the CRUD actions for Subcategorie model.
+ * SubcategorieController implements the CRUD actions for Subcategory model.
  */
 class SubcategorieController extends Controller
 {
@@ -32,13 +32,13 @@ class SubcategorieController extends Controller
     }
 
     /**
-     * Lists all Subcategorie models.
+     * Lists all Subcategory models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new SubcategorieSearch();
+        $searchModel = new SubcategorySearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -48,7 +48,7 @@ class SubcategorieController extends Controller
     }
 
     /**
-     * Displays a single Subcategorie model.
+     * Displays a single Subcategory model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -61,13 +61,13 @@ class SubcategorieController extends Controller
     }
 
     /**
-     * Creates a new Subcategorie model.
+     * Creates a new Subcategory model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Subcategorie();
+        $model = new Subcategory();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -83,7 +83,7 @@ class SubcategorieController extends Controller
     }
 
     /**
-     * Updates an existing Subcategorie model.
+     * Updates an existing Subcategory model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -103,7 +103,7 @@ class SubcategorieController extends Controller
     }
 
     /**
-     * Deletes an existing Subcategorie model.
+     * Deletes an existing Subcategory model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -117,15 +117,15 @@ class SubcategorieController extends Controller
     }
 
     /**
-     * Finds the Subcategorie model based on its primary key value.
+     * Finds the Subcategory model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return Subcategorie the loaded model
+     * @return Subcategory the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Subcategorie::findOne(['id' => $id])) !== null) {
+        if (($model = Subcategory::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

@@ -2,7 +2,7 @@
 
 namespace common\models;
 
-use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "warning".
@@ -11,70 +11,27 @@ use Yii;
  * @property string $name
  * @property string $description
  * @property string $created_at
- * @property int $categorie_id
- * @property int $parish_id
- *
- * @property Categorie $categorie
- * @property Parish $parish
  */
-class Warning extends \yii\db\ActiveRecord
-{
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
-    {
-        return 'warning';
-    }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function rules()
-    {
+class Warning extends ActiveRecord {
+
+    public static function tableName() { return 'warning'; }
+
+    public function rules() {
         return [
-            [['name', 'description', 'created_at', 'categorie_id', 'parish_id'], 'required'],
+            [['name', 'description', 'created_at'], 'required'],
             [['description'], 'string'],
             [['created_at'], 'safe'],
-            [['categorie_id', 'parish_id'], 'integer'],
             [['name'], 'string', 'max' => 255],
-            [['categorie_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categorie::class, 'targetAttribute' => ['categorie_id' => 'id']],
-            [['parish_id'], 'exist', 'skipOnError' => true, 'targetClass' => Parish::class, 'targetAttribute' => ['parish_id' => 'id']],
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Nome'),
-            'description' => Yii::t('app', 'Descrição'),
-            'created_at' => Yii::t('app', 'Data da Publicação'),
-            'categorie_id' => Yii::t('app', 'ID Categoria'),
-            'parish_id' => Yii::t('app', 'ID Freguesia'),
+            'id' => 'ID',
+            'name' => 'Name',
+            'description' => 'Description',
+            'created_at' => 'Created At',
         ];
-    }
-
-    /**
-     * Gets query for [[Categorie]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCategorie()
-    {
-        return $this->hasOne(Categorie::class, ['id' => 'categorie_id']);
-    }
-
-    /**
-     * Gets query for [[Parish]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getParish()
-    {
-        return $this->hasOne(Parish::class, ['id' => 'parish_id']);
     }
 }

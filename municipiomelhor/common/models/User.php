@@ -3,7 +3,6 @@
 namespace common\models;
 
 use Yii;
-use yii\base\NotSupportedException;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
@@ -17,46 +16,51 @@ use yii\web\IdentityInterface;
  * @property string $auth_key
  * @property string $password_hash
  * @property string|null $password_reset_token
- * @property string|null $created_at
- * @property int|null $parish_id
+ * @property string $created_at
  *
  * @property OccurrenceFollow[] $occurrenceFollows
  * @property Occurrence[] $occurrences
- * @property Parish $parish
  * @property Suggestion[] $suggestions
  */
 
 class User extends ActiveRecord implements IdentityInterface {
 
-    public static function tableName() {
-        return 'user';
-    }
+    public static function tableName() { return 'user'; }
 
     public function rules() {
         return [
-            [['name', 'surname', 'email', 'auth_key', 'password_hash'], 'required'],
+            [['name', 'surname', 'email', 'auth_key', 'password_hash', 'created_at'], 'required'],
             [['created_at'], 'safe'],
-            [['parish_id'], 'integer'],
             [['name', 'surname', 'email', 'password_hash', 'password_reset_token'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
             [['email'], 'unique'],
             [['password_reset_token'], 'unique'],
-            [['parish_id'], 'exist', 'skipOnError' => true, 'targetClass' => Parish::class, 'targetAttribute' => ['parish_id' => 'id']],
         ];
     }
 
     public function attributeLabels() {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Nome'),
-            'surname' => Yii::t('app', 'Apelido'),
-            'email' => Yii::t('app', 'Email'),
-            'auth_key' => Yii::t('app', 'Auth Key'),
-            'password_hash' => Yii::t('app', 'Password Hash'),
-            'password_reset_token' => Yii::t('app', 'Password Reset Token'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'parish_id' => Yii::t('app', 'Parish ID'),
+            'id' => 'ID',
+            'name' => 'Name',
+            'surname' => 'Surname',
+            'email' => 'Email',
+            'auth_key' => 'Auth Key',
+            'password_hash' => 'Password Hash',
+            'password_reset_token' => 'Password Reset Token',
+            'created_at' => 'Created At',
         ];
+    }
+
+    public function getOccurrenceFollows() {
+        return $this->hasMany(OccurrenceFollow::class, ['user_id' => 'id']);
+    }
+
+    public function getOccurrences() {
+        return $this->hasMany(Occurrence::class, ['user_id' => 'id']);
+    }
+
+    public function getSuggestions() {
+        return $this->hasMany(Suggestion::class, ['user_id' => 'id']);
     }
 
     public static function findIdentity($id) {
@@ -117,61 +121,5 @@ class User extends ActiveRecord implements IdentityInterface {
 
     public function removePasswordResetToken() {
         $this->password_reset_token = null;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // QUERYS
-
-    public function getOccurrenceFollows() {
-        return $this->hasMany(OccurrenceFollow::class, ['user_id' => 'id']);
-    }
-
-    public function getOccurrences() {
-        return $this->hasMany(occurrence::class, ['user_id' => 'id']);
-    }
-
-    public function getParish() {
-        return $this->hasOne(Parish::class, ['id' => 'parish_id']);
-    }
-
-    public function getSuggestions() {
-        return $this->hasMany(Suggestion::class, ['user_id' => 'id']);
-    }
-
-
-
-
-
-    // BackEnd
-    public function createUser() {
-        $user = new User();
-
-        $user->name = $this->name;
-        $user->surname = $this->surname;
-        $user->email = $this->email;
-        $user->generateAuthKey();
-        $user->setPassword($this->password_hash);
-        $user->parish_id = $this->parish_id;
-        $user->save(false);
-
-        $auth = Yii::$app->authManager;
-        $userRole = $auth->getRole('User');
-        $auth->assign($userRole, $user->getId());
-
-        return $user;
     }
 }

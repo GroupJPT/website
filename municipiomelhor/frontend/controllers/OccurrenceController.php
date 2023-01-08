@@ -2,10 +2,10 @@
 
 namespace frontend\controllers;
 
-use common\models\Categorie;
+use common\models\Category;
 use common\models\Occurrence;
 
-use common\models\Subcategorie;
+use common\models\Subcategory;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -62,12 +62,12 @@ class OccurrenceController extends Controller {
 
     public function actionSubcategories($id)
     {
-        $countSubcategories = Subcategorie::find()
-            ->where(['categorie_id' => $id])
+        $countSubcategories = Subcategory::find()
+            ->where(['category_id' => $id])
             ->count();
 
-        $subcategories = Subcategorie::find()
-            ->where(['categorie_id' => $id])
+        $subcategories = Subcategory::find()
+            ->where(['category_id' => $id])
             ->all();
 
         if($countSubcategories > 0){

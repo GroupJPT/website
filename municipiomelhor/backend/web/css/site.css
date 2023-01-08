@@ -1,3 +1,6 @@
+/** ==============================
+// GLOBAL CONFIGURATION
+============================== **/
 main > .container {
     padding: 70px 15px 20px;
 }
@@ -88,3 +91,10 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+
+
+
+/** ==============================
+// USER PAGES
+============================== **/

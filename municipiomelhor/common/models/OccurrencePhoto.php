@@ -2,7 +2,7 @@
 
 namespace common\models;
 
-use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "occurrence_photo".
@@ -13,21 +13,12 @@ use Yii;
  *
  * @property Occurrence $occurrence
  */
-class OccurrencePhoto extends \yii\db\ActiveRecord
-{
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
-    {
-        return 'occurrence_photo';
-    }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function rules()
-    {
+class OccurrencePhoto extends ActiveRecord {
+
+    public static function tableName() { return 'occurrence_photo'; }
+
+    public function rules() {
         return [
             [['photo_path', 'occurrence_id'], 'required'],
             [['occurrence_id'], 'integer'],
@@ -36,25 +27,15 @@ class OccurrencePhoto extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'photo_path' => Yii::t('app', 'Photo Path'),
-            'occurrence_id' => Yii::t('app', 'occurrence ID'),
+            'id' => 'ID',
+            'photo_path' => 'Photo Path',
+            'occurrence_id' => 'Occurrence ID',
         ];
     }
 
-    /**
-     * Gets query for [[occurrence]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getOccurrence()
-    {
+    public function getOccurrence() {
         return $this->hasOne(Occurrence::class, ['id' => 'occurrence_id']);
     }
 }

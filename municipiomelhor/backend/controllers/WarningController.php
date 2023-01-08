@@ -3,21 +3,13 @@
 namespace backend\controllers;
 
 use common\models\Warning;
-use common\models\WarningSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-/**
- * WarningController implements the CRUD actions for Warning model.
- */
-class WarningController extends Controller
-{
-    /**
-     * @inheritDoc
-     */
-    public function behaviors()
-    {
+class WarningController extends Controller {
+
+    public function behaviors() {
         return array_merge(
             parent::behaviors(),
             [
@@ -31,13 +23,10 @@ class WarningController extends Controller
         );
     }
 
-    /**
-     * Lists all Warning models.
-     *
-     * @return string
-     */
-    public function actionIndex()
-    {
+    /** ==============================
+     * Action to Index page.
+    ============================== **/
+    public function actionIndex() {
         $searchModel = new WarningSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
@@ -47,12 +36,6 @@ class WarningController extends Controller
         ]);
     }
 
-    /**
-     * Displays a single Warning model.
-     * @param int $id ID
-     * @return string
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionView($id)
     {
         return $this->render('view', [
@@ -60,11 +43,9 @@ class WarningController extends Controller
         ]);
     }
 
-    /**
-     * Creates a new Warning model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|\yii\web\Response
-     */
+    /** ==============================
+     * Action to create warning.
+    ============================== **/
     public function actionCreate()
     {
         $model = new Warning();

@@ -3,9 +3,9 @@
 use yii\helpers\Html;
 
 /** @var yii\web\View $this */
-/** @var common\models\Subcategorie $model */
+/** @var common\models\Subcategory $model */
 
-$this->title = 'Update Subcategorie: ' . $model->name;
+$this->title = 'Update Subcategory: ' . $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Subcategories', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';

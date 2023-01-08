@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
-/** @var common\models\Subcategorie $model */
+/** @var common\models\Subcategory $model */
 
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Subcategories', 'url' => ['index']];

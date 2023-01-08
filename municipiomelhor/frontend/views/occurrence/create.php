@@ -1,7 +1,7 @@
 <?php
 
-use common\models\Categorie;
-use common\models\Subcategorie;
+use common\models\Category;
+use common\models\Subcategory;
 use yii\bootstrap5\Html;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
@@ -33,9 +33,9 @@ $this->title = 'Criar ocorrência';
 
                 <?php
 
-                $dataCategory = ArrayHelper::map(Categorie::find()->all(), 'id', 'name');
+                $dataCategory = ArrayHelper::map(Category::find()->all(), 'id', 'name');
 
-                echo $form->field($model, 'categorie_id')->dropDownList(
+                echo $form->field($model, 'category_id')->dropDownList(
                     $dataCategory,
                     [
                         'prompt'=>'Selecione a categoria',
@@ -45,12 +45,12 @@ $this->title = 'Criar ocorrência';
                             "'.Url::toRoute('occurrence/subcategories').'",
                             { id: $(this).val() },
                             function(res){
-                                $("#occurrence-subcategorie_id").html(res);
+                                $("#occurrence-subcategory_id").html(res);
                             },
                         ); visibleSubcategory();
                     '])->label("Categoria");
 
-                echo $form->field($model, 'subcategorie_id')->dropDownList(['prompt'=>'Selecione uma Categoria'])->label("");
+                echo $form->field($model, 'subcategory_id')->dropDownList(['prompt'=>'Selecione uma Categoria'])->label("");
 
                 ?>
 
@@ -123,10 +123,10 @@ $this->title = 'Criar ocorrência';
         function nextPrev(n) {
             switch (page) {
                 case 0:
-                    if(document.getElementById("occurrence-categorie_id").value == "" || document.getElementById("occurrence-subcategorie_id").value == "") return false;
+                    if(document.getElementById("occurrence-category_id").value == "" || document.getElementById("occurrence-subcategory_id").value == "") return false;
                     break;
                 case 1:
-                    if(document.getElementById("occurrence-categorie_id").value == "") return false;
+                    if(document.getElementById("occurrence-category_id").value == "") return false;
                     break;
             }
             var x = document.getElementsByClassName("occ-form-page");
@@ -141,11 +141,11 @@ $this->title = 'Criar ocorrência';
         }
 
         function visibleSubcategory() {
-            if(document.getElementById("occurrence-categorie_id").value != "") {
-                document.getElementById("occurrence-subcategorie_id").style.display = "inline";
+            if(document.getElementById("occurrence-category_id").value != "") {
+                document.getElementById("occurrence-subcategory_id").style.display = "inline";
             }
             else {
-                document.getElementById("occurrence-subcategorie_id").style.display = "none";
+                document.getElementById("occurrence-subcategory_id").style.display = "none";
             }
         }
 

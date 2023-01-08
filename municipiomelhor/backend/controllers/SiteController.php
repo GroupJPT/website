@@ -7,6 +7,7 @@ use Yii;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\ErrorAction;
 
 class SiteController extends Controller {
 
@@ -38,7 +39,7 @@ class SiteController extends Controller {
     public function actions() {
         return [
             'error' => [
-                'class' => \yii\web\ErrorAction::class,
+                'class' => ErrorAction::class,
             ],
         ];
     }
@@ -55,7 +56,7 @@ class SiteController extends Controller {
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login())
-            if (Yii::$app->user->can('backendPermission'))
+            if (Yii::$app->user->can('backendAccess'))
                 return $this->goBack();
         else {
             Yii::$app->user->logout();

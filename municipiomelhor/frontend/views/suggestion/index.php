@@ -6,41 +6,17 @@ use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
-/** @var yii\web\View $this */
-/** @var common\models\SuggestionSearch $searchModel */
-/** @var yii\data\ActiveDataProvider $dataProvider */
-
 $this->title = 'Sugestões';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="suggestion-index">
+<div style="text-align:center; margin-top: 5rem;" class="suggestion-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1 style="font-size: 50px;"><?= Html::encode($this->title) ?></h1>
+
+    <p>A caixa de sugestões foi criada com o objetivo de todos os residentes do municipio poderem enviar sugestões de alguma melhoria que poderia ser feita ou até construir algo inovador para o Municipio e pudesse até atrair mais gente para o mesmo.</p>
 
     <p>
         <?= Html::a('Criar Sugestão', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'address',
-            'description:ntext',
-            'user_id',
-            [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Suggestion $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
-            ],
-        ],
-    ]); ?>
 
 
 </div>

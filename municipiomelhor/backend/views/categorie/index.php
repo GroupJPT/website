@@ -1,13 +1,13 @@
 <?php
 
-use common\models\Categorie;
+use common\models\Category;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
 /** @var yii\web\View $this */
-/** @var common\models\CategorieSearch $searchModel */
+/** @var common\models\CategorySearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
 
@@ -32,7 +32,7 @@ use yii\grid\GridView;
             'topic',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Categorie $model, $key, $index, $column) {
+                'urlCreator' => function ($action, Category $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],

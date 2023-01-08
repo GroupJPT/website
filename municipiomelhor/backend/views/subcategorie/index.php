@@ -1,13 +1,13 @@
 <?php
 
-use common\models\Subcategorie;
+use common\models\Subcategory;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
 /** @var yii\web\View $this */
-/** @var common\models\SubcategorieSearch $searchModel */
+/** @var common\models\SubcategorySearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
 ?>
@@ -31,7 +31,7 @@ use yii\grid\GridView;
             'categorie_id',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Subcategorie $model, $key, $index, $column) {
+                'urlCreator' => function ($action, Subcategory $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],

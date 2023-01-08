@@ -23,26 +23,19 @@ class m130524_201442_init extends Migration {
             'password_hash' => $this->string()->notNull(),
             'password_reset_token' => $this->string()->unique(),
             'created_at' => $this->dateTime()->notNull(),
-            'parish_id' => $this->integer(),
         ], $tableOptions);
 
-        // Table Parish
-        $this->createTable('parish', [
-            'id' => $this->primaryKey(),
-            'name' => $this->string()->notNull()->unique(),
-        ], $tableOptions);
-
-        // Table Contact (FALTA ALTERAÇÕES)
+        // Table Contact
         $this->createTable('contact', [
             'id' => $this->primaryKey(),
             'name' => $this->string()->notNull(),
             'address' => $this->string()->notNull(),
+            'region' => $this->string()->notNull(),
+            'postal-code' => $this->string()->notNull(),
             'phone' => $this->integer(9)->notNull(),
             'fax' => $this->integer(),
             'email' => $this->string(),
             'website' => $this->string(),
-            'categorie_id' => $this->integer()->notNull(),
-            'parish_id' => $this->integer()->notNull(),
         ], $tableOptions);
 
         // Table Warning
@@ -51,42 +44,41 @@ class m130524_201442_init extends Migration {
             'name' => $this->string()->notNull(),
             'description' => $this->text()->notNull(),
             'created_at' => $this->dateTime()->notNull(),
-            'categorie_id' => $this->integer()->notNull(),
-            'parish_id' => $this->integer()->notNull(),
         ], $tableOptions);
 
-        // Table Categories
-        $this->createTable('categorie', [
+        // Table Category
+        $this->createTable('category', [
             'id' => $this->primaryKey(),
             'name' => $this->string()->notNull()->unique(),
-            'topic' => $this->string()->notNull(),
         ], $tableOptions);
 
-        // Table Subcategories
-        $this->createTable('subcategorie', [
+        // Table Subcategory
+        $this->createTable('subcategory', [
             'id' => $this->primaryKey(),
             'name' => $this->string()->notNull()->unique(),
-            'categorie_id' => $this->integer()->notNull(),
+            'category_id' => $this->integer()->notNull(),
         ], $tableOptions);
 
-        // Table occurrence
+        // Table Occurrence
         $this->createTable('occurrence', [
             'id' => $this->primaryKey(),
             'description' => $this->text()->notNull(),
+            'address' => $this->string()->notNull(),
+            'region' => $this->string()->notNull(),
+            'postal-code' => $this->string()->notNull(),
             'user_id' => $this->integer()->notNull(),
-            'categorie_id' => $this->integer()->notNull(),
-            'subcategorie_id' => $this->integer()->notNull(),
-            'parish_id' => $this->integer()->notNull(),
+            'category_id' => $this->integer()->notNull(),
+            'subcategory_id' => $this->integer()->notNull(),
         ], $tableOptions);
 
-        // Table occurrence Photo
+        // Table Occurrence Photo
         $this->createTable('occurrence_photo', [
             'id' => $this->primaryKey(),
             'photo_path' => $this->string()->notNull(),
             'occurrence_id' => $this->integer()->notNull(),
         ], $tableOptions);
 
-        // Table occurrence History
+        // Table Occurrence History
         $this->createTable('occurrence_history', [
             'id' => $this->primaryKey(),
             'status' => $this->integer()->notNull(),
@@ -94,7 +86,7 @@ class m130524_201442_init extends Migration {
             'occurrence_id' => $this->integer()->notNull(),
         ], $tableOptions);
 
-        // Table occurrence Follow
+        // Table Occurrence Follow
         $this->createTable('occurrence_follow', [
             'id' => $this->primaryKey(),
             'created_at' => $this->dateTime()->notNull(),
@@ -123,25 +115,13 @@ class m130524_201442_init extends Migration {
         // CREATE FOREIGN KEYS
         ============================== */
 
-        // Table User
-        $this->addForeignKey('fk-user-parish_id', 'user', 'parish_id', 'parish', 'id',);
-
-        // Table Contact
-        $this->addForeignKey('fk-contact-categorie_id', 'contact', 'categorie_id', 'categorie', 'id',);
-        $this->addForeignKey('fk-contact-parish_id', 'contact', 'parish_id', 'parish', 'id',);
-
-        // Table Warning
-        $this->addForeignKey('fk-warning-categorie_id', 'warning', 'categorie_id', 'categorie', 'id',);
-        $this->addForeignKey('fk-warning-parish_id', 'warning', 'parish_id', 'parish', 'id',);
-
-        // Table Subcategories
-        $this->addForeignKey('fk-subcategorie-categorie_id', 'subcategorie', 'categorie_id', 'categorie', 'id',);
+        // Table Subcategory
+        $this->addForeignKey('fk-subcategory-category_id', 'subcategory', 'category_id', 'category', 'id',);
 
         // Table occurrence
         $this->addForeignKey('fk-occurrence-user_id', 'occurrence', 'user_id', 'user', 'id',);
-        $this->addForeignKey('fk-occurrence-categorie_id', 'occurrence', 'categorie_id', 'categorie', 'id',);
-        $this->addForeignKey('fk-occurrence-subcategorie_id', 'occurrence', 'subcategorie_id', 'subcategorie', 'id',);
-        $this->addForeignKey('fk-occurrence-parish_id', 'occurrence', 'parish_id', 'parish', 'id',);
+        $this->addForeignKey('fk-occurrence-category_id', 'occurrence', 'category_id', 'category', 'id',);
+        $this->addForeignKey('fk-occurrence-subcategory_id', 'occurrence', 'subcategory_id', 'subcategory', 'id',);
 
         // Table occurrence Photo
         $this->addForeignKey('fk-occurrence_photo-occurrence_id', 'occurrence_photo', 'occurrence_id', 'occurrence', 'id',);
@@ -165,44 +145,60 @@ class m130524_201442_init extends Migration {
         // INSERT ITEMS IN TABLES
         ============================== */
 
-        // Insert Default Parishes
-        $this->insert('parish', ['name' => 'A dos Cunhados e Maceira']);
-        $this->insert('parish', ['name' => 'Campelos e Outeiro da Cabeça']);
-        $this->insert('parish', ['name' => 'Carvoeira e Carmões']);
-        $this->insert('parish', ['name' => 'Dois Portos e Runa']);
-        $this->insert('parish', ['name' => 'Freiria']);
-        $this->insert('parish', ['name' => 'Maxial e Monte Redondo']);
-        $this->insert('parish', ['name' => 'Ponte de Rol']);
-        $this->insert('parish', ['name' => 'Ramalhal']);
-        $this->insert('parish', ['name' => 'Santa Maria, São Pedro e Matacães']);
-        $this->insert('parish', ['name' => 'São Pedro da Cadeira']);
-        $this->insert('parish', ['name' => 'Silveira']);
-        $this->insert('parish', ['name' => 'Torres Vedras']);
-        $this->insert('parish', ['name' => 'Turcifal']);
-        $this->insert('parish', ['name' => 'Ventosa']);
-
         // Insert Default Administrator
         $this->insert('user', [
             'name' => 'Pedro',
             'surname' => 'Sousa',
-            'auth_key' => 'bdpafnYNts_AznTmUbl9QNiZpf0Tg_4D',
+            'auth_key' => 'bdpafnYNts_AznTmUbl9QNiZpf0Tg_1D',
             'password_hash' => '$2y$13$FctQ9hmiyRBry8ODgBVfp.f9MjkCQP13FBp5dHFx8wixZb/yj5wiu',
             'email' => 'admin@mm.pt',
             'created_at' => '1668559033',
-            'parish_id' => 1,
+        ]);
+
+        // Insert Default Appraiser
+        $this->insert('user', [
+            'name' => 'Tomás',
+            'surname' => 'Cândido',
+            'auth_key' => 'bdpafnYNts_AznTmUbl9QNiZpf0Tg_2D',
+            'password_hash' => '$2y$13$FctQ9hmiyRBry8ODgBVfp.f9MjkCQP13FBp5dHFx8wixZb/yj5wiu',
+            'email' => 'appraiser@mm.pt',
+            'created_at' => '1668559033',
+        ]);
+
+        // Insert Default Appraiser
+        $this->insert('user', [
+            'name' => 'João',
+            'surname' => 'Mota',
+            'auth_key' => 'bdpafnYNts_AznTmUbl9QNiZpf0Tg_3D',
+            'password_hash' => '$2y$13$FctQ9hmiyRBry8ODgBVfp.f9MjkCQP13FBp5dHFx8wixZb/yj5wiu',
+            'email' => 'employee@mm.pt',
+            'created_at' => '1668559033',
         ]);
 
         // Insert Default User
         $this->insert('user', [
-            'name' => 'Tomás',
-            'surname' => 'Cândido',
+            'name' => 'Mário',
+            'surname' => 'Fernandes',
             'auth_key' => 'bdpafnYNts_AznTmUbl9QNiZpf0Tg_4D',
             'password_hash' => '$2y$13$FctQ9hmiyRBry8ODgBVfp.f9MjkCQP13FBp5dHFx8wixZb/yj5wiu',
             'email' => 'user@mm.pt',
             'created_at' => '1668559033',
-            'parish_id' => 1,
         ]);
 
+        // Insert Default Categories
+        $this->insert('category', ['name' => 'Árvores e Espaços Verdes']);
+        $this->insert('subcategory', ['name' => 'Árvores - Plantação', 'category_id' => '1']);
+        $this->insert('subcategory', ['name' => 'Árvores, arbustos ou relva - Manutenção', 'category_id' => '1']);
+        $this->insert('subcategory', ['name' => 'Bebedouros, Chafariz, Fontanário ou Lago - Manutenção', 'category_id' => '1']);
+        $this->insert('subcategory', ['name' => 'Cercas, vedações e outras estruturas - Manutenção', 'category_id' => '1']);
+        $this->insert('subcategory', ['name' => 'Colocação de novo mobiliário urbano', 'category_id' => '1']);
+        $this->insert('subcategory', ['name' => 'Hortas urbanas - Manutenção', 'category_id' => '1']);
+        $this->insert('subcategory', ['name' => 'Mesas, bancos ou outros mobiliário urbanos - Manutenção', 'category_id' => '1']);
+        $this->insert('subcategory', ['name' => 'Parques Infantis e Juvenis - Manutenção', 'category_id' => '1']);
+        $this->insert('subcategory', ['name' => 'Rede de rega - Manutenção', 'category_id' => '1']);
+
+        $this->insert('category', ['name' => 'Equipamentos Municipais - Cultura']);
+        $this->insert('subcategory', ['name' => 'Escultura - Manutenção', 'category_id' => '2']);
     }
 
     public function safeDown() {
@@ -211,16 +207,10 @@ class m130524_201442_init extends Migration {
         // DROP FOREIGN KEYS
         ============================== */
 
-        $this->dropForeignKey('fk-user-parish_id', 'user');
-        $this->dropForeignKey('fk-contact-categorie_id', 'contact');
-        $this->dropForeignKey('fk-contact-parish_id', 'contact');
-        $this->dropForeignKey('fk-warning-categorie_id', 'warning');
-        $this->dropForeignKey('fk-warning-parish_id', 'warning');
-        $this->dropForeignKey('fk-subcategorie-categorie_id', 'subcategorie');
+        $this->dropForeignKey('fk-subcategory-category_id', 'subcategory');
         $this->dropForeignKey('fk-occurrence-user_id', 'occurrence');
-        $this->dropForeignKey('fk-occurrence-categorie_id', 'occurrence');
-        $this->dropForeignKey('fk-occurrence-subcategorie_id', 'occurrence');
-        $this->dropForeignKey('fk-occurrence-parish_id', 'occurrence');
+        $this->dropForeignKey('fk-occurrence-category_id', 'occurrence');
+        $this->dropForeignKey('fk-occurrence-subcategory_id', 'occurrence');
         $this->dropForeignKey('fk-occurrence_photo-occurrence_id', 'occurrence_photo');
         $this->dropForeignKey('fk-occurrence_history-occurrence_id', 'occurrence_history');
         $this->dropForeignKey('fk-occurrence_follow-user_id', 'occurrence_follow');
@@ -233,11 +223,10 @@ class m130524_201442_init extends Migration {
         ============================== */
 
         $this->dropTable('user');
-        $this->dropTable('parish');
         $this->dropTable('contact');
         $this->dropTable('warning');
-        $this->dropTable('categorie');
-        $this->dropTable('subcategorie');
+        $this->dropTable('category');
+        $this->dropTable('subcategory');
         $this->dropTable('occurrence');
         $this->dropTable('occurrence_photo');
         $this->dropTable('occurrence_history');
@@ -246,30 +235,3 @@ class m130524_201442_init extends Migration {
         $this->dropTable('suggestion_history');
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

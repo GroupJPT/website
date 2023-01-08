@@ -2,7 +2,7 @@
 
 namespace common\models;
 
-use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "suggestion".
@@ -15,21 +15,12 @@ use Yii;
  * @property SuggestionHistory[] $suggestionHistories
  * @property User $user
  */
-class Suggestion extends \yii\db\ActiveRecord
-{
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
-    {
-        return 'suggestion';
-    }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function rules()
-    {
+class Suggestion extends ActiveRecord {
+
+    public static function tableName() { return 'suggestion'; }
+
+    public function rules() {
         return [
             [['address', 'description', 'user_id'], 'required'],
             [['description'], 'string'],
@@ -39,36 +30,20 @@ class Suggestion extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'address' => Yii::t('app', 'Address'),
-            'description' => Yii::t('app', 'Descrição'),
-            'user_id' => Yii::t('app', 'ID de Utilizador'),
+            'id' => 'ID',
+            'address' => 'Address',
+            'description' => 'Description',
+            'user_id' => 'User ID',
         ];
     }
 
-    /**
-     * Gets query for [[SuggestionHistories]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getSuggestionHistories()
-    {
+    public function getSuggestionHistories() {
         return $this->hasMany(SuggestionHistory::class, ['suggestion_id' => 'id']);
     }
 
-    /**
-     * Gets query for [[User]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUser()
-    {
+    public function getUser() {
         return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 }

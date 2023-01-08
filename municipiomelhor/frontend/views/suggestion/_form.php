@@ -16,8 +16,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'user_id')->textInput() ?>
-
     <div class="form-group">
         <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
     </div>

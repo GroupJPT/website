@@ -1,11 +1,13 @@
 <?php
+
+use yii\bootstrap5\ActiveForm;
 use yii\helpers\Html;
 ?>
 
 
     <div class="card-body login-card-body">
 
-        <?php $form = \yii\bootstrap4\ActiveForm::begin(['id' => 'login-form']) ?>
+        <?php $form = ActiveForm::begin(['id' => 'login-form']) ?>
 
         <!-- Section: Design Block -->
         <div class="card-body login-card-body">
@@ -54,6 +56,5 @@ use yii\helpers\Html;
             </div>
         </div>
 
-        <?php \yii\bootstrap4\ActiveForm::end(); ?>
+        <?php ActiveForm::end(); ?>
     </div>
-    <!-- /.login-card-body -->
