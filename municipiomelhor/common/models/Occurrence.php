@@ -11,7 +11,7 @@ use yii\db\ActiveRecord;
  * @property string $description
  * @property string $address
  * @property string $region
- * @property string $postal-code
+ * @property string $postal_code
  * @property int $user_id
  * @property int $category_id
  * @property int $subcategory_id
@@ -30,10 +30,10 @@ class Occurrence extends ActiveRecord {
 
     public function rules() {
         return [
-            [['description', 'address', 'region', 'postal-code', 'user_id', 'category_id', 'subcategory_id'], 'required'],
+            [['description', 'address', 'region', 'postal_code', 'user_id', 'category_id', 'subcategory_id'], 'required'],
             [['description'], 'string'],
             [['user_id', 'category_id', 'subcategory_id'], 'integer'],
-            [['address', 'region', 'postal-code'], 'string', 'max' => 255],
+            [['address', 'region', 'postal_code'], 'string', 'max' => 255],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::class, 'targetAttribute' => ['category_id' => 'id']],
             [['subcategory_id'], 'exist', 'skipOnError' => true, 'targetClass' => Subcategory::class, 'targetAttribute' => ['subcategory_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
@@ -43,10 +43,10 @@ class Occurrence extends ActiveRecord {
     public function attributeLabels() {
         return [
             'id' => 'ID',
-            'description' => 'Description',
-            'address' => 'Address',
-            'region' => 'Region',
-            'postal-code' => 'Postal Code',
+            'description' => 'Descrição',
+            'address' => 'Morada',
+            'region' => 'Freguesia',
+            'postal_code' => 'Código Postal',
             'user_id' => 'User ID',
             'category_id' => 'Category ID',
             'subcategory_id' => 'Subcategory ID',

@@ -60,20 +60,23 @@ $this->title = 'Criar ocorrência';
             <div class="col occ-form-page">
                 <h2>2. Qual é a rua?</h2>
                 <p>Rua</p>
-                <?= $form->field($model, 'description')->textInput() ?>
+                <?= $form->field($model, 'address')->textInput() ?>
+                <?= $form->field($model, 'postal_code')->textInput() ?>
+                <?= $form->field($model, 'region')->textInput() ?>
             </div>
 
             <!-- Step 3 -->
             <div class="col occ-form-page">
                 <h2>3. Descrição.</h2>
                 <p>Descrição</p>
-                <textarea id="ocurrenceDesc" rows="10" cols="100"></textarea>
+                <?= $form->field($model, 'description')->textarea() ?>
             </div>
 
             <!-- Step 4 -->
             <div class="col occ-form-page">
                 <h2>4. Fotografias.</h2>
                 <p>Fotografias</p>
+                <?= $form->field($model, 'photo')->fileInput() ?>
             </div>
 
             <!-- Step 5 -->
@@ -106,6 +109,27 @@ $this->title = 'Criar ocorrência';
 
     <?php ActiveForm::end(); ?>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <script>
         var page = 0;
         showCreatePage(page);
@@ -129,6 +153,7 @@ $this->title = 'Criar ocorrência';
                     if(document.getElementById("occurrence-category_id").value == "") return false;
                     break;
             }
+
             var x = document.getElementsByClassName("occ-form-page");
             x[page].style.display = "none";
             page = page + n;
@@ -153,6 +178,8 @@ $this->title = 'Criar ocorrência';
 
 
     <script>
+
+        var results = "";
         var markers = [];
 
         const TORRES_VEDRAS_BOUNDS = {
@@ -477,32 +504,112 @@ $this->title = 'Criar ocorrência';
             var geocoder = new google.maps.Geocoder();
 
             google.maps.event.addListener(map, 'click', function(event) {
+
+                var cityFound = false;
+                var streetFound = false;
+
+
                 if(page == 1) {
-                    map.setZoom(14);
-                    map.setCenter(event.latLng);
-
-                    marker.setPosition(event.latLng)
-
-
-                    //Teste
-                    $('#lat').val(myLatLng.lat());
-                    $('#lng').val(myLatLng.lng());
-
-
-
-                    geocoder.geocode({
-                        'latLng': event.latLng
-                    }, function(results, status) {
-                        if (status == google.maps.GeocoderStatus.OK) {
+                    geocoder.geocode({'location': event.latLng}, function (results, status){
+                        if (status === 'OK') {
                             if (results[0]) {
-                                $('#lng').val(results[0].formatted_address);
-                            }
+
+                                cityFound = testRegion(results);
+                                if(cityFound) {
+                                    streetFound = testStreet(results);
+                                    if(streetFound){
+
+                                        if(map.zoom < 14)
+                                            map.setZoom(14);
+                                        map.setCenter(event.latLng);
+                                        marker.setPosition(event.latLng);
+
+                                        document.getElementById('occurrence-address').value = results[0].address_components[1].long_name;
+                                        document.getElementById('occurrence-postal_code').value = results[0].address_components[5].long_name;
+                                        document.getElementById('occurrence-region').value = results[0].address_components[2].long_name;
+                                    }
+                                    else
+                                        sendNotFound();
+                                } else
+                                    sendNotFound();
+                            } else
+                                sendNotFound();
+                        } else {
+                            window.alert('Geocoder fauked due to: '+status);
                         }
-                    });
+                    })
                 }
             })
 
             warrenParishBorder.setMap(map);
+        }
+
+        /*
+        function addressTest() {
+
+            var geocoder = new google.maps.Geocoder();
+            var request = { address: document.getElementById('occurrence-address').value + ", " +document.getElementById('occurrence-postal_code').value + " " + document.getElementById('occurrence-region').value };
+            var cityFound = false;
+            var streetFound = false;
+
+            geocoder.geocode(request, function (results, status){
+                if (status === 'OK') {
+                    cityFound = testRegion(results);
+                    if(cityFound){
+                        streetFound = testStreet(results);
+                        if(streetFound) {
+                            setAddress(results);
+                        } else {
+                            window.alert('Endereço Inválido.');
+                        }
+                    }
+                    else {
+                        window.alert('Endereço Inválido.');
+                    }
+
+                } else {
+                    window.alert('Erro ao tentar pesquisar endereço.');
+                    console.log('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+
+            function setAddress(results) {
+                var latLng = {
+                    lat: results[0].geometry.location.lat(),
+                    lng: results[0].geometry.location.lng()
+                };
+                marker.setPosition(latLng);
+                map.setCenter(latLng);
+
+            }
+        }
+        */
+
+        function testRegion(results) {
+            for (var i = 0; i < results[0].address_components.length; i++) {
+                if (results[0].address_components[i].long_name == 'Carmões' || results[0].address_components[i].long_name == 'Dois Portos' || results[0].address_components[i].long_name == 'Carvoeira' || results[0].address_components[i].long_name == 'Runa' || results[0].address_components[i].long_name == 'Turcifal' || results[0].address_components[i].long_name == 'Freiria' || results[0].address_components[i].long_name == 'Ventosa' || results[0].address_components[i].long_name == 'Bonabal' || results[0].address_components[i].long_name == 'São Pedro da Cadeira' || results[0].address_components[i].long_name == 'Silveira' || results[0].address_components[i].long_name == 'Ponte do Rol' || results[0].address_components[i].long_name == 'Torres Vedras' || results[0].address_components[i].long_name == 'Matacães' || results[0].address_components[i].long_name == 'Monte Redondo'  || results[0].address_components[i].long_name == 'Maxial'  || results[0].address_components[i].long_name == 'Ramalhal'  || results[0].address_components[i].long_name == 'Outeiro da Cabeça' || results[0].address_components[i].long_name == 'Campelos' || results[0].address_components[i].long_name == 'A dos Cunhados'  || results[0].address_components[i].long_name == 'Casal da Barreirinha' || results[0].address_components[i].long_name == 'Maceira' || results[0].address_components[i].long_name == 'Casal dos Feros') {
+                    return cityFound = true;
+                }
+            }
+        }
+
+        function testStreet(results) {
+            for (var i = 0; i < results[0].address_components.length; i++) {
+                if (results[0].address_components[i].types[0] == 'route') {
+                    return streetFound = true;
+                }
+            }
+        }
+
+        function sendNotFound() {
+            cleanForm();
+            window.alert('Nenhum resultado encontrado');
+        }
+
+        function cleanForm() {
+            document.getElementById('occurrence-address').value = "";
+            document.getElementById('occurrence-postal_code').value = "";
+            document.getElementById('occurrence-region').value = "";
         }
 
     </script>
