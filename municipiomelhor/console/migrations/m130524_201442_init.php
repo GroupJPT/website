@@ -152,7 +152,7 @@ class m130524_201442_init extends Migration {
             'auth_key' => 'bdpafnYNts_AznTmUbl9QNiZpf0Tg_1D',
             'password_hash' => '$2y$13$FctQ9hmiyRBry8ODgBVfp.f9MjkCQP13FBp5dHFx8wixZb/yj5wiu',
             'email' => 'admin@mm.pt',
-            'created_at' => '1668559033',
+            'created_at' => '2022-07-08 13:45:00',
         ]);
 
         // Insert Default Appraiser
@@ -162,7 +162,7 @@ class m130524_201442_init extends Migration {
             'auth_key' => 'bdpafnYNts_AznTmUbl9QNiZpf0Tg_2D',
             'password_hash' => '$2y$13$FctQ9hmiyRBry8ODgBVfp.f9MjkCQP13FBp5dHFx8wixZb/yj5wiu',
             'email' => 'appraiser@mm.pt',
-            'created_at' => '1668559033',
+            'created_at' => '2022-07-08 13:45:00',
         ]);
 
         // Insert Default Appraiser
@@ -172,7 +172,7 @@ class m130524_201442_init extends Migration {
             'auth_key' => 'bdpafnYNts_AznTmUbl9QNiZpf0Tg_3D',
             'password_hash' => '$2y$13$FctQ9hmiyRBry8ODgBVfp.f9MjkCQP13FBp5dHFx8wixZb/yj5wiu',
             'email' => 'employee@mm.pt',
-            'created_at' => '1668559033',
+            'created_at' => '2022-07-08 13:45:00',
         ]);
 
         // Insert Default User
@@ -182,7 +182,7 @@ class m130524_201442_init extends Migration {
             'auth_key' => 'bdpafnYNts_AznTmUbl9QNiZpf0Tg_4D',
             'password_hash' => '$2y$13$FctQ9hmiyRBry8ODgBVfp.f9MjkCQP13FBp5dHFx8wixZb/yj5wiu',
             'email' => 'user@mm.pt',
-            'created_at' => '1668559033',
+            'created_at' => '2022-07-08 13:45:00',
         ]);
 
         // Insert Default Categories

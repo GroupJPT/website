@@ -9,7 +9,7 @@ $this->title = 'Criar Sugestão';
 ?>
 <div class="suggestion-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1 class="suggestionTitle"><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,

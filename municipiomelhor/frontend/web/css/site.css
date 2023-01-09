@@ -504,3 +504,10 @@ a.desc:after {
     margin-right: auto;
     width: 90%;
 }
+
+.suggestionTitle{
+    text-align: center;
+    width: 100%;
+    font-size: 50px;
+    margin-top: 5rem;
+}

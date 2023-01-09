@@ -33,8 +33,8 @@ class Suggestion extends ActiveRecord {
     public function attributeLabels() {
         return [
             'id' => 'ID',
-            'address' => 'Address',
-            'description' => 'Description',
+            'address' => 'Morada',
+            'description' => 'Descrição',
             'user_id' => 'User ID',
         ];
     }

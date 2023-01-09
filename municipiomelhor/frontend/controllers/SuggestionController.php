@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use common\models\Suggestion;
 use common\models\SuggestionSearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
