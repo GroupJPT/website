@@ -89,11 +89,14 @@ header{
     background: var(--bg-navbar);
 }
 
-
-
-
-
-
+.box_text_center{
+    padding-top: 1rem;
+    margin: auto;
+    width: 50%;
+    border-radius: 10px;
+    border: 3px solid #6b6a6a;
+    padding: 10px;
+}
 
 
 

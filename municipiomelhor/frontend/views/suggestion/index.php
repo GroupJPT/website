@@ -12,11 +12,15 @@ $this->title = 'Sugestões';
 
     <h1 style="font-size: 50px;margin-left:5rem;"><?= Html::encode($this->title) ?></h1>
 
-    <p>A caixa de sugestões foi criada com o objetivo de todos os residentes do municipio poderem enviar sugestões de alguma melhoria que poderia ser feita ou até construir algo inovador para o Municipio e pudesse até atrair mais gente para o mesmo.</p>
+    <div class="box_text_center">
+        <div>A caixa de sugestões foi criada com o objetivo de todos
+            os residentes do município puderem enviar sugestões
+            de alguma melhoria que poderia ser feita ou até construir algo
+            inovador para o Município e pudesse até atrair mais gente para o mesmo.
+        </div>
 
-    <p>
-        <?= Html::a('Criar Sugestão', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-
+        <div class="btn-color">
+            <?= Html::a('Criar Sugestão', ['create'], ['class' => 'btn btn-success']) ?>
+        </div>
+    </div>
 </div>
