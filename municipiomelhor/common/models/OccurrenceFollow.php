@@ -39,9 +39,10 @@ class OccurrenceFollow extends ActiveRecord {
         ];
     }
 
-    public function getOccurrence() {
-        return $this->hasOne(Occurrence::class, ['id' => 'occurrence_id']);
+    public function getOccurrences() {
+        return $this->hasMany(Occurrence::class, ['id' => 'occurrence_id']);
     }
+
 
     public function getUser() {
         return $this->hasOne(User::class, ['id' => 'user_id']);

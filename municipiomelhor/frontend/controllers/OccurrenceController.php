@@ -5,7 +5,9 @@ namespace frontend\controllers;
 use common\models\Category;
 use common\models\Occurrence;
 
+use common\models\OccurrenceFollow;
 use common\models\Subcategory;
+use common\models\User;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -28,7 +30,7 @@ class OccurrenceController extends Controller {
                         ],
                         [
                             'allow' => true,
-                            'actions' => ['create', 'update', 'subcategories'],
+                            'actions' => ['create', 'update','myoccurrences', 'subcategories'],
                             'roles' => ['Admin', 'Appraiser', 'Employee', 'User'],
                         ],
                     ],
@@ -119,7 +121,21 @@ class OccurrenceController extends Controller {
      * authenticated user.
     ============================== **/
     public function actionMyoccurrences() {
-        return $this->render('myoccurrences');
+
+
+        $myoccurrences=Occurrence::find()->where(['user_id' => Yii::$app->user->getId()])->all();
+        $user=User::findOne(Yii::$app->user->getId());
+
+        $occurrencesfollows=$user->getOccurrenceFollows()->with(['occurrences'])->all();
+
+        $occurrences=$occurrencesfollows->get
+
+
+
+        return $this->render('myoccurrences',[
+            'myoccurrences'=>$myoccurrences,
+            'occurrences'=>$occurrences
+        ]);
     }
 
     /** ==============================
