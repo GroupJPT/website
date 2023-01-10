@@ -67,18 +67,18 @@ class m130524_201442_init extends Migration {
             'region' => $this->string()->notNull(),
             'postal_code' => $this->string()->notNull(),
             'lat' => $this->string()->notNull(),
-            'lgn' => $this->string()->notNull(),
+            'lng' => $this->string()->notNull(),
             'user_id' => $this->integer()->notNull(),
             'category_id' => $this->integer()->notNull(),
             'subcategory_id' => $this->integer()->notNull(),
         ], $tableOptions);
 
         // Table Occurrence Photo
-        $this->createTable('occurrence_photo', [
-            'id' => $this->primaryKey(),
-            'photo_path' => $this->string()->notNull(),
-            'occurrence_id' => $this->integer()->notNull(),
-        ], $tableOptions);
+        //$this->createTable('occurrence_photo', [
+        //    'id' => $this->primaryKey(),
+        //    'photo_path' => $this->string()->notNull(),
+        //    'occurrence_id' => $this->integer()->notNull(),
+        //], $tableOptions);
 
         // Table Occurrence History
         $this->createTable('occurrence_history', [
@@ -126,7 +126,7 @@ class m130524_201442_init extends Migration {
         $this->addForeignKey('fk-occurrence-subcategory_id', 'occurrence', 'subcategory_id', 'subcategory', 'id',);
 
         // Table occurrence Photo
-        $this->addForeignKey('fk-occurrence_photo-occurrence_id', 'occurrence_photo', 'occurrence_id', 'occurrence', 'id',);
+        //$this->addForeignKey('fk-occurrence_photo-occurrence_id', 'occurrence_photo', 'occurrence_id', 'occurrence', 'id',);
 
         // Table occurrence History
         $this->addForeignKey('fk-occurrence_history-occurrence_id', 'occurrence_history', 'occurrence_id', 'occurrence', 'id',);
@@ -213,7 +213,7 @@ class m130524_201442_init extends Migration {
         $this->dropForeignKey('fk-occurrence-user_id', 'occurrence');
         $this->dropForeignKey('fk-occurrence-category_id', 'occurrence');
         $this->dropForeignKey('fk-occurrence-subcategory_id', 'occurrence');
-        $this->dropForeignKey('fk-occurrence_photo-occurrence_id', 'occurrence_photo');
+        //$this->dropForeignKey('fk-occurrence_photo-occurrence_id', 'occurrence_photo');
         $this->dropForeignKey('fk-occurrence_history-occurrence_id', 'occurrence_history');
         $this->dropForeignKey('fk-occurrence_follow-user_id', 'occurrence_follow');
         $this->dropForeignKey('fk-occurrence_follow-occurrence_id', 'occurrence_follow');
@@ -230,7 +230,7 @@ class m130524_201442_init extends Migration {
         $this->dropTable('category');
         $this->dropTable('subcategory');
         $this->dropTable('occurrence');
-        $this->dropTable('occurrence_photo');
+        //$this->dropTable('occurrence_photo');
         $this->dropTable('occurrence_history');
         $this->dropTable('occurrence_follow');
         $this->dropTable('suggestion');

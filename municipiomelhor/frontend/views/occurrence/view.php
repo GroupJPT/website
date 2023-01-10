@@ -1,195 +1,26 @@
 <?php
 
-use common\models\Category;
-use yii\helpers\ArrayHelper;
-use yii\helpers\Url;
-use yii\widgets\ActiveForm;
+$this->title = 'Ocorrência Nº1';
 
-$this->title = 'Criar ocorrência';
 ?>
 
-<div class="row occ-create">
-    <div class="col-7">
-        <div id="map"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <div id="map" style="height: 400px; width: 400px;"></div>
+        </div>
+        <div class="col-6">
+            <h2><?= $category->name ?></h2>
+        </div>
     </div>
 
-    <?php $form = ActiveForm::begin([
-        'action' => '/occurrence/create',
-        'options' => [
-            'class' => 'col-5'
-        ]
-    ]); ?>
-        <div class="row-cols-1">
-
-            <!-- Step 1 -->
-            <div class="col occ-form-page occ-create-active">
-                <h2>1. Selecione a categoria.</h2>
-                <p>Em que categoria se encaixa o seu problema?</p>
-
-                <?php
-
-                $dataCategory = ArrayHelper::map(Category::find()->all(), 'id', 'name');
-
-                echo $form->field($model, 'category_id')->dropDownList(
-                    $dataCategory,
-                    [
-                        'prompt'=>'Selecione a categoria',
-
-                        'onchange'=>'
-                        $.get(
-                            "'.Url::toRoute('occurrence/subcategories').'",
-                            { id: $(this).val() },
-                            function(res){
-                                $("#occurrence-subcategory_id").html(res);
-                            },
-                        ); visibleSubcategory();
-                    '])->label("Categoria");
-
-                echo $form->field($model, 'subcategory_id')->dropDownList(['prompt'=>'Selecione uma Categoria'])->label("");
-
-                ?>
-
-            </div>
-
-            <!-- Step 2 -->
-            <div class="col occ-form-page">
-                <h2>2. Qual é a rua?</h2>
-                <p>Rua</p>
-                <?= $form->field($model, 'address')->textInput() ?>
-                <?= $form->field($model, 'postal_code')->textInput() ?>
-                <?= $form->field($model, 'region')->textInput() ?>
-            </div>
-
-            <!-- Step 3 -->
-            <div class="col occ-form-page">
-                <h2>3. Descrição.</h2>
-                <p>Descrição</p>
-                <?= $form->field($model, 'description')->textarea() ?>
-            </div>
-
-            <!--
-            <div class="col occ-form-page">
-                <h2>4. Fotografias.</h2>
-                <p>Fotografias</p>
-            </div>
-            -->
-
-            <!-- Step 4 -->
-            <div class="col occ-form-page">
-                <h2>Confirmação dos dados.</h2>
-                <p id="final-category"></p>
-                <p id="final-subcategory"></p>
-                <p id="final-address"></p>
-                <p id="final-description"></p>
-                <div style="display: none;">
-                    <?= $form->field($model, 'lat')->textInput() ?>
-                    <?= $form->field($model, 'lng')->textInput() ?>
-                </div>
-
-            </div>
-
-
-
-            <div class="col occ-btns">
-                <div class="row">
-                    <div class="col-6 d-flex flex-column align-items-center">
-                        <button type="button" id="occ-create-prev" class="btn btn-dark" onclick="nextPrev(-1)">Anterior</button>
-                    </div>
-                    <div class="col-6 d-flex flex-column align-items-center">
-                        <button type="button" id="occ-create-next" class="btn btn-dark" onclick="nextPrev(1)">Proximo</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    <?php ActiveForm::end(); ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     <script>
-        var page = 0;
-        showCreatePage(page);
-
-        function showCreatePage(n) {
-            var x = document.getElementsByClassName("occ-form-page");
-            x[n].style.display = "block";
-
-            if (n == 0)
-                document.getElementById("occ-create-prev").style.display = "none";
-            else
-                document.getElementById("occ-create-prev").style.display = "inline";
+        var latLng = {
+            lat: <?= $model->lat ?>,
+            lng: <?= $model->lng ?>
         }
 
-        function nextPrev(n) {
-            switch (page) {
-                case 0:
-                    if(document.getElementById("occurrence-category_id").value == "" || document.getElementById("occurrence-subcategory_id").value == "") return false;
-                    break;
-                case 1:
-                    if(document.getElementById("occurrence-category_id").value == "") return false;
-                    break;
-            }
-
-            var x = document.getElementsByClassName("occ-form-page");
-            x[page].style.display = "none";
-            page = page + n;
-            if (page == 3) {
-                document.getElementById("final-category").innerHTML = "Categoria: "+document.getElementById("occurrence-category_id").text;
-                document.getElementById("final-subcategory").innerHTML = "Subcategoria: "+document.getElementById("occurrence-subcategory_id").text;
-                document.getElementById("final-address").innerHTML = "Morada: "+document.getElementById('occurrence-address').value + ", " +document.getElementById('occurrence-postal_code').value + " " + document.getElementById('occurrence-region').value;
-                document.getElementById("final-description").innerHTML = "Descrição: "+document.getElementById("occurrence-description").value;
-                document.getElementById("occ-create-next").textContent = "Submeter"
-            }
-            else if(page == 4){
-                document.getElementById("occ-create-next").type = "submit";
-                return;
-            }
-            else{
-                document.getElementById("occ-create-next").type = "button";
-                document.getElementById("occ-create-next").textContent = "Próximo"
-
-            }
-            showCreatePage(page);
-        }
-
-        function visibleSubcategory() {
-            if(document.getElementById("occurrence-category_id").value != "") {
-                document.getElementById("occurrence-subcategory_id").style.display = "inline";
-            }
-            else {
-                document.getElementById("occurrence-subcategory_id").style.display = "none";
-            }
-        }
-
-    </script>
-
-
-    <script>
         const TORRES_VEDRAS_BOUNDS = {
             north: 39.234965,
             south: 38.992024,
@@ -199,13 +30,13 @@ $this->title = 'Criar ocorrência';
 
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: 39.1100526, lng: -9.4139981},
+                center: {lat: latLng.lat, lng: latLng.lng},
                 restriction: {
                     latLngBounds: TORRES_VEDRAS_BOUNDS,
                     strictBounds: false,
                 },
                 streetViewControl: false,
-                zoom: 1,
+                zoom: 16,
                 scrollwheel:true,
                 styles: [
                     {
@@ -509,123 +340,14 @@ $this->title = 'Criar ocorrência';
                 draggable: false
             });
 
-            var geocoder = new google.maps.Geocoder();
-
-            google.maps.event.addListener(map, 'click', function(event) {
-
-                var cityFound = false;
-                var streetFound = false;
-
-
-                if(page == 1) {
-                    geocoder.geocode({'location': event.latLng}, function (results, status){
-                        if (status === 'OK') {
-                            if (results[0]) {
-
-                                cityFound = testRegion(results);
-                                if(cityFound) {
-                                    streetFound = testStreet(results);
-                                    if(streetFound){
-
-                                        if(map.zoom < 14)
-                                            map.setZoom(14);
-                                        map.setCenter(event.latLng);
-                                        marker.setPosition(event.latLng);
-
-                                        document.getElementById('occurrence-address').value = results[0].address_components[1].long_name;
-                                        document.getElementById('occurrence-postal_code').value = results[0].address_components[5].long_name;
-                                        document.getElementById('occurrence-region').value = results[0].address_components[2].long_name;
-                                        document.getElementById("occurrence-lat").value = results[0].geometry.location.lat();
-                                        document.getElementById("occurrence-lng").value = results[0].geometry.location.lng();
-                                    }
-                                    else
-                                        sendNotFound();
-                                } else
-                                    sendNotFound();
-                            } else
-                                sendNotFound();
-                        } else {
-                            window.alert('Geocoder fauked due to: '+status);
-                        }
-                    })
-                }
-            })
+            marker.setPosition(latLng);
 
             warrenParishBorder.setMap(map);
         }
-
-        /*
-        function addressTest() {
-
-            var geocoder = new google.maps.Geocoder();
-            var request = { address: document.getElementById('occurrence-address').value + ", " +document.getElementById('occurrence-postal_code').value + " " + document.getElementById('occurrence-region').value };
-            var cityFound = false;
-            var streetFound = false;
-
-            geocoder.geocode(request, function (results, status){
-                if (status === 'OK') {
-                    cityFound = testRegion(results);
-                    if(cityFound){
-                        streetFound = testStreet(results);
-                        if(streetFound) {
-                            setAddress(results);
-                        } else {
-                            window.alert('Endereço Inválido.');
-                        }
-                    }
-                    else {
-                        window.alert('Endereço Inválido.');
-                    }
-
-                } else {
-                    window.alert('Erro ao tentar pesquisar endereço.');
-                    console.log('Geocode was not successful for the following reason: ' + status);
-                }
-            });
-
-            function setAddress(results) {
-                var latLng = {
-                    lat: results[0].geometry.location.lat(),
-                    lng: results[0].geometry.location.lng()
-                };
-                marker.setPosition(latLng);
-                map.setCenter(latLng);
-
-            }
-        }
-        */
-
-        function testRegion(results) {
-            for (var i = 0; i < results[0].address_components.length; i++) {
-                if (results[0].address_components[i].long_name == 'Carmões' || results[0].address_components[i].long_name == 'Dois Portos' || results[0].address_components[i].long_name == 'Carvoeira' || results[0].address_components[i].long_name == 'Runa' || results[0].address_components[i].long_name == 'Turcifal' || results[0].address_components[i].long_name == 'Freiria' || results[0].address_components[i].long_name == 'Ventosa' || results[0].address_components[i].long_name == 'Bonabal' || results[0].address_components[i].long_name == 'São Pedro da Cadeira' || results[0].address_components[i].long_name == 'Silveira' || results[0].address_components[i].long_name == 'Ponte do Rol' || results[0].address_components[i].long_name == 'Torres Vedras' || results[0].address_components[i].long_name == 'Matacães' || results[0].address_components[i].long_name == 'Monte Redondo'  || results[0].address_components[i].long_name == 'Maxial'  || results[0].address_components[i].long_name == 'Ramalhal'  || results[0].address_components[i].long_name == 'Outeiro da Cabeça' || results[0].address_components[i].long_name == 'Campelos' || results[0].address_components[i].long_name == 'A dos Cunhados'  || results[0].address_components[i].long_name == 'Casal da Barreirinha' || results[0].address_components[i].long_name == 'Maceira' || results[0].address_components[i].long_name == 'Casal dos Feros') {
-                    return cityFound = true;
-                }
-            }
-        }
-
-        function testStreet(results) {
-            for (var i = 0; i < results[0].address_components.length; i++) {
-                if (results[0].address_components[i].types[0] == 'route') {
-                    return streetFound = true;
-                }
-            }
-        }
-
-        function sendNotFound() {
-            cleanForm();
-            window.alert('Nenhum resultado encontrado');
-        }
-
-        function cleanForm() {
-            document.getElementById('occurrence-address').value = "";
-            document.getElementById('occurrence-postal_code').value = "";
-            document.getElementById('occurrence-region').value = "";
-        }
-
     </script>
 
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEjyX3XVWLoxPaC44hX9Owt9SFeduZ_XU&callback=initMap"></script>
 
-
-
 </div>
+
+

@@ -6,6 +6,7 @@ use common\models\Category;
 use common\models\Occurrence;
 
 use common\models\Subcategory;
+use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -18,16 +19,17 @@ class OccurrenceController extends Controller {
             parent::behaviors(),
             [
                 'access' => [
-                    'class' => AccessControl::class,
+                    'class' => AccessControl::className(),
                     'rules' => [
                         [
-                            'actions' => ['index', 'search'],
                             'allow' => true,
+                            'actions' => ['index', 'search', 'view'],
+                            'roles' => [],
                         ],
                         [
-                            'actions' => ['create', 'myoccurrences', 'subcategories'],
                             'allow' => true,
-                            'roles' => ['Admin', 'Employee', 'User'],
+                            'actions' => ['create', 'update', 'subcategories'],
+                            'roles' => ['Admin', 'Appraiser', 'Employee', 'User'],
                         ],
                     ],
                 ],
@@ -55,33 +57,62 @@ class OccurrenceController extends Controller {
     public function actionCreate() {
         $model = new Occurrence();
 
+        if ($this->request->isPost)
+            $model->user_id = Yii::$app->user->getId();
+        if ($model->load($this->request->post()) && $model->save())
+            return $this->redirect(['view', 'id' => $model->id]);
+        else
+            $model->loadDefaultValues();
+
         return $this->render('create', [
             'model' => $model,
         ]);
     }
 
-    public function actionSubcategories($id)
-    {
-        $countSubcategories = Subcategory::find()
-            ->where(['category_id' => $id])
-            ->count();
+    /** ==============================
+     * Action to list detales of
+     * occurrence with id X.
+    ============================== **/
+    public function actionView($id) {
 
-        $subcategories = Subcategory::find()
-            ->where(['category_id' => $id])
-            ->all();
+        $model = $this->findModel($id);
 
-        if($countSubcategories > 0){
-            echo "<option value=''>Selecione uma subcategoria.</option>";
-            foreach ($subcategories as $subcategory){
-                echo "<option value='".$subcategory->id."'>".$subcategory->name."</option>";
-            }
-        }
-        else{
-            echo "<option>Não existe subcategorias.</option>";
-        }
-
-
+        return $this->render('view', [
+            'model' => $model,
+            'category' => $this->getCategory($model->category_id),
+            'subcategory' => $this->getSubcategory($model->subcategory_id)
+        ]);
     }
+
+    protected function getCategory($id) {
+        return Category::findOne(['id' => $id]);
+    }
+
+    protected function getSubcategory($id) {
+        return Subcategory::findOne(['id' => $id]);
+    }
+
+    protected function findModel($id) {
+        if (($model = Occurrence::findOne(['id' => $id])) !== null)
+            return $model;
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /** ==============================
      * Action to List occurrences of
@@ -95,27 +126,9 @@ class OccurrenceController extends Controller {
      * Action to search occurrences.
     ============================== **/
     public function actionSearch() {
-        return $this->render('myoccurrences');
+        return $this->render('search');
     }
 
-
-
-
-
-
-
-
-    /**
-     * Displays a single occurrence model.
-     * @param int $id ID
-     * @return string
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id) {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
 
     /**
      * Creates a new occurrence model.
@@ -173,19 +186,46 @@ class OccurrenceController extends Controller {
         return $this->redirect(['index']);
     }
 
-    /**
-     * Finds the occurrence model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id ID
-     * @return Occurrence the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id)
-    {
-        if (($model = Occurrence::findOne(['id' => $id])) !== null) {
-            return $model;
-        }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /** ==============================
+     * Action to gets subcategories of
+     * category selected.
+    ============================== **/
+    public function actionSubcategories($id) {
+        $countSubcategories = Subcategory::find()
+            ->where(['category_id' => $id])
+            ->count();
+
+        $subcategories = Subcategory::find()
+            ->where(['category_id' => $id])
+            ->all();
+
+        if($countSubcategories > 0){
+            echo "<option value=''>Selecione uma subcategoria.</option>";
+            foreach ($subcategories as $subcategory){
+                echo "<option value='".$subcategory->id."'>".$subcategory->name."</option>";
+            }
+        }
+        else
+            echo "<option>Não existe subcategorias.</option>";
     }
 }
