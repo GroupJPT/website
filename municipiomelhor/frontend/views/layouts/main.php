@@ -42,8 +42,7 @@ AppAsset::register($this);
         $menuItemsAuth = [['label' => 'Entrar', 'url' => ['/site/login'], 'options' => ['class' => 'justify-content-end']]];
     else
         $menuItemsAuth = [['label' => 'Olá '.Yii::$app->user->identity->name." ".Yii::$app->user->identity->surname, 'items' => [
-            ['label' => 'Perfil', 'url' => ['#']],
-            ['label' => 'Minhas Occorencias', 'url' => ['#']],
+            ['label' => 'Perfil', 'url' => ['/user/userProfile']],
             ['label' => 'Sair', 'linkOptions' => ['data-method' => 'post'], 'url' => ['/site/logout']],
         ]]];
 
