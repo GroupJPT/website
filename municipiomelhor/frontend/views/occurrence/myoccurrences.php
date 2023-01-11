@@ -11,33 +11,12 @@ $this->title = 'Minhas Ocorrências || MunicípioMelhor!';
 
 <div class="occurrence-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <?php
 
-    <?php Pjax::begin(); ?>
+    foreach ($occurrences as $occurrence){
+        echo $occurrence->id;
+    }
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            'description:ntext',
-            'address',
-            'region',
-            'postal_code',
-            //'lat',
-            //'lng',
-            //'user_id',
-            //'category_id',
-            //'subcategory_id',
-            [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Occurrence $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                }
-            ],
-        ],
-    ]); ?>
-
-    <?php Pjax::end(); ?>
+    ?>
 
 </div>

@@ -1,46 +1,23 @@
 <?php
 
+use common\models\Category;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 $this->title = 'Pesquisar Ocorrências || MunicípioMelhor!';
 ?>
 
-<div class="occurrence-search">
+<div class="container">
+    <div class="row-cols-1">
+        <?php foreach ($occurrences as $occurrence) {
+            ?>
 
-    <?php $form = ActiveForm::begin([
-        'action' => ['index'],
-        'method' => 'get',
-        'options' => [
-            'data-pjax' => 1
-        ],
-    ]); ?>
+            <div onclick="" style="height: 200px; background-color: red;" class="col h-100">
+                <p> <?= $occurrence->id ?> </p>
+                <p> <?= $occurrence->description ?> </p>
+                <p> <?= $occurrence->address ?>, <?= $occurrence->postal_code ?> <?= $occurrence->region ?></p>
+            </div>
 
-    <?= $form->field($model, 'id') ?>
-
-    <?= $form->field($model, 'description') ?>
-
-    <?= $form->field($model, 'address') ?>
-
-    <?= $form->field($model, 'region') ?>
-
-    <?= $form->field($model, 'postal_code') ?>
-
-    <?php // echo $form->field($model, 'lat') ?>
-
-    <?php // echo $form->field($model, 'lng') ?>
-
-    <?php // echo $form->field($model, 'user_id') ?>
-
-    <?php // echo $form->field($model, 'category_id') ?>
-
-    <?php // echo $form->field($model, 'subcategory_id') ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
+        <?php } ?>
     </div>
-
-    <?php ActiveForm::end(); ?>
-
 </div>
