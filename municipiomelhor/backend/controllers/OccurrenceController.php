@@ -4,23 +4,31 @@ namespace backend\controllers;
 
 use common\models\Occurrence;
 use common\models\OccurrenceSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-/**
- * OccurrenceController implements the CRUD actions for occurrence model.
- */
-class OccurrenceController extends Controller
-{
-    /**
-     * @inheritDoc
-     */
-    public function behaviors()
-    {
+/** ==============================
+// BACKEND OCCURRENCE CONTROLLER
+============================== **/
+
+class OccurrenceController extends Controller {
+
+    public function behaviors() {
         return array_merge(
             parent::behaviors(),
             [
+                'access' => [
+                    'class' => AccessControl::class,
+                    'rules' => [
+                        [
+                            'actions' => ['index', 'view', 'create', 'update', 'delete'],
+                            'allow' => true,
+                            'permissions' => ['occurrenceCRUD'],
+                        ],
+                    ],
+                ],
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
@@ -31,13 +39,18 @@ class OccurrenceController extends Controller
         );
     }
 
-    /**
-     * Lists all occurrence models.
-     *
-     * @return string
-     */
-    public function actionIndex()
-    {
+
+
+
+
+
+
+
+
+
+
+
+    public function actionIndex() {
         $searchModel = new OccurrenceSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
@@ -47,26 +60,13 @@ class OccurrenceController extends Controller
         ]);
     }
 
-    /**
-     * Displays a single occurrence model.
-     * @param int $id ID
-     * @return string
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
+    public function actionView($id) {
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
 
-    /**
-     * Creates a new occurrence model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|\yii\web\Response
-     */
-    public function actionCreate()
-    {
+    public function actionCreate() {
         $model = new Occurrence();
 
         if ($this->request->isPost) {
@@ -82,15 +82,7 @@ class OccurrenceController extends Controller
         ]);
     }
 
-    /**
-     * Updates an existing occurrence model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id ID
-     * @return string|\yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
-    {
+    public function actionUpdate($id) {
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
@@ -102,27 +94,19 @@ class OccurrenceController extends Controller
         ]);
     }
 
-    /**
-     * Deletes an existing occurrence model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id ID
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionDelete($id)
-    {
+    public function actionDelete($id) {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 
-    /**
-     * Finds the occurrence model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id ID
-     * @return Occurrence the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+
+
+
+
+    /** ==============================
+     * FUNCTIONS
+    ============================== **/
     protected function findModel($id)
     {
         if (($model = Occurrence::findOne(['id' => $id])) !== null) {

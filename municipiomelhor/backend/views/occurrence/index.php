@@ -5,29 +5,38 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
+use yii\widgets\Pjax;
 
-/** @var yii\web\View $this */
-/** @var common\models\OccurrenceSearch $searchModel */
-/** @var yii\data\ActiveDataProvider $dataProvider */
-
+$this->title = 'Occurrences';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="occurrence-index">
 
-    <h1>Occorrências</h1>
+    <h1><?= Html::encode($this->title) ?></h1>
 
+    <p>
+        <?= Html::a('Create Occurrence', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
+
+    <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
             'description:ntext',
-            'user_id',
-            'categorie_id',
-            'subcategorie_id',
-            'parish_id',
+            'address',
+            'region',
+            'postal_code',
+            //'lat',
+            //'lng',
+            //'user_id',
+            //'category_id',
+            //'subcategory_id',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Occurrence $model, $key, $index, $column) {
@@ -37,5 +46,6 @@ use yii\grid\GridView;
         ],
     ]); ?>
 
+    <?php Pjax::end(); ?>
 
 </div>

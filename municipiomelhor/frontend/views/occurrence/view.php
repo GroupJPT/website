@@ -1,6 +1,6 @@
 <?php
 
-$this->title = 'Ocorrência Nº1';
+$this->title = 'Ocorrência Nº'.$model->id.' || MunicípioMelhor!';
 
 ?>
 
@@ -349,5 +349,3 @@ $this->title = 'Ocorrência Nº1';
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEjyX3XVWLoxPaC44hX9Owt9SFeduZ_XU&callback=initMap"></script>
 
 </div>
-
-

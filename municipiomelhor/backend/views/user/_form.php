@@ -18,12 +18,16 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'auth_key')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'password_hash')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'parish_id')->textInput() ?>
+    <?= $form->field($model, 'password_reset_token')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'created_at')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Salvar'), ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

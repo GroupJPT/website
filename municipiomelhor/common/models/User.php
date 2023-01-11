@@ -7,7 +7,7 @@ use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
 /**
- * This is the model class for table "user".
+ * This is the model class for table "User".
  *
  * @property int $id
  * @property string $name
@@ -17,17 +17,14 @@ use yii\web\IdentityInterface;
  * @property string $password_hash
  * @property string|null $password_reset_token
  * @property string $created_at
- *
- * @property OccurrenceFollow[] $occurrenceFollows
- * @property Occurrence[] $occurrences
- * @property Suggestion[] $suggestions
  */
 
 class User extends ActiveRecord implements IdentityInterface {
 
-    public static function tableName() { return 'user'; }
+    public static function tableName() { return 'User'; }
 
-    public function rules() {
+    public function rules()
+    {
         return [
             [['name', 'surname', 'email', 'auth_key', 'password_hash', 'created_at'], 'required'],
             [['created_at'], 'safe'],
@@ -41,28 +38,18 @@ class User extends ActiveRecord implements IdentityInterface {
     public function attributeLabels() {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'surname' => 'Surname',
+            'name' => 'Nome',
+            'surname' => 'Apelido',
             'email' => 'Email',
             'auth_key' => 'Auth Key',
             'password_hash' => 'Password Hash',
             'password_reset_token' => 'Password Reset Token',
-            'created_at' => 'Created At',
+            'created_at' => 'Criado em',
         ];
     }
 
-    public function getOccurrenceFollows() {
-        return $this->hasMany(OccurrenceFollow::class, ['user_id' => 'id']);
-    }
 
-    public function getOccurrences() {
-        return $this->hasMany(Occurrence::class, ['user_id' => 'id']);
-    }
-
-    public function getSuggestions() {
-        return $this->hasMany(Suggestion::class, ['user_id' => 'id']);
-    }
-
+    // ----------------------------------------
     public static function findIdentity($id) {
         return static::findOne(['id' => $id]);
     }
@@ -71,27 +58,7 @@ class User extends ActiveRecord implements IdentityInterface {
         return static::findOne(['auth_key' => $token]);
     }
 
-    public static function findByEmail($email) {
-        return static::findOne(['email' => $email]);
-    }
-
-    public static function findByPasswordResetToken($token) {
-        if (!static::isPasswordResetTokenValid($token))
-            return null;
-
-        return static::findOne(['password_reset_token' => $token]);
-    }
-
-    public static function isPasswordResetTokenValid($token) {
-        if (empty($token))
-            return false;
-
-        $timestamp = (int) substr($token, strrpos($token, '_') + 1);
-        $expire = Yii::$app->params['user.passwordResetTokenExpire'];
-        return $timestamp + $expire >= time();
-    }
-
-    public function getId(){
+    public function getId() {
         return $this->getPrimaryKey();
     }
 
@@ -101,6 +68,12 @@ class User extends ActiveRecord implements IdentityInterface {
 
     public function validateAuthKey($authKey) {
         return $this->getAuthKey() === $authKey;
+    }
+    //-------------------------------------------------------
+
+
+    public static function findByEmail($email) {
+        return static::findOne(['email' => $email]);
     }
 
     public function validatePassword($password) {
@@ -113,13 +86,5 @@ class User extends ActiveRecord implements IdentityInterface {
 
     public function generateAuthKey() {
         $this->auth_key = Yii::$app->security->generateRandomString();
-    }
-
-    public function generatePasswordResetToken(){
-        $this->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
-    }
-
-    public function removePasswordResetToken() {
-        $this->password_reset_token = null;
     }
 }

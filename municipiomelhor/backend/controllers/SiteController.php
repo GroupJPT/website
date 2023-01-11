@@ -7,7 +7,6 @@ use Yii;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\web\Controller;
-use yii\web\ErrorAction;
 
 class SiteController extends Controller {
 
@@ -19,11 +18,12 @@ class SiteController extends Controller {
                     [
                         'actions' => ['login'],
                         'allow' => true,
+                        'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout', 'index', 'error', 'update'],
+                        'actions' => ['logout', 'index', 'error'],
                         'allow' => true,
-                        'roles' => ['Admin', 'Employee'],
+                        'roles' => ['Admin', 'Appraiser', 'Employee'],
                     ],
                 ],
             ],
@@ -39,28 +39,35 @@ class SiteController extends Controller {
     public function actions() {
         return [
             'error' => [
-                'class' => ErrorAction::class,
+                'class' => \yii\web\ErrorAction::class,
             ],
         ];
     }
 
+    /** ==============================
+    // LOG-IN IN FRONTEND
+    ============================== **/
     public function actionIndex() {
         return $this->render('index');
     }
 
+    /** ==============================
+    // ACTION TO LOG-IN IN BACKEND.
+    ============================== **/
     public function actionLogin() {
-        if (!Yii::$app->user->isGuest)
+        if (!Yii::$app->user->isGuest) {
             return $this->goHome();
+        }
 
         $this->layout = 'blank';
 
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login())
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
             if (Yii::$app->user->can('backendAccess'))
                 return $this->goBack();
-        else {
             Yii::$app->user->logout();
-            return $this->goHome();
+        } else {
+            Yii::$app->user->logout();
         }
 
         $model->password = '';
@@ -68,6 +75,9 @@ class SiteController extends Controller {
         return $this->render('login', ['model' => $model]);
     }
 
+    /** ==============================
+    // ACTION TO LOG-OUT FROM BACKEND.
+    ============================== **/
     public function actionLogout() {
         Yii::$app->user->logout();
         return $this->goHome();

@@ -1,6 +1,8 @@
 <?php
 
+use common\widgets\Alert;
 use frontend\assets\AppAsset;
+use yii\bootstrap5\Breadcrumbs;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\Nav;
 use yii\bootstrap5\NavBar;
@@ -29,15 +31,13 @@ AppAsset::register($this);
     // NAVBAR CONFIG
     ============================== **/
     NavBar::begin([
-        'brandLabel' => Html::img('@web/images/icon-navbar.svg', ['class'=>'icon', 'alt'=>Yii::$app->name]),
+        'brandLabel' => Html::img('@web/imgs/icon-navbar.svg', ['class'=>'icon', 'alt'=>Yii::$app->name]),
         'brandUrl' => Yii::$app->homeUrl,
         'brandOptions' => ['class' => 'myclass'],
         'options' => [
             'class' => 'navbar navbar-expand-md fixed-top',
         ],
     ]);
-
-    // Test to see if user are authenticated
     if (Yii::$app->user->isGuest)
         $menuItemsAuth = [['label' => 'Entrar', 'url' => ['/site/login'], 'options' => ['class' => 'justify-content-end']]];
     else
@@ -55,7 +55,7 @@ AppAsset::register($this);
             ['label' => 'Ocorrencias','url' => ['/occurrence']],
             ['label' => 'Avisos', 'url' => ['/warning']],
             ['label' => 'Sugestões', 'url' => ['/suggestion']],
-            ]]);
+        ]]);
 
 
     echo Nav::widget([
@@ -68,7 +68,7 @@ AppAsset::register($this);
 </header>
 
 <main role="main" class="flex-shrink-0">
-    <?= $content; ?>
+    <?= $content ?>
 
     <div class="loader-wrapper">
         <span class="loader"><span class="loader-inner"></span></span>
@@ -84,45 +84,13 @@ AppAsset::register($this);
         }
     </script>
 </main>
-<!--
+
 <footer class="footer mt-auto py-3 text-muted">
     <div class="container">
-        <div class="row">
-            <div class="col">
-                <p>dsadas</p>
-
-            </div>
-            <div class="col">
-                <p>dsadas</p>
-
-            </div>
-            <div class="col">
-                <p>dsadas</p>
-
-            </div>
-            <div class="col">
-                <p>dsadas</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <p class="float-start"><?= date('Y') ?> &copy; MunicípioMelhor!, Todos os direitos reservados.</p>
-            </div>
-            <div class="col">
-                <?php /*
-                    echo Nav::widget([
-                    'options' => ['class' => 'float-end'],
-                    'items' => [
-                        ['label' => 'Privacidade', 'url' => ['/site']],
-                        ['label' => 'Avisos Legal','url' => ['/occurrence']],
-                        ['label' => 'Termos', 'url' => ['/warning']],
-                    ]]);*/
-                ?>
-            </div>
-        </div>
+        <p class="float-start">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
+        <p class="float-end"><?= Yii::powered() ?></p>
     </div>
 </footer>
--->
 
 <?php $this->endBody() ?>
 </body>

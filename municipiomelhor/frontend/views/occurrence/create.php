@@ -5,7 +5,7 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
-$this->title = 'Criar ocorrência';
+$this->title = 'Criar Ocorrência || MunicípioMelhor!';
 ?>
 
 <div class="row occ-create">
@@ -19,23 +19,23 @@ $this->title = 'Criar ocorrência';
             'class' => 'col-5'
         ]
     ]); ?>
-        <div class="row-cols-1">
+    <div class="row-cols-1">
 
-            <!-- Step 1 -->
-            <div class="col occ-form-page occ-create-active">
-                <h2>1. Selecione a categoria.</h2>
-                <p>Em que categoria se encaixa o seu problema?</p>
+        <!-- Step 1 -->
+        <div class="col occ-form-page occ-create-active">
+            <h2>1. Selecione a categoria.</h2>
+            <p>Em que categoria se encaixa o seu problema?</p>
 
-                <?php
+            <?php
 
-                $dataCategory = ArrayHelper::map(Category::find()->all(), 'id', 'name');
+            $dataCategory = ArrayHelper::map(Category::find()->all(), 'id', 'name');
 
-                echo $form->field($model, 'category_id')->dropDownList(
-                    $dataCategory,
-                    [
-                        'prompt'=>'Selecione a categoria',
+            echo $form->field($model, 'category_id')->dropDownList(
+                $dataCategory,
+                [
+                    'prompt'=>'Selecione a categoria',
 
-                        'onchange'=>'
+                    'onchange'=>'
                         $.get(
                             "'.Url::toRoute('occurrence/subcategories').'",
                             { id: $(this).val() },
@@ -45,62 +45,62 @@ $this->title = 'Criar ocorrência';
                         ); visibleSubcategory();
                     '])->label("Categoria");
 
-                echo $form->field($model, 'subcategory_id')->dropDownList(['prompt'=>'Selecione uma Categoria'])->label("");
+            echo $form->field($model, 'subcategory_id')->dropDownList(['prompt'=>'Selecione uma Categoria'])->label("");
 
-                ?>
+            ?>
 
+        </div>
+
+        <!-- Step 2 -->
+        <div class="col occ-form-page">
+            <h2>2. Qual é a rua?</h2>
+            <p>Rua</p>
+            <?= $form->field($model, 'address')->textInput() ?>
+            <?= $form->field($model, 'postal_code')->textInput() ?>
+            <?= $form->field($model, 'region')->textInput() ?>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="col occ-form-page">
+            <h2>3. Descrição.</h2>
+            <p>Descrição</p>
+            <?= $form->field($model, 'description')->textarea() ?>
+        </div>
+
+        <!--
+        <div class="col occ-form-page">
+            <h2>4. Fotografias.</h2>
+            <p>Fotografias</p>
+        </div>
+        -->
+
+        <!-- Step 4 -->
+        <div class="col occ-form-page">
+            <h2>Confirmação dos dados.</h2>
+            <p id="final-category"></p>
+            <p id="final-subcategory"></p>
+            <p id="final-address"></p>
+            <p id="final-description"></p>
+            <div style="display: none;">
+                <?= $form->field($model, 'lat')->textInput() ?>
+                <?= $form->field($model, 'lng')->textInput() ?>
             </div>
 
-            <!-- Step 2 -->
-            <div class="col occ-form-page">
-                <h2>2. Qual é a rua?</h2>
-                <p>Rua</p>
-                <?= $form->field($model, 'address')->textInput() ?>
-                <?= $form->field($model, 'postal_code')->textInput() ?>
-                <?= $form->field($model, 'region')->textInput() ?>
-            </div>
+        </div>
 
-            <!-- Step 3 -->
-            <div class="col occ-form-page">
-                <h2>3. Descrição.</h2>
-                <p>Descrição</p>
-                <?= $form->field($model, 'description')->textarea() ?>
-            </div>
 
-            <!--
-            <div class="col occ-form-page">
-                <h2>4. Fotografias.</h2>
-                <p>Fotografias</p>
-            </div>
-            -->
 
-            <!-- Step 4 -->
-            <div class="col occ-form-page">
-                <h2>Confirmação dos dados.</h2>
-                <p id="final-category"></p>
-                <p id="final-subcategory"></p>
-                <p id="final-address"></p>
-                <p id="final-description"></p>
-                <div style="display: none;">
-                    <?= $form->field($model, 'lat')->textInput() ?>
-                    <?= $form->field($model, 'lng')->textInput() ?>
+        <div class="col occ-btns">
+            <div class="row">
+                <div class="col-6 d-flex flex-column align-items-center">
+                    <button type="button" id="occ-create-prev" class="btn btn-dark" onclick="nextPrev(-1)">Anterior</button>
                 </div>
-
-            </div>
-
-
-
-            <div class="col occ-btns">
-                <div class="row">
-                    <div class="col-6 d-flex flex-column align-items-center">
-                        <button type="button" id="occ-create-prev" class="btn btn-dark" onclick="nextPrev(-1)">Anterior</button>
-                    </div>
-                    <div class="col-6 d-flex flex-column align-items-center">
-                        <button type="button" id="occ-create-next" class="btn btn-dark" onclick="nextPrev(1)">Proximo</button>
-                    </div>
+                <div class="col-6 d-flex flex-column align-items-center">
+                    <button type="button" id="occ-create-next" class="btn btn-dark" onclick="nextPrev(1)">Proximo</button>
                 </div>
             </div>
         </div>
+    </div>
 
     <?php ActiveForm::end(); ?>
 
@@ -629,3 +629,4 @@ $this->title = 'Criar ocorrência';
 
 
 </div>
+

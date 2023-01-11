@@ -3,23 +3,22 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/** @var yii\web\View $this */
-/** @var common\models\Suggestion $model */
-/** @var yii\widgets\ActiveForm $form */
 ?>
 
-<div class="container">
-    <div class="suggestion-form">
-        <?php $form = ActiveForm::begin(); ?>
+<div class="suggestion-form">
 
-        <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
+    <?php $form = ActiveForm::begin(); ?>
 
-        <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
 
-        <div class="form-group" style="width: 12%;margin-left: 90%;margin-top: 3%;">
-            <?= Html::submitButton('Enviar Sugestão', ['class' => 'btn btn-success']) ?>
-        </div>
+    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-        <?php ActiveForm::end(); ?>
+    <?= $form->field($model, 'user_id')->textInput() ?>
+
+    <div class="form-group">
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
+
+    <?php ActiveForm::end(); ?>
+
 </div>

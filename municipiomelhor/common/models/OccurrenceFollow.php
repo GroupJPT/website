@@ -33,18 +33,13 @@ class OccurrenceFollow extends ActiveRecord {
     public function attributeLabels() {
         return [
             'id' => 'ID',
-            'created_at' => 'Created At',
+            'created_at' => 'Criado em',
             'user_id' => 'User ID',
             'occurrence_id' => 'Occurrence ID',
         ];
     }
 
-    public function getOccurrences() {
-        return $this->hasMany(Occurrence::class, ['id' => 'occurrence_id']);
-    }
+    public function getOccurrence() { return $this->hasOne(Occurrence::class, ['id' => 'occurrence_id']); }
 
-
-    public function getUser() {
-        return $this->hasOne(User::class, ['id' => 'user_id']);
-    }
+    public function getUser() { return $this->hasOne(User::class, ['id' => 'user_id']); }
 }

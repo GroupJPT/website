@@ -4,10 +4,8 @@ namespace frontend\controllers;
 
 use common\models\Category;
 use common\models\Occurrence;
-
-use common\models\OccurrenceFollow;
+use common\models\OccurrenceSearch;
 use common\models\Subcategory;
-use common\models\User;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -30,8 +28,8 @@ class OccurrenceController extends Controller {
                         ],
                         [
                             'allow' => true,
-                            'actions' => ['create', 'update','myoccurrences', 'subcategories'],
-                            'roles' => ['Admin', 'Appraiser', 'Employee', 'User'],
+                            'actions' => ['create', 'myoccurrences', 'subcategories'],
+                            'roles' => ['@'],
                         ],
                     ],
                 ],
@@ -40,18 +38,16 @@ class OccurrenceController extends Controller {
                     'actions' => [
                         'delete' => ['POST'],
                     ],
-
                 ],
             ]
         );
     }
 
-     /** ==============================
-     * Action to Index page.
-     ============================== **/
-    public function actionIndex() {
-        return $this->render('index');
-    }
+    /** ==============================
+     * Action to index page.
+    ============================== **/
+
+    public function actionIndex() { return $this->render('index'); }
 
     /** ==============================
      * Action to create occurrence.
@@ -59,16 +55,39 @@ class OccurrenceController extends Controller {
     public function actionCreate() {
         $model = new Occurrence();
 
-        if ($this->request->isPost)
+        if ($this->request->isPost) {
             $model->user_id = Yii::$app->user->getId();
-        if ($model->load($this->request->post()) && $model->save())
-            return $this->redirect(['view', 'id' => $model->id]);
-        else
+            if ($model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        } else {
             $model->loadDefaultValues();
+        }
 
         return $this->render('create', [
             'model' => $model,
         ]);
+    }
+
+    /** ==============================
+     * Action to List occurrences of
+     * authenticated user.
+    ============================== **/
+    public function actionMyoccurrences() {
+        $searchModel = new OccurrenceSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        return $this->render('myoccurrences', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /** ==============================
+     * Action to search occurrences.
+    ============================== **/
+    public function actionSearch() {
+        return $this->render('search');
     }
 
     /** ==============================
@@ -86,6 +105,23 @@ class OccurrenceController extends Controller {
         ]);
     }
 
+
+
+
+
+
+
+    /** ==============================
+     * FUNCTIONS
+    ============================== **/
+    protected function findModel($id) {
+        if (($model = Occurrence::findOne(['id' => $id])) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
     protected function getCategory($id) {
         return Category::findOne(['id' => $id]);
     }
@@ -94,138 +130,6 @@ class OccurrenceController extends Controller {
         return Subcategory::findOne(['id' => $id]);
     }
 
-    protected function findModel($id) {
-        if (($model = Occurrence::findOne(['id' => $id])) !== null)
-            return $model;
-        throw new NotFoundHttpException('The requested page does not exist.');
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /** ==============================
-     * Action to List occurrences of
-     * authenticated user.
-    ============================== **/
-    public function actionMyoccurrences() {
-
-
-        $myoccurrences=Occurrence::find()->where(['user_id' => Yii::$app->user->getId()])->all();
-        $user=User::findOne(Yii::$app->user->getId());
-
-        $occurrencesfollows=$user->getOccurrenceFollows()->with(['occurrences'])->all();
-
-        $occurrences=$occurrencesfollows->get
-
-
-
-        return $this->render('myoccurrences',[
-            'myoccurrences'=>$myoccurrences,
-            'occurrences'=>$occurrences
-        ]);
-    }
-
-    /** ==============================
-     * Action to search occurrences.
-    ============================== **/
-    public function actionSearch() {
-        return $this->render('search');
-    }
-
-
-    /**
-     * Creates a new occurrence model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|\yii\web\Response
-     *
-    public function actionCreate()
-    {
-        $model = new Occurrence();
-
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
-        } else {
-            $model->loadDefaultValues();
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }*/
-
-    /**
-     * Updates an existing occurrence model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id ID
-     * @return string|\yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Deletes an existing occurrence model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id ID
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /** ==============================
-     * Action to gets subcategories of
-     * category selected.
-    ============================== **/
     public function actionSubcategories($id) {
         $countSubcategories = Subcategory::find()
             ->where(['category_id' => $id])

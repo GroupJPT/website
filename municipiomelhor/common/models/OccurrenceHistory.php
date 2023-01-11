@@ -31,13 +31,11 @@ class OccurrenceHistory extends ActiveRecord {
     public function attributeLabels() {
         return [
             'id' => 'ID',
-            'status' => 'Status',
-            'created_at' => 'Created At',
+            'status' => 'Estado',
+            'created_at' => 'Criado em',
             'occurrence_id' => 'Occurrence ID',
         ];
     }
 
-    public function getOccurrence() {
-        return $this->hasOne(Occurrence::class, ['id' => 'occurrence_id']);
-    }
+    public function getOccurrence() { return $this->hasOne(Occurrence::class, ['id' => 'occurrence_id']); }
 }

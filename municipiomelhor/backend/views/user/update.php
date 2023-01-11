@@ -5,12 +5,10 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var common\models\User $model */
 
-$this->title = Yii::t('app', 'Atualizar Utilizador: {name}', [
-    'name' => $model->name,
-]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Utilizadores'), 'url' => ['index']];
+$this->title = 'Update User: ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Yii::t('app', 'Atualizar');
+$this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="user-update">
 

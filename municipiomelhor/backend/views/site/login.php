@@ -2,6 +2,8 @@
 
 use yii\bootstrap5\ActiveForm;
 use yii\helpers\Html;
+
+$this->title = "Entrar || MM BackOffice";
 ?>
 
 

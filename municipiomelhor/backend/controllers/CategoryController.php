@@ -3,16 +3,32 @@
 namespace backend\controllers;
 
 use common\models\Category;
+use common\models\CategorySearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-class CategorieController extends Controller {
+/** ==============================
+// BACKEND SUB AND CATEGORY CONTROLLER
+============================== **/
+
+class CategoryController extends Controller {
 
     public function behaviors() {
         return array_merge(
             parent::behaviors(),
             [
+                'access' => [
+                    'class' => AccessControl::class,
+                    'rules' => [
+                        [
+                            'actions' => ['index', 'view', 'create', 'update', 'delete'],
+                            'allow' => true,
+                            'permissions' => ['categoryCRUD'],
+                        ],
+                    ],
+                ],
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
@@ -24,30 +40,29 @@ class CategorieController extends Controller {
     }
 
 
+
+
+
+
+
+
     public function actionIndex() {
-        return $this->render('index');
+        $searchModel = new CategorySearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
-    /**
-     * Displays a single Category model.
-     * @param int $id ID
-     * @return string
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
+    public function actionView($id) {
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
 
-    /**
-     * Creates a new Category model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|\yii\web\Response
-     */
-    public function actionCreate()
-    {
+    public function actionCreate() {
         $model = new Category();
 
         if ($this->request->isPost) {
@@ -63,15 +78,7 @@ class CategorieController extends Controller {
         ]);
     }
 
-    /**
-     * Updates an existing Category model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id ID
-     * @return string|\yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
-    {
+    public function actionUpdate($id) {
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
@@ -83,29 +90,20 @@ class CategorieController extends Controller {
         ]);
     }
 
-    /**
-     * Deletes an existing Category model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id ID
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionDelete($id)
-    {
+    public function actionDelete($id) {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 
-    /**
-     * Finds the Category model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id ID
-     * @return Category the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id)
-    {
+
+
+
+
+    /** ==============================
+     * FUNCTIONS
+    ============================== **/
+    protected function findModel($id) {
         if (($model = Category::findOne(['id' => $id])) !== null) {
             return $model;
         }

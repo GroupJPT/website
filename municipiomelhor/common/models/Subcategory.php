@@ -32,16 +32,12 @@ class Subcategory extends ActiveRecord {
     public function attributeLabels() {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => 'Nome',
             'category_id' => 'Category ID',
         ];
     }
 
-    public function getCategory() {
-        return $this->hasOne(Category::class, ['id' => 'category_id']);
-    }
+    public function getCategory() { return $this->hasOne(Category::class, ['id' => 'category_id']); }
 
-    public function getOccurrences() {
-        return $this->hasMany(Occurrence::class, ['subcategory_id' => 'id']);
-    }
+    public function getOccurrences() { return $this->hasMany(Occurrence::class, ['subcategory_id' => 'id']); }
 }

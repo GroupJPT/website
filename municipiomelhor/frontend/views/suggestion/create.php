@@ -5,11 +5,13 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var common\models\Suggestion $model */
 
-$this->title = 'Criar Sugestão';
+$this->title = 'Create Suggestion';
+$this->params['breadcrumbs'][] = ['label' => 'Suggestions', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="suggestion-create">
 
-    <h1 class="suggestionTitle"><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,

@@ -21,7 +21,6 @@ use yii\db\ActiveRecord;
  * @property Category $category
  * @property OccurrenceFollow[] $occurrenceFollows
  * @property OccurrenceHistory[] $occurrenceHistories
- * @property OccurrencePhoto[] $occurrencePhotos
  * @property Subcategory $subcategory
  * @property User $user
  */
@@ -48,7 +47,10 @@ class Occurrence extends ActiveRecord {
             'description' => 'Descrição',
             'address' => 'Rua',
             'region' => 'Localidade',
-            'postal_code' => 'Código Postal',
+            'postal_code' => 'Código-Postal',
+            'lat' => 'Lat',
+            'lng' => 'Lng',
+            'user_id' => 'User ID',
             'category_id' => 'Category ID',
             'subcategory_id' => 'Subcategory ID',
         ];
@@ -59,8 +61,6 @@ class Occurrence extends ActiveRecord {
     public function getOccurrenceFollows() { return $this->hasMany(OccurrenceFollow::class, ['occurrence_id' => 'id']); }
 
     public function getOccurrenceHistories() { return $this->hasMany(OccurrenceHistory::class, ['occurrence_id' => 'id']); }
-
-    public function getOccurrencePhotos() { return $this->hasMany(OccurrencePhoto::class, ['occurrence_id' => 'id']); }
 
     public function getSubcategory() { return $this->hasOne(Subcategory::class, ['id' => 'subcategory_id']); }
 

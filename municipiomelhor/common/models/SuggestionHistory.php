@@ -31,13 +31,11 @@ class SuggestionHistory extends ActiveRecord {
     public function attributeLabels() {
         return [
             'id' => 'ID',
-            'status' => 'Status',
-            'created_at' => 'Created At',
+            'status' => 'Estado',
+            'created_at' => 'Criado em',
             'suggestion_id' => 'Suggestion ID',
         ];
     }
 
-    public function getSuggestion() {
-        return $this->hasOne(Suggestion::class, ['id' => 'suggestion_id']);
-    }
+    public function getSuggestion() { return $this->hasOne(Suggestion::class, ['id' => 'suggestion_id']); }
 }

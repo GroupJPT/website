@@ -3,9 +3,15 @@
 namespace backend\controllers;
 
 use common\models\Warning;
+use common\models\WarningSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+
+/** ==============================
+// BACKEND WARNING CONTROLLER
+============================== **/
 
 class WarningController extends Controller {
 
@@ -13,6 +19,16 @@ class WarningController extends Controller {
         return array_merge(
             parent::behaviors(),
             [
+                'access' => [
+                    'class' => AccessControl::class,
+                    'rules' => [
+                        [
+                            'actions' => ['index', 'error', 'update'],
+                            'allow' => true,
+                            'permissions' => ['userCRUD'],
+                        ],
+                    ],
+                ],
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
@@ -23,9 +39,10 @@ class WarningController extends Controller {
         );
     }
 
-    /** ==============================
-     * Action to Index page.
-    ============================== **/
+
+
+
+
     public function actionIndex() {
         $searchModel = new WarningSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
@@ -36,18 +53,13 @@ class WarningController extends Controller {
         ]);
     }
 
-    public function actionView($id)
-    {
+    public function actionView($id) {
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
 
-    /** ==============================
-     * Action to create warning.
-    ============================== **/
-    public function actionCreate()
-    {
+    public function actionCreate() {
         $model = new Warning();
 
         if ($this->request->isPost) {
@@ -63,15 +75,7 @@ class WarningController extends Controller {
         ]);
     }
 
-    /**
-     * Updates an existing Warning model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id ID
-     * @return string|\yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
-    {
+    public function actionUpdate($id) {
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
@@ -83,29 +87,20 @@ class WarningController extends Controller {
         ]);
     }
 
-    /**
-     * Deletes an existing Warning model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id ID
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionDelete($id)
-    {
+    public function actionDelete($id) {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 
-    /**
-     * Finds the Warning model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id ID
-     * @return Warning the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id)
-    {
+
+
+
+
+    /** ==============================
+     * FUNCTIONS
+    ============================== **/
+    protected function findModel($id) {
         if (($model = Warning::findOne(['id' => $id])) !== null) {
             return $model;
         }

@@ -18,7 +18,9 @@ use yii\db\ActiveRecord;
 
 class Suggestion extends ActiveRecord {
 
-    public static function tableName() { return 'suggestion'; }
+    public static function tableName() {
+        return 'suggestion';
+    }
 
     public function rules() {
         return [
@@ -33,17 +35,13 @@ class Suggestion extends ActiveRecord {
     public function attributeLabels() {
         return [
             'id' => 'ID',
-            'address' => 'Morada',
-            'description' => 'Descrição',
+            'address' => 'Address',
+            'description' => 'Description',
             'user_id' => 'User ID',
         ];
     }
 
-    public function getSuggestionHistories() {
-        return $this->hasMany(SuggestionHistory::class, ['suggestion_id' => 'id']);
-    }
+    public function getSuggestionHistories() { return $this->hasMany(SuggestionHistory::class, ['suggestion_id' => 'id']); }
 
-    public function getUser() {
-        return $this->hasOne(User::class, ['id' => 'user_id']);
-    }
+    public function getUser() { return $this->hasOne(User::class, ['id' => 'user_id']); }
 }

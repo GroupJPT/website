@@ -1,12 +1,13 @@
 <?php
 
 use hail812\adminlte\widgets\Menu;
+use yii\helpers\Html;
 
 ?>
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="<?= Yii::$app->homeUrl ?>" class="brand-link">
-        <img src="" alt="MM Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <?= Html::img('@web/imgs/icon-navbar.svg', ['class'=>'brand-image', 'alt'=>Yii::$app->name]) ?>
         <span class="brand-text font-weight-light">MunicípioMelhor!</span>
     </a>
 
@@ -27,15 +28,15 @@ use hail812\adminlte\widgets\Menu;
             <?php
             echo Menu::widget([
                 'items' => [
-                    ['label' => 'GESTÃO', 'header' => true],
-                    ['label' => 'Utilizadores', 'url' => ['/user']],
-                    ['label' => 'Occorrências', 'url' => ['/occurrence']],
-                    ['label' => 'Sugestões', 'url' => ['/suggestion']],
-                    ['label' => 'Avisos', 'url' => ['/warning']],
-                    ['label' => 'Freguesias', 'url' => ['/parish']],
-                    ['label' => 'Categorias', 'url' => ['/categorie']],
-                    ['label' => 'Subcategorias', 'url' => ['/subcategorie']],
-
+                    ['label' => 'Gestão', 'header' => true],
+                    ['label' => 'Utilizadores', 'url' => ['/user'], 'visible' => Yii::$app->user->can('userCRUD')],
+                    ['label' => 'Occorrências', 'url' => ['/occurrence'], 'visible' => Yii::$app->user->can('occurrenceCRUD')],
+                    ['label' => 'Sugestões', 'url' => ['/suggestion'], 'visible' => Yii::$app->user->can('suggestionCRUD')],
+                    ['label' => 'Avisos', 'url' => ['/warning'], 'visible' => Yii::$app->user->can('warningCRUD')],
+                    ['label' => 'Categorias', 'url' => ['/category'], 'visible' => Yii::$app->user->can('categoryCRUD')],
+                    ['label' => 'Ferramentas de Programador', 'header' => true, 'visible' => Yii::$app->user->can('devTools')],
+                    ['label' => 'Gii',  'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank', 'visible' => Yii::$app->user->can('devTools')],
+                    ['label' => 'Debug', 'icon' => 'bug', 'url' => ['/debug'], 'target' => '_blank', 'visible' => Yii::$app->user->can('devTools')],
                 ],
             ]);
             ?>

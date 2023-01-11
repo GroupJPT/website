@@ -14,7 +14,6 @@ use yii\db\ActiveRecord;
  */
 
 class Warning extends ActiveRecord {
-
     public static function tableName() { return 'warning'; }
 
     public function rules() {
@@ -29,9 +28,9 @@ class Warning extends ActiveRecord {
     public function attributeLabels() {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'description' => 'Description',
-            'created_at' => 'Created At',
+            'name' => 'Nome',
+            'description' => 'Descrição',
+            'created_at' => 'Criado em',
         ];
     }
 }

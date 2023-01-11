@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var common\models\Warning $model */
 
-$this->title = 'Criar Aviso';
+$this->title = 'Create Warning';
 $this->params['breadcrumbs'][] = ['label' => 'Warnings', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

@@ -36,25 +36,45 @@ class m221115_222834_init_rbac_roles extends Migration {
         $auth->addChild($employee, $backendAccess);
 
         // User Crud Permission
-        $userCreate = $auth->createPermission('userCreate');
-        $userCreate->description = 'Permission to create users.';
-        $auth->add($userCreate);
-        $auth->addChild($admin, $userCreate);
+        $userCRUD = $auth->createPermission('userCRUD');
+        $userCRUD->description = 'Permission to management users.';
+        $auth->add($userCRUD);
+        $auth->addChild($admin, $userCRUD);
 
-        $userRead = $auth->createPermission('userRead');
-        $userRead->description = 'Permission to read users.';
-        $auth->add($userRead);
-        $auth->addChild($admin, $userRead);
+        // Occurrence Crud Permission
+        $occurrenceCRUD = $auth->createPermission('occurrenceCRUD');
+        $occurrenceCRUD->description = 'Permission to management occurrences.';
+        $auth->add($occurrenceCRUD);
+        $auth->addChild($admin, $occurrenceCRUD);
+        $auth->addChild($appraiser, $occurrenceCRUD);
+        $auth->addChild($employee, $occurrenceCRUD);
 
-        $userUpdate = $auth->createPermission('userUpdate');
-        $userUpdate->description = 'Permission to update users.';
-        $auth->add($userUpdate);
-        $auth->addChild($admin, $userUpdate);
+        // Suggestion Crud Permission
+        $suggestionCRUD = $auth->createPermission('suggestionCRUD');
+        $suggestionCRUD->description = 'Permission to management suggestion.';
+        $auth->add($suggestionCRUD);
+        $auth->addChild($admin, $suggestionCRUD);
+        $auth->addChild($appraiser, $suggestionCRUD);
 
-        $userDelete = $auth->createPermission('userDelete');
-        $userDelete->description = 'Permission to delete users.';
-        $auth->add($userDelete);
-        $auth->addChild($admin, $userDelete);
+        // Warning Crud Permission
+        $warningCRUD = $auth->createPermission('warningCRUD');
+        $warningCRUD->description = 'Permission to management warnings.';
+        $auth->add($warningCRUD);
+        $auth->addChild($admin, $warningCRUD);
+        $auth->addChild($appraiser, $warningCRUD);
+
+        // Category Crud Permission
+        $categoryCRUD = $auth->createPermission('categoryCRUD');
+        $categoryCRUD->description = 'Permission to management categories.';
+        $auth->add($categoryCRUD);
+        $auth->addChild($admin, $categoryCRUD);
+        $auth->addChild($appraiser, $categoryCRUD);
+
+        // DevTools Permission
+        $devTools = $auth->createPermission('devTools');
+        $devTools->description = 'Permission to management dev tools.';
+        $auth->add($devTools);
+        $auth->addChild($admin, $devTools);
 
         /** ==============================
         // ASSIGNS

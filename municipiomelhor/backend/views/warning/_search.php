@@ -13,6 +13,9 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
+        'options' => [
+            'data-pjax' => 1
+        ],
     ]); ?>
 
     <?= $form->field($model, 'id') ?>
@@ -22,10 +25,6 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'description') ?>
 
     <?= $form->field($model, 'created_at') ?>
-
-    <?= $form->field($model, 'categorie_id') ?>
-
-    <?php // echo $form->field($model, 'parish_id') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

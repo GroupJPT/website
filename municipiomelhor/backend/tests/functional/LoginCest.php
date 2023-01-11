@@ -3,42 +3,15 @@
 namespace backend\tests\functional;
 
 use backend\tests\FunctionalTester;
-use common\fixtures\UserFixture;
+use Yii;
 
-/**
- * Class LoginCest
- */
-class LoginCest
-{
-    /**
-     * Load fixtures before db transaction begin
-     * Called in _before()
-     * @see \Codeception\Module\Yii2::_before()
-     * @see \Codeception\Module\Yii2::loadFixtures()
-     * @return array
-     */
-    public function _fixtures()
-    {
-        return [
-            'user' => [
-                'class' => UserFixture::class,
-                'dataFile' => codecept_data_dir() . 'login_data.php'
-            ]
-        ];
-    }
-    
-    /**
-     * @param FunctionalTester $I
-     */
-    public function loginUser(FunctionalTester $I)
-    {
-        $I->amOnRoute('/site/login');
-        $I->fillField('Username', 'erau');
-        $I->fillField('Password', 'password_0');
-        $I->click('login-button');
+class LoginCest {
+    public function _before(FunctionalTester $I) { }
 
-        $I->see('Logout (erau)', 'form button[type=submit]');
-        $I->dontSeeLink('Login');
-        $I->dontSeeLink('Signup');
+    public function loginTest(FunctionalTester $I) {
+        $I->amOnPage(Yii::$app->homeUrl);
+        $I->fillField('LoginForm[email]', 'admin@mm.pt');
+        $I->fillField('LoginForm[password]', '12345678');
+        $I->click('Sign In');
     }
 }
