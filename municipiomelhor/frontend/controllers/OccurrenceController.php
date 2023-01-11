@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use common\models\Category;
 use common\models\Occurrence;
+use common\models\OccurrenceFollow;
 use common\models\OccurrenceSearch;
 use common\models\Subcategory;
 use Yii;
@@ -70,16 +71,19 @@ class OccurrenceController extends Controller {
     }
 
     /** ==============================
-     * Action to List occurrences of
-     * authenticated user.
+     * RESOLVER
     ============================== **/
     public function actionMyoccurrences() {
-        $searchModel = new OccurrenceSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        $occurrences = new Occurrence();
+
+        $allOccurrenceFollow = OccurrenceFollow::find()->where(['user_id' => Yii::$app->user->getId()])->all();
+
+        foreach ($allOccurrenceFollow as $occurrenceFollow) {
+            $occurrences = Occurrence::find()->where(['id' => $occurrenceFollow->id]);
+        }
 
         return $this->render('myoccurrences', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'occurrences' => $occurrences,
         ]);
     }
 
@@ -87,7 +91,10 @@ class OccurrenceController extends Controller {
      * Action to search occurrences.
     ============================== **/
     public function actionSearch() {
-        return $this->render('search');
+        $occurrences = Occurrence::find()->all();
+        return $this->render('search', [
+            'occurrences' => $occurrences,
+        ]);
     }
 
     /** ==============================

@@ -2,7 +2,9 @@
 
 namespace common\models;
 
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "warning".
@@ -14,11 +16,22 @@ use yii\db\ActiveRecord;
  */
 
 class Warning extends ActiveRecord {
+
     public static function tableName() { return 'warning'; }
+
+    public function behaviors() {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'createdAtAttribute' => 'created_at',
+                'value' => new Expression('NOW()'),
+            ],
+        ];
+    }
 
     public function rules() {
         return [
-            [['name', 'description', 'created_at'], 'required'],
+            [['name', 'description'], 'required'],
             [['description'], 'string'],
             [['created_at'], 'safe'],
             [['name'], 'string', 'max' => 255],
