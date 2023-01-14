@@ -1,12 +1,12 @@
 <?php
 
-namespace app\modules\v1;
+namespace app\modules\api;
 
 use Yii;
 
 class Module extends \yii\base\Module {
 
-    public $controllerNameSpace = 'app\modules\v1\controllers';
+    public $controllerNameSpace = 'app\modules\api\controllers';
 
     public function init() {
         parent::init();

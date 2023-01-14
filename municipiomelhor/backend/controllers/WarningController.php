@@ -23,7 +23,6 @@ class WarningController extends Controller {
                     'class' => AccessControl::class,
                     'rules' => [
                         [
-                            'actions' => ['index', 'create', 'update'],
                             'allow' => true,
                             'permissions' => ['warningCRUD'],
                         ],

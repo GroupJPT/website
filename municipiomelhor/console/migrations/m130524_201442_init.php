@@ -44,6 +44,7 @@ class m130524_201442_init extends Migration
             'name' => $this->string()->notNull(),
             'description' => $this->text()->notNull(),
             'created_at' => $this->dateTime(),
+            'updated_at' => $this->dateTime(),
         ], $tableOptions);
 
         // Table Category

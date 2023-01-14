@@ -15,8 +15,8 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [
-        'v1' => [
-            'class' => 'app\modules\v1\Module',
+        'api' => [
+            'class' => 'app\modules\api\Module',
         ]
     ],
     'components' => [
@@ -53,13 +53,84 @@ return [
                 '/' => 'site/index',
                 '/login' => 'site/login',
 
-                // API ROUTES
+                // API ROUTES: GUEST
                 [
                     'class' => 'yii\rest\UrlRule',
-                    'controller' => 'v1/user',
+                    'controller' => 'api/guest',
                     'pluralize' => false,
                     'extraPatterns' => [
-                        'GET utilizadores' => 'utilizadores',
+                        'GET login' => 'occurrences',
+                    ]
+                ],
+
+                // API ROUTES: USER
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/user',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET view' => 'occurrences',
+                        'GET update' => 'occurrences',
+                    ]
+                ],
+
+                // API ROUTES: OCCURRENCE
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/occurrence',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET occurrences' => 'occurrences',
+                    ]
+                ],
+
+                // API ROUTES: SUGGESTION
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/suggestion',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET x' => 'x',
+                    ]
+                ],
+
+                // API ROUTES: CATEGORY
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/category',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET x' => 'x',
+                    ]
+                ],
+
+                // API ROUTES: SUBCATEGORY
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/subcategory',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET x' => 'x',
+                    ]
+                ],
+
+                // API ROUTES: WARNING
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/warning',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET occurrences' => 'occurrences',
+                    ]
+                ],
+
+                // API ROUTES: CONTACT
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/warning',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET occurrences' => 'occurrences',
                     ]
                 ],
             ],

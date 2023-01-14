@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use app\mosquitto\phpMQTT;
 use yii\db\ActiveRecord;
 
 /**
@@ -65,4 +66,42 @@ class Occurrence extends ActiveRecord {
     public function getSubcategory() { return $this->hasOne(Subcategory::class, ['id' => 'subcategory_id']); }
 
     public function getUser() { return $this->hasOne(User::class, ['id' => 'user_id']); }
+
+
+
+
+    // MOSQUITTO ----------------------------------------
+    public function afterSave($insert, $changedAttributes) {
+
+        parent::afterSave($insert, $changedAttributes);
+
+        $msgCreate = "Uma nova ocorrência foi criada com o ID:".$this->id.".";
+        $msgUpdate = "A ocorrência com o ID:".$this->id." foi alterada antes de ser analisada.";
+        if ($insert)
+            $this->makePublish("OccurrenceInfo", $msgCreate);
+        else
+            $this->makePublish("OccurrenceInfo", $msgUpdate);
+    }
+
+    public function afterDelete() {
+
+        parent::afterDelete();
+
+        $msgDelete = "A ocorrência com o ID:".$this->id." foi eleminado antes de ser analisada.";
+        $this->makePublish("OccurrenceInfo",$msgDelete);
+    }
+
+    public function makePublish($canal,$msg) {
+        $server = "127.0.0.1";
+        $port = 1883;
+        $username = "";
+        $password = "";
+        $client_id = "phpMQTT-publisher";
+        $mqtt = new phpMQTT($server, $port, $client_id);
+        if ($mqtt->connect(true, NULL, $username, $password)) {
+            $mqtt->publish($canal, $msg, 0);
+            $mqtt->close();
+        }
+        else { file_put_contents("debug.output","Time out!"); }
+    }
 }
